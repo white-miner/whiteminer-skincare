@@ -1,0 +1,1248 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>하얀광부 | 바우만 피부타입 정밀 진단</title>
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+    <script src="https://t1.kakaocdn.net/kakao_js_sdk/2.7.1/kakao.min.js" integrity="sha384-kDljxUXh0CxNWpD4rl+9HuG29l+59U5BWfXPKCQ3JlF8w3yo+xtls016Bs5msXmt" crossorigin="anonymous"></script>
+    <style>
+        /* [하얀광부 디자인 시스템] */
+        :root {
+            --bg-color: #FAFAFA;
+            --card-bg: #FFFFFF;
+            --text-main: #1A1A1A;
+            --text-sub: #666666;
+            --gold-main: #D4AF37;
+            --gold-light: #F4E8C1;
+            --alert-red: #E74C3C;
+            --btn-hover: #C5A028;
+            --shadow: 0 4px 20px rgba(0,0,0,0.08);
+            
+            /* 육각차트 색상 */
+            --chart-oil: #FFB74D;
+            --chart-hydration: #4FC3F7;
+            --chart-sensitive: #F48FB1;
+            --chart-pigment: #BA68C8;
+            --chart-elastic: #81C784;
+            --chart-barrier: #90A4AE;
+        }
+
+        * { box-sizing: border-box; font-family: 'Pretendard', -apple-system, sans-serif; margin: 0; padding: 0; }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            display: flex;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        .app-container {
+            width: 100%;
+            max-width: 480px;
+            background: var(--card-bg);
+            min-height: 100vh;
+            position: relative;
+            box-shadow: 0 0 30px rgba(0,0,0,0.05);
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* 헤더 */
+        header {
+            padding: 16px 20px;
+            text-align: center;
+            border-bottom: 1px solid #eee;
+            position: sticky;
+            top: 0;
+            background: rgba(255,255,255,0.98);
+            z-index: 10;
+        }
+
+        .logo { font-weight: 900; font-size: 1.2rem; color: var(--text-main); }
+        .logo span { color: var(--gold-main); }
+
+        .progress-container {
+            height: 4px;
+            background: #eee;
+            width: 100%;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+        }
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, var(--gold-main), #F0D878);
+            width: 0%;
+            transition: width 0.4s ease;
+        }
+
+        /* 화면 전환 */
+        .screen {
+            display: none;
+            padding: 24px 20px;
+            flex: 1;
+            flex-direction: column;
+            animation: fadeIn 0.4s ease-out;
+        }
+        .screen.active { display: flex; }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ========== 인트로 화면 ========== */
+        .intro-hero {
+            text-align: center;
+            padding: 20px 0;
+        }
+
+        .stickman-container {
+            width: 160px;
+            height: 160px;
+            margin: 0 auto 25px;
+            background: linear-gradient(135deg, #FFF9E6 0%, #FFF5D6 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 8px 30px rgba(212, 175, 55, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .character-img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .intro-badge {
+            display: inline-block;
+            background: var(--gold-light);
+            color: #8A6D1F;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
+        .intro-title {
+            font-size: 1.8rem;
+            font-weight: 800;
+            line-height: 1.4;
+            margin-bottom: 20px;
+            color: var(--text-main);
+        }
+        .intro-title .highlight {
+            color: var(--alert-red);
+            position: relative;
+        }
+
+        .intro-desc {
+            background: #FFFBF0;
+            border-left: 4px solid var(--gold-main);
+            padding: 18px;
+            margin: 20px 0;
+            border-radius: 0 12px 12px 0;
+        }
+        .intro-desc p {
+            color: var(--text-sub);
+            line-height: 1.7;
+            font-size: 0.95rem;
+            margin-bottom: 12px;
+        }
+        .intro-desc p:last-child { margin-bottom: 0; }
+
+        .symptom-checklist {
+            background: #fff;
+            border: 1px solid #eee;
+            border-radius: 12px;
+            padding: 18px;
+            margin: 20px 0;
+        }
+        .symptom-checklist h4 {
+            font-size: 0.9rem;
+            color: var(--text-sub);
+            margin-bottom: 12px;
+        }
+        .symptom-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 8px 0;
+            font-size: 0.95rem;
+            color: var(--text-main);
+        }
+        .symptom-item .check {
+            color: var(--alert-red);
+            font-weight: bold;
+        }
+
+        .quiz-info {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 25px 0;
+            font-size: 0.85rem;
+            color: var(--text-sub);
+        }
+        .quiz-info span {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .start-btn {
+            background: var(--text-main);
+            color: #fff;
+            width: 100%;
+            padding: 18px;
+            border: none;
+            border-radius: 14px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            margin-top: auto;
+            transition: all 0.2s;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+        }
+        .start-btn:hover { background: #333; transform: translateY(-2px); }
+        .start-btn:active { transform: scale(0.98); }
+
+        /* ========== 질문 화면 ========== */
+        .step-badge {
+            display: inline-block;
+            background: var(--gold-light);
+            color: #8A6D1F;
+            padding: 8px 14px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .question-number {
+            font-size: 0.85rem;
+            color: var(--text-sub);
+            margin-bottom: 8px;
+        }
+
+        .question-text {
+            font-size: 1.35rem;
+            font-weight: 700;
+            margin-bottom: 30px;
+            line-height: 1.5;
+        }
+
+        .option-btn {
+            background: #fff;
+            border: 2px solid #eee;
+            color: var(--text-main);
+            padding: 16px 18px;
+            border-radius: 12px;
+            width: 100%;
+            text-align: left;
+            margin-bottom: 12px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .option-btn:hover {
+            border-color: var(--gold-main);
+            background: #FFFCF2;
+            transform: translateX(5px);
+        }
+        .option-btn:active {
+            transform: scale(0.98);
+        }
+
+        /* ========== 결과 화면 ========== */
+        #captureArea {
+            background: var(--card-bg);
+            padding: 10px;
+        }
+
+        .result-header {
+            text-align: center;
+            padding: 20px 0;
+            border-bottom: 1px dashed #eee;
+            margin-bottom: 25px;
+        }
+
+        .result-img-container {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 15px;
+            background: linear-gradient(135deg, #FFF9E6 0%, #FFF5D6 100%);
+            border-radius: 50%;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(212, 175, 55, 0.2);
+        }
+
+        .result-label {
+            font-size: 0.9rem;
+            color: var(--text-sub);
+            margin-bottom: 8px;
+        }
+
+        .result-code {
+            font-size: 3.2rem;
+            font-weight: 900;
+            color: var(--gold-main);
+            letter-spacing: 4px;
+            margin: 10px 0;
+        }
+
+        .result-korean {
+            font-size: 1rem;
+            color: var(--text-sub);
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .result-name {
+            font-size: 1.6rem;
+            font-weight: 800;
+            color: var(--text-main);
+        }
+
+        .result-simple-desc {
+            font-size: 0.95rem;
+            color: var(--text-sub);
+            margin-top: 8px;
+            line-height: 1.5;
+        }
+
+        /* 육각형 레이더 차트 */
+        .chart-section {
+            background: #f9f9f9;
+            border-radius: 16px;
+            padding: 25px 20px;
+            margin-bottom: 20px;
+        }
+
+        .chart-title {
+            font-size: 1rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .radar-chart-container {
+            width: 100%;
+            max-width: 280px;
+            margin: 0 auto;
+        }
+
+        .radar-chart {
+            width: 100%;
+            height: auto;
+        }
+
+        /* 지표 설명 카드들 */
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-top: 20px;
+        }
+
+        .metric-card {
+            background: #fff;
+            border-radius: 12px;
+            padding: 14px;
+            border-left: 4px solid;
+        }
+
+        .metric-card.oil { border-color: var(--chart-oil); }
+        .metric-card.hydration { border-color: var(--chart-hydration); }
+        .metric-card.sensitive { border-color: var(--chart-sensitive); }
+        .metric-card.pigment { border-color: var(--chart-pigment); }
+        .metric-card.elastic { border-color: var(--chart-elastic); }
+        .metric-card.barrier { border-color: var(--chart-barrier); }
+
+        .metric-name {
+            font-size: 0.8rem;
+            color: var(--text-sub);
+            margin-bottom: 4px;
+        }
+
+        .metric-score {
+            font-size: 1.4rem;
+            font-weight: 800;
+            margin-bottom: 6px;
+        }
+
+        .metric-status {
+            font-size: 0.75rem;
+            padding: 3px 8px;
+            border-radius: 10px;
+            display: inline-block;
+            margin-bottom: 8px;
+        }
+        .metric-status.high { background: #FFEBEE; color: #C62828; }
+        .metric-status.medium { background: #FFF8E1; color: #F57F17; }
+        .metric-status.low { background: #E8F5E9; color: #2E7D32; }
+        .metric-status.good { background: #E3F2FD; color: #1565C0; }
+
+        .metric-tip {
+            font-size: 0.78rem;
+            color: #555;
+            line-height: 1.4;
+        }
+
+        /* 상세 분석 카드 */
+        .result-card {
+            background: #fff;
+            border-radius: 14px;
+            padding: 20px;
+            margin-bottom: 15px;
+            border: 1px solid #eee;
+        }
+
+        .card-title {
+            font-weight: 700;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 1rem;
+        }
+
+        .card-desc {
+            font-size: 0.95rem;
+            line-height: 1.7;
+            color: #444;
+        }
+
+        .prescription-card {
+            background: linear-gradient(135deg, #FFFDF5 0%, #FFF9E6 100%);
+            border: 2px solid var(--gold-main);
+        }
+        .prescription-card .card-title { color: var(--gold-main); }
+
+        /* 추천 성분 태그 */
+        .ingredient-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 12px;
+        }
+        .ingredient-tag {
+            background: #fff;
+            border: 1px solid var(--gold-main);
+            color: #8A6D1F;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        /* 피해야 할 것 */
+        .avoid-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 12px;
+        }
+        .avoid-tag {
+            background: #FFEBEE;
+            color: #C62828;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        /* CTA 버튼 */
+        .shop-section {
+            margin-top: 25px;
+            text-align: center;
+            background: linear-gradient(135deg, #FFF5F5 0%, #FFEBEB 100%);
+            border-radius: 16px;
+            padding: 25px 20px;
+            border: 1px solid #FFCDD2;
+        }
+
+        .shop-label {
+            font-weight: 700;
+            margin-bottom: 8px;
+            font-size: 1rem;
+            color: var(--text-main);
+        }
+
+        .shop-sub-label {
+            font-size: 0.85rem;
+            color: var(--text-sub);
+            margin-bottom: 15px;
+        }
+
+        .shop-link-btn {
+            display: block;
+            background: linear-gradient(135deg, var(--alert-red) 0%, #D32F2F 100%);
+            color: #fff;
+            text-decoration: none;
+            text-align: center;
+            padding: 18px;
+            border-radius: 14px;
+            font-weight: 700;
+            font-size: 1.05rem;
+            box-shadow: 0 6px 20px rgba(231, 76, 60, 0.35);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+        }
+
+        .shop-benefit {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 12px;
+            font-size: 0.8rem;
+            color: var(--text-sub);
+        }
+
+        .retry-btn {
+            background: #f5f5f5;
+            border: none;
+            color: var(--text-main);
+            padding: 16px;
+            border-radius: 12px;
+            width: 100%;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 15px;
+        }
+        .retry-btn:hover { background: #eee; }
+
+        /* 푸터 수정: 글자색 검정 */
+        .footer {
+            margin-top: 40px;
+            text-align: center;
+            font-size: 0.85rem;
+            color: #000000;
+            padding: 20px;
+            border-top: 1px solid #eee;
+            font-weight: 500;
+        }
+        .footer a {
+            color: #000000;
+            text-decoration: none;
+            font-weight: 700;
+        }
+
+        /* 공유 버튼 영역 */
+        .share-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-top: 15px;
+        }
+        
+        .save-img-btn {
+            grid-column: 1 / -1;
+            padding: 14px;
+            background: #333;
+            color: #fff;
+            border: none;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        .save-img-btn:hover { background: #000; }
+
+        .share-btn {
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            background: #fff;
+            font-size: 0.85rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            color: #333;
+            text-decoration: none;
+        }
+        .share-btn:hover { background: #f9f9f9; }
+        
+        /* 인스타그램 버튼 전용 스타일 */
+        .share-btn.insta {
+            border-color: #E1306C;
+            color: #E1306C;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+
+<div class="app-container">
+    <header>
+        <div class="logo">하얀<span>광부</span></div>
+        <div class="progress-container">
+            <div class="progress-bar" id="progressBar"></div>
+        </div>
+    </header>
+
+    <div id="introScreen" class="screen active">
+        <div class="intro-hero">
+            <div class="stickman-container">
+                <img src="./2.png" alt="하얀광부 캐릭터" class="character-img">
+            </div>
+
+            <span class="intro-badge">🔬 바우만 피부타입 진단</span>
+            
+            <h1 class="intro-title">
+                당신의 피부,<br>
+                지금 <span class="highlight">무너지고</span> 있진 않나요?
+            </h1>
+        </div>
+
+        <div class="intro-desc">
+            <p>피부도 광산처럼 <b>관리하지 않으면 무너집니다.</b></p>
+            <p>하얀광부가 당신의 피부 상태를 꼼꼼히 분석하고,<br>
+            <b style="color:var(--gold-main);">딱 맞는 해결책</b>을 찾아드릴게요.</p>
+        </div>
+
+        <div class="symptom-checklist">
+            <h4>⚠️ 이런 증상이 있다면 꼭 진단받으세요</h4>
+            <div class="symptom-item"><span class="check">✓</span> 갑자기 트러블이 늘었다</div>
+            <div class="symptom-item"><span class="check">✓</span> 바르는 게 다 따갑다</div>
+            <div class="symptom-item"><span class="check">✓</span> 늘 쓰던 제품도 안 맞는다</div>
+            <div class="symptom-item"><span class="check">✓</span> 피부가 푸석하고 칙칙하다</div>
+        </div>
+
+        <div class="quiz-info">
+            <span>⏱️ 약 3-5분</span>
+            <span>📋 24문항</span>
+            <span>🎯 16타입 분류</span>
+        </div>
+
+        <button class="start-btn" onclick="startDiagnosis()">
+            내 피부 타입 진단하기 →
+        </button>
+    </div>
+
+    <div id="quizScreen" class="screen">
+        <div class="step-badge" id="stepBadge">STEP 1. 유분도 체크</div>
+        <div class="question-number" id="questionNumber">Q1 / 24</div>
+        <div class="question-text" id="questionText">질문 내용이 여기에 표시됩니다.</div>
+        <div id="optionsArea"></div>
+    </div>
+
+    <div id="resultScreen" class="screen">
+        <div id="captureArea">
+            <div class="result-header">
+                <div class="result-img-container">
+                    <img src="./1.png" alt="진단 완료" class="character-img">
+                </div>
+
+                <p class="result-label">당신의 바우만 피부타입</p>
+                <div class="result-code" id="resultCode">OSPT</div>
+                <div class="result-korean" id="resultKorean">지성 + 민감 + 잡티 + 탄력◎</div>
+                <div class="result-name" id="resultName">"트러블 많은 민감 지성 피부"</div>
+                <p class="result-simple-desc" id="resultSimpleDesc">피지 조절과 진정 케어가 동시에 필요한 피부예요</p>
+            </div>
+
+            <div class="chart-section">
+                <div class="chart-title">📊 내 피부 밸런스</div>
+                <div class="radar-chart-container">
+                    <svg class="radar-chart" id="radarChart" viewBox="0 0 300 260"></svg>
+                </div>
+
+                <div class="metrics-grid" id="metricsGrid">
+                </div>
+            </div>
+
+            <div class="result-card">
+                <div class="card-title">🔍 내 피부 상태는?</div>
+                <div class="card-desc" id="resultDesc">분석 내용이 여기에 표시됩니다.</div>
+            </div>
+
+            <div class="result-card">
+                <div class="card-title">🚫 이건 피하세요</div>
+                <div class="avoid-tags" id="avoidTags">
+                </div>
+            </div>
+
+            <div class="result-card prescription-card">
+                <div class="card-title">💎 하얀광부의 처방</div>
+                <div class="card-desc" id="resultCare">케어 팁이 여기에 표시됩니다.</div>
+                <div class="ingredient-tags" id="ingredientTags">
+                </div>
+            </div>
+        </div>
+        <div class="shop-section">
+            <p class="shop-label">🎁 내 피부타입 전용 제품 추천</p>
+            <p class="shop-sub-label">피부샵 전문 브랜드 제품을 합리적인 가격에</p>
+            <a href="#" id="shopLink" target="_blank" class="shop-link-btn">
+                맞춤 제품 보러가기 →
+            </a>
+            <div class="shop-benefit">
+                <span>✓ 무료배송</span>
+                <span>✓ 피부샵 전문 제품</span>
+                <span>✓ 샘플 증정</span>
+            </div>
+        </div>
+
+        <div class="share-section">
+            <button class="save-img-btn" onclick="saveAsImage()">
+                🖼️ 진단 결과 이미지로 저장
+            </button>
+            <button class="share-btn" onclick="copyResultDetails()">
+                📋 텍스트 상세 복사
+            </button>
+            <a href="https://instagram.com/whiteminer_skincare" target="_blank" class="share-btn insta">
+                📸 인스타그램 구경가기
+            </a>
+        </div>
+
+        <button class="retry-btn" onclick="location.reload()">🔄 다시 진단하기</button>
+
+        <div class="footer">
+            하얀광부 스킨케어<br>
+            <a href="https://instagram.com/whiteminer_skincare" target="_blank">Instagram @whiteminer_skincare</a>
+        </div>
+    </div>
+</div>
+
+<script>
+    // 카카오 SDK 초기화 (사용자가 키를 넣으면 작동, 안 넣으면 무시)
+    try { Kakao.init('여기에_카카오_자바스크립트_키_입력'); } catch(e) {}
+
+    // =============================================
+    // [데이터베이스]
+    // =============================================
+    
+    const steps = [
+        { name: "STEP 1. 유분 체크", count: 6 },
+        { name: "STEP 2. 민감도 체크", count: 8 },
+        { name: "STEP 3. 잡티 체크", count: 5 },
+        { name: "STEP 4. 탄력 체크", count: 5 }
+    ];
+
+    const questions = [
+        // STEP 1: O vs D (6문항)
+        { q: "세안 후 아무것도 안 바르고 2시간 뒤, 얼굴 상태는?", a: [{t:"이마와 코가 번들거려요", s:4}, {t:"T존만 약간 기름져요", s:3}, {t:"특별한 변화 없어요", s:2}, {t:"당기고 건조해요", s:1}] },
+        { q: "아침에 일어나면 베개에 유분이 묻어나나요?", a: [{t:"항상 묻어나요", s:4}, {t:"자주 묻어나요", s:3}, {t:"가끔 묻어나요", s:2}, {t:"거의 안 묻어나요", s:1}] },
+        { q: "화장 후 몇 시간 만에 유분이 올라오나요?", a: [{t:"1-2시간 이내", s:4}, {t:"3-4시간 정도", s:3}, {t:"5시간 이상", s:2}, {t:"거의 안 올라와요", s:1}] },
+        { q: "코와 이마의 모공이 눈에 잘 보이나요?", a: [{t:"매우 크고 뚜렷해요", s:4}, {t:"꽤 보이는 편이에요", s:3}, {t:"자세히 봐야 보여요", s:2}, {t:"거의 안 보여요", s:1}] },
+        { q: "블랙헤드나 화이트헤드가 있나요?", a: [{t:"많이 있어요", s:4}, {t:"꽤 있는 편이에요", s:3}, {t:"약간 있어요", s:2}, {t:"거의 없어요", s:1}] },
+        { q: "피부에 각질이 일어나는 경우가 있나요?", a: [{t:"전혀 없어요", s:4}, {t:"거의 없어요", s:3}, {t:"가끔 있어요", s:2}, {t:"자주 있어요", s:1}] },
+        
+        // STEP 2: S vs R (8문항)
+        { q: "새로운 화장품을 사용하면 피부 반응이 있나요?", a: [{t:"트러블/붉어짐이 자주 생겨요", s:4}, {t:"종종 반응이 있어요", s:3}, {t:"가끔 반응이 있어요", s:2}, {t:"어떤 제품이든 괜찮아요", s:1}] },
+        { q: "여드름이나 뾰루지가 얼마나 자주 생기나요?", a: [{t:"항상 있어요", s:4}, {t:"자주 생겨요", s:3}, {t:"가끔 생겨요", s:2}, {t:"거의 안 생겨요", s:1}] },
+        { q: "얼굴이 쉽게 붉어지나요? (운동, 음주, 온도변화 시)", a: [{t:"매우 쉽게 붉어져요", s:4}, {t:"자주 붉어져요", s:3}, {t:"가끔 붉어져요", s:2}, {t:"거의 안 붉어져요", s:1}] },
+        { q: "피부가 따끔거리거나 화끈거린 적이 있나요?", a: [{t:"자주 있어요", s:4}, {t:"종종 있어요", s:3}, {t:"가끔 있어요", s:2}, {t:"없어요", s:1}] },
+        { q: "피부과에서 진단받은 적 있나요? (여드름/아토피/로사시아 등)", a: [{t:"2개 이상 진단받았어요", s:4}, {t:"1개 진단받았어요", s:3}, {t:"의심 증상만 있어요", s:2}, {t:"없어요", s:1}] },
+        { q: "가족 중에 민감성 피부나 알레르기가 있나요?", a: [{t:"직계가족 여러 명", s:4}, {t:"직계가족 1명", s:3}, {t:"친척 중에 있어요", s:2}, {t:"없어요", s:1}] },
+        { q: "환절기에 피부 트러블이 심해지나요?", a: [{t:"매우 심해져요", s:4}, {t:"꽤 심해져요", s:3}, {t:"약간 영향 있어요", s:2}, {t:"영향 없어요", s:1}] },
+        { q: "피부에 가려움증이 있나요?", a: [{t:"자주 가려워요", s:4}, {t:"종종 가려워요", s:3}, {t:"가끔 가려워요", s:2}, {t:"안 가려워요", s:1}] },
+
+        // STEP 3: P vs N (5문항)
+        { q: "기미, 주근깨, 잡티가 있나요?", a: [{t:"많이 있어요", s:4}, {t:"꽤 있어요", s:3}, {t:"약간 있어요", s:2}, {t:"거의 없어요", s:1}] },
+        { q: "여드름/상처가 나은 후 자국이 얼마나 오래 남나요?", a: [{t:"6개월 이상", s:4}, {t:"3-6개월", s:3}, {t:"1-3개월", s:2}, {t:"거의 안 남아요", s:1}] },
+        { q: "햇볕에 노출되면 피부가 어떻게 되나요?", a: [{t:"쉽게 검게 그을려요", s:4}, {t:"붉어졌다가 그을려요", s:3}, {t:"붉어졌다 원래대로 와요", s:2}, {t:"타거나 벗겨져요", s:1}] },
+        { q: "부모님 중에 기미나 주근깨가 있나요?", a: [{t:"두 분 다 있어요", s:4}, {t:"한 분만 있어요", s:3}, {t:"약간만 있어요", s:2}, {t:"없어요", s:1}] },
+        { q: "호르몬 변화 시 색소 변화가 있었나요? (임신/피임약 등)", a: [{t:"뚜렷한 변화가 있었어요", s:4}, {t:"약간 변화가 있었어요", s:3}, {t:"잘 모르겠어요", s:2}, {t:"없었어요/해당없음", s:1}] },
+
+        // STEP 4: W vs T (5문항)
+        { q: "이마, 눈가, 미간에 주름이 있나요?", a: [{t:"뚜렷한 주름이 있어요", s:4}, {t:"잔주름이 보여요", s:3}, {t:"표정 지을 때만 보여요", s:2}, {t:"주름이 없어요", s:1}] },
+        { q: "주변에서 몇 살로 보인다고 하나요?", a: [{t:"나이보다 많아 보인대요", s:4}, {t:"나이대로 보인대요", s:3}, {t:"조금 어려 보인대요", s:2}, {t:"많이 어려 보인대요", s:1}] },
+        { q: "자외선 차단제를 얼마나 꾸준히 사용했나요?", a: [{t:"거의 안 썼어요", s:4}, {t:"가끔 썼어요", s:3}, {t:"자주 썼어요", s:2}, {t:"매일 꾸준히 썼어요", s:1}] },
+        { q: "흡연 경험이 있나요?", a: [{t:"현재 10년 이상 흡연", s:4}, {t:"현재 흡연/과거 장기흡연", s:3}, {t:"과거 단기 흡연", s:2}, {t:"비흡연", s:1}] },
+        { q: "부모님이 실제 나이보다 젊어 보이시나요?", a: [{t:"나이보다 많아 보여요", s:4}, {t:"나이대로 보여요", s:3}, {t:"젊어 보여요", s:2}, {t:"많이 젊어 보여요", s:1}] }
+    ];
+
+    // 결과 데이터
+    const resultData = {
+        "OSPT": {
+            koreanCode: "지성 + 민감 + 잡티 + 탄력◎",
+            name: "트러블 많은 민감 지성 피부",
+            simpleDesc: "피지 조절과 진정 케어가 동시에 필요한 피부예요",
+            desc: "피지 분비가 많으면서 피부 장벽이 약해 트러블과 색소침착이 동시에 생기기 쉬운 상태입니다. 다행히 탄력은 유지되고 있어, 진정과 피지 조절에 집중하면 빠르게 개선될 수 있어요.",
+            care: "자극 없이 피지를 조절하면서 진정 케어를 병행해야 합니다. 각질 제거는 최소화하고, 수분 공급을 충분히 하면서 유수분 밸런스를 맞춰주세요.",
+            avoid: ["고농도 알코올 토너", "과도한 클렌징", "자극적인 스크럽"],
+            ingredients: ["나이아신아마이드", "살리실산(BHA)", "센텔라", "티트리"],
+            linkType: "ACNE"
+        },
+        "OSNT": {
+            koreanCode: "지성 + 민감 + 잡티× + 탄력◎",
+            name: "여드름 잘 나는 민감 지성 피부",
+            simpleDesc: "트러블만 잡으면 건강해지는 피부예요",
+            desc: "피지는 많지만 잡티 걱정은 적은 타입입니다. 한국 남성에게 가장 흔한 피부 타입이에요. 여드름과 모공만 관리하면 빠르게 좋아질 수 있습니다.",
+            care: "가벼운 수분 제품으로 유수분 밸런스만 맞춰도 좋아집니다. 무거운 크림은 피하고, 수분 젤이나 로션 타입을 사용하세요.",
+            avoid: ["무거운 크림", "기름진 제품", "자극적인 토너"],
+            ingredients: ["티트리", "살리실산", "나이아신아마이드", "녹차추출물"],
+            linkType: "OILY"
+        },
+        "OSPW": {
+            koreanCode: "지성 + 민감 + 잡티 + 탄력↓",
+            name: "복합 고민 피부",
+            simpleDesc: "여러 고민을 단계적으로 케어해야 하는 피부예요",
+            desc: "트러블, 잡티, 주름, 예민함까지 여러 고민이 겹쳐 있어요. 한 번에 다 해결하려 하면 오히려 악화될 수 있어요. 진정부터 차근차근 접근해야 합니다.",
+            care: "자극 없이 진정 → 미백 → 주름 케어 순서로 하나씩 접근하세요. 강한 기능성 제품은 피부가 안정된 다음에 써야 해요.",
+            avoid: ["강한 필링", "고농도 레티놀 바로 사용", "여러 기능성 제품 동시 사용"],
+            ingredients: ["저농도 비타민C", "아젤라익산", "펩타이드", "센텔라"],
+            linkType: "ACNE"
+        },
+        "OSNW": {
+            koreanCode: "지성 + 민감 + 잡티× + 탄력↓",
+            name: "홍조성 민감 피부",
+            simpleDesc: "붉어짐과 탄력 관리가 필요해요",
+            desc: "조금만 자극받아도 얼굴이 쉽게 붉어지고, 탄력도 떨어지는 상태예요. 열감을 줄이고 진정시키는 게 가장 중요해요.",
+            care: "열감을 줄이고 탄력을 채워주세요. 뜨거운 환경, 매운 음식, 술은 피하고, 진정 성분을 꾸준히 써주세요.",
+            avoid: ["뜨거운 느낌 주는 성분", "알코올", "강한 기능성 제품"],
+            ingredients: ["센텔라", "아젤라익산", "녹차추출물", "판테놀"],
+            linkType: "SENSITIVE"
+        },
+        "ORPT": {
+            koreanCode: "지성 + 튼튼 + 잡티 + 탄력◎",
+            name: "튼튼한 잡티 피부",
+            simpleDesc: "색소침착 관리만 집중하면 되는 피부예요",
+            desc: "피부는 튼튼해서 어떤 제품을 써도 트러블이 잘 안 나지만, 잡티가 잘 남는 편이에요. 미백 관리와 자외선 차단에 집중하세요.",
+            care: "피부가 강해서 적극적인 미백 케어가 가능합니다. 비타민C, 레티놀 등 강한 성분도 잘 받아들여요. 자외선 차단만 철저히 하세요.",
+            avoid: ["자외선 무방비 노출"],
+            ingredients: ["비타민C", "알부틴", "레티놀", "나이아신아마이드"],
+            linkType: "OILY"
+        },
+        "ORNT": {
+            koreanCode: "지성 + 튼튼 + 잡티× + 탄력◎",
+            name: "건강한 지성 피부",
+            simpleDesc: "피지 조절만 하면 완벽한 피부예요! 👍",
+            desc: "축복받은 피부입니다! 피지만 잘 관리하면 다른 고민이 거의 없어요. 너무 과하게 관리하지 말고 심플하게 유지하세요.",
+            care: "복잡한 루틴 필요 없어요. 클렌징과 가벼운 보습만 잘 하면 돼요. 피부가 좋으니 오히려 과한 관리가 독이 될 수 있어요.",
+            avoid: ["과도한 보습", "불필요한 기능성 제품"],
+            ingredients: ["나이아신아마이드", "히알루론산"],
+            linkType: "OILY"
+        },
+        "ORPW": {
+            koreanCode: "지성 + 튼튼 + 잡티 + 탄력↓",
+            name: "노화성 잡티 피부",
+            simpleDesc: "안티에이징과 미백을 동시에 해야 하는 피부예요",
+            desc: "피부는 튼튼하지만 노화와 색소침착이 진행되고 있습니다. 강한 성분도 잘 받아들이니 적극적인 안티에이징 케어가 가능해요.",
+            care: "레티놀, 비타민C 등 기능성 제품을 적극적으로 사용하세요. 피부가 강하니 고농도 제품도 시도해볼 수 있어요.",
+            avoid: ["자외선 무방비 노출"],
+            ingredients: ["레티놀", "비타민C", "펩타이드", "알부틴"],
+            linkType: "ANTI_AGING"
+        },
+        "ORNW": {
+            koreanCode: "지성 + 튼튼 + 잡티× + 탄력↓",
+            name: "탄력 저하 지성 피부",
+            simpleDesc: "안티에이징에만 집중하면 되는 피부예요",
+            desc: "색소 고민은 없지만 탄력이 떨어지고 있습니다. 피부가 튼튼해서 강한 안티에이징 제품을 사용할 수 있어요.",
+            care: "안티에이징 제품 하나만 제대로 쓰세요. 레티놀이나 펩타이드 제품을 꾸준히 사용하면 효과를 볼 수 있어요.",
+            avoid: ["특별히 없음"],
+            ingredients: ["레티놀", "펩타이드", "콜라겐", "아데노신"],
+            linkType: "ANTI_AGING"
+        },
+        "DSPT": {
+            koreanCode: "건성 + 민감 + 잡티 + 탄력◎",
+            name: "예민한 건조 피부",
+            simpleDesc: "보습과 진정이 최우선인 피부예요",
+            desc: "건조하고 예민해서 조금만 자극받아도 붉어지거나 트러블이 생깁니다. 색소침착도 잘 되는 편이에요. 장벽 강화가 가장 중요합니다.",
+            care: "저자극 고보습 제품으로 피부 장벽을 세워주세요. 장벽이 회복되면 다른 고민도 자연스럽게 줄어듭니다.",
+            avoid: ["알코올", "향료", "자극 성분", "과도한 각질제거"],
+            ingredients: ["세라마이드", "히알루론산", "알로에", "판테놀"],
+            linkType: "SENSITIVE"
+        },
+        "DSNT": {
+            koreanCode: "건성 + 민감 + 잡티× + 탄력◎",
+            name: "장벽 약화 건성 피부",
+            simpleDesc: "피부 장벽만 세우면 건강해지는 피부예요",
+            desc: "한국 여성에게 가장 흔한 피부 타입입니다. 건조하고 예민하지만, 색소나 주름 고민은 적어요. 보습과 진정에만 집중하면 됩니다.",
+            care: "순한 보습제로 장벽만 세워주세요. 복잡한 루틴보다 기본에 충실한 것이 중요합니다.",
+            avoid: ["자극 성분", "과도한 각질제거", "강한 세안"],
+            ingredients: ["세라마이드", "판테놀", "마데카소사이드", "스쿠알란"],
+            linkType: "DRY"
+        },
+        "DSPW": {
+            koreanCode: "건성 + 민감 + 잡티 + 탄력↓",
+            name: "집중 관리 피부",
+            simpleDesc: "모든 케어가 필요하지만 효과도 빠른 피부예요",
+            desc: "건조함이 노화를 가속화시키고, 민감해서 아무거나 쓰기도 어려운 상태입니다. 하지만 제대로 관리하면 개선 효과가 가장 빠른 타입이기도 해요.",
+            care: "장벽 강화를 먼저 하고, 피부가 안정되면 단계적으로 미백과 안티에이징 제품을 추가하세요.",
+            avoid: ["자극 성분", "고농도 레티놀 초기사용", "강한 필링"],
+            ingredients: ["세라마이드", "저농도 비타민C", "펩타이드", "히알루론산"],
+            linkType: "ANTI_AGING"
+        },
+        "DSNW": {
+            koreanCode: "건성 + 민감 + 비색소 + 주름",
+            name: "건조성 노화 피부",
+            simpleDesc: "보습과 안티에이징을 동시에 해야 하는 피부예요",
+            desc: "수분 부족으로 인해 주름이 자글자글해집니다. 민감해서 강한 제품은 쓰기 어려워요.",
+            care: "수분과 유분을 동시에 채워주세요. 저자극 레티놀이나 펩타이드 제품을 순하게 시작하세요.",
+            avoid: ["자극적 레티놀", "알코올 토너"],
+            ingredients: ["저자극 레티놀", "펩타이드", "스쿠알란", "시어버터"],
+            linkType: "ANTI_AGING"
+        },
+        "DRPT": {
+            koreanCode: "건성 + 튼튼 + 잡티 + 탄력◎",
+            name: "잡티 고민 건성 피부",
+            simpleDesc: "보습과 미백에 집중하면 되는 피부예요",
+            desc: "건조하지만 피부 자체는 튼튼합니다. 색소침착만 관리하면 되는 비교적 케어하기 쉬운 타입이에요.",
+            care: "보습과 미백을 병행하세요. 피부가 강해서 비타민C나 미백 앰플을 적극적으로 사용할 수 있습니다.",
+            avoid: ["지성용 제품"],
+            ingredients: ["비타민C", "알부틴", "나이아신아마이드", "히알루론산"],
+            linkType: "DRY"
+        },
+        "DRNT": {
+            koreanCode: "건성 + 튼튼 + 잡티× + 탄력◎",
+            name: "워너비 건성 피부",
+            simpleDesc: "건조함만 해결하면 완벽한 피부예요",
+            desc: "피부 고민이 가장 적은 타입입니다! 건조함만 잡으면 다른 고민은 거의 없어요. 좋은 보습제 하나만 잘 쓰세요.",
+            care: "심플하고 리치한 보습 루틴이 전부입니다. 복잡한 제품을 쓸 필요가 없어요.",
+            avoid: ["지성용 제품", "불필요한 기능성 제품"],
+            ingredients: ["히알루론산", "호호바오일", "시어버터", "세라마이드"],
+            linkType: "DRY"
+        },
+        "DRPW": {
+            koreanCode: "건성 + 튼튼 + 잡티 + 탄력↓",
+            name: "광노화 피부",
+            simpleDesc: "자외선 데미지 복구가 핵심인 피부예요",
+            desc: "자외선에 의한 노화(광노화)가 진행된 상태입니다. 색소침착과 주름이 함께 나타나요. 피부가 튼튼해서 적극적인 케어가 가능합니다.",
+            care: "선크림 필수! 비타민C와 레티놀로 적극적인 안티에이징과 미백 케어를 하세요.",
+            avoid: ["자외선 무방비 노출"],
+            ingredients: ["비타민C", "레티놀", "펩타이드", "선크림(필수)"],
+            linkType: "ANTI_AGING"
+        },
+        "DRNW": {
+            koreanCode: "건성 + 튼튼 + 잡티× + 탄력↓",
+            name: "영양 부족 건성 피부",
+            simpleDesc: "영양 공급에 집중해야 하는 피부예요",
+            desc: "건조해서 탄력을 잃어가고 있습니다. 색소 고민은 없고 피부도 튼튼하니, 영양감 있는 안티에이징 제품을 쓰면 좋아질 수 있어요.",
+            care: "리치한 영양 크림과 오일 세럼을 사용하세요. 레티놀이나 펩타이드도 잘 받아들입니다.",
+            avoid: ["가벼운 수분 제품만 사용"],
+            ingredients: ["레티놀", "펩타이드", "오일 세럼", "영양 크림"],
+            linkType: "ANTI_AGING"
+        }
+    };
+
+    // 스토어 링크
+    const links = {
+        "ACNE": "https://smartstore.naver.com/inspirationplus/category/0e8853bfba8a4306ba8510b16fee430a?cp=1",
+        "OILY": "https://smartstore.naver.com/inspirationplus/category/42bab2f6a2474194826e5c43d49f7047?cp=1",
+        "DRY": "https://smartstore.naver.com/inspirationplus/category/39736c80e1dd48099a870939752c30f1?cp=1",
+        "SENSITIVE": "https://smartstore.naver.com/inspirationplus/products/11201133444",
+        "ANTI_AGING": "https://smartstore.naver.com/inspirationplus/products/11226243461"
+    };
+
+    // 지표 설명 데이터
+    const metricInfo = {
+        oil: { name: "유분", high: "많음", medium: "보통", low: "부족", 
+               highTip: "피지 조절 성분(나이아신아마이드, BHA)을 사용하세요",
+               mediumTip: "현재 유분 밸런스가 좋습니다. 유지하세요",
+               lowTip: "유분 공급 제품(오일, 밤)을 추가하세요" },
+        hydration: { name: "수분", high: "충분", medium: "보통", low: "부족",
+                     highTip: "수분 밸런스가 좋습니다. 유지하세요",
+                     mediumTip: "히알루론산 제품으로 수분을 보충하세요",
+                     lowTip: "고보습 세럼과 크림이 필수입니다" },
+        sensitive: { name: "민감도", high: "매우 민감", medium: "다소 민감", low: "튼튼함",
+                     highTip: "저자극 제품 위주로, 진정 성분을 사용하세요",
+                     mediumTip: "새 제품은 패치테스트 후 사용하세요",
+                     lowTip: "피부가 튼튼해서 다양한 제품을 시도할 수 있어요" },
+        pigment: { name: "색소침착", high: "침착 잘됨", medium: "보통", low: "침착 안됨",
+                   highTip: "자외선 차단 필수, 미백 성분을 꾸준히 사용하세요",
+                   mediumTip: "자외선 차단만 잘 해도 관리됩니다",
+                   lowTip: "색소 고민이 적습니다. 현재 관리를 유지하세요" },
+        elastic: { name: "탄력도", high: "탄력 좋음", medium: "보통", low: "탄력 저하",
+                   highTip: "탄력이 좋습니다. 현재 상태를 유지하세요",
+                   mediumTip: "펩타이드 제품으로 예방적 관리를 시작하세요",
+                   lowTip: "레티놀, 펩타이드로 적극적인 탄력 케어가 필요합니다" },
+        barrier: { name: "장벽건강", high: "장벽 튼튼", medium: "다소 약함", low: "장벽 손상",
+                   highTip: "장벽이 건강합니다. 과한 관리는 피하세요",
+                   mediumTip: "세라마이드로 장벽을 강화하세요",
+                   lowTip: "장벽 회복이 최우선입니다. 자극을 최소화하세요" }
+    };
+
+    // =============================================
+    // [로직]
+    // =============================================
+    
+    let currentQ = 0;
+    let scores = { step1: 0, step2: 0, step3: 0, step4: 0 };
+    let rawScores = { oil: 0, sensitive: 0, pigment: 0, wrinkle: 0 };
+
+    function startDiagnosis() {
+        document.getElementById('introScreen').classList.remove('active');
+        document.getElementById('quizScreen').classList.add('active');
+        showQuestion();
+    }
+
+    function showQuestion() {
+        const progress = ((currentQ) / questions.length) * 100;
+        document.getElementById('progressBar').style.width = `${progress}%`;
+
+        let currentStepIdx = 0;
+        let qCount = 0;
+        for(let i = 0; i < steps.length; i++) {
+            qCount += steps[i].count;
+            if(currentQ < qCount) {
+                currentStepIdx = i;
+                break;
+            }
+        }
+
+        document.getElementById('stepBadge').innerText = steps[currentStepIdx].name;
+        document.getElementById('questionNumber').innerText = `Q${currentQ + 1} / ${questions.length}`;
+
+        const qData = questions[currentQ];
+        document.getElementById('questionText').innerText = qData.q;
+        
+        const optsDiv = document.getElementById('optionsArea');
+        optsDiv.innerHTML = "";
+        qData.a.forEach(opt => {
+            const btn = document.createElement('button');
+            btn.className = 'option-btn';
+            btn.innerText = opt.t;
+            btn.onclick = () => nextQuestion(opt.s, currentStepIdx);
+            optsDiv.appendChild(btn);
+        });
+    }
+
+    function nextQuestion(score, stepIdx) {
+        if(stepIdx === 0) { scores.step1 += score; rawScores.oil += score; }
+        else if(stepIdx === 1) { scores.step2 += score; rawScores.sensitive += score; }
+        else if(stepIdx === 2) { scores.step3 += score; rawScores.pigment += score; }
+        else if(stepIdx === 3) { scores.step4 += score; rawScores.wrinkle += score; }
+
+        currentQ++;
+        if(currentQ < questions.length) {
+            showQuestion();
+        } else {
+            showResult();
+        }
+    }
+
+    function showResult() {
+        document.getElementById('quizScreen').classList.remove('active');
+        document.getElementById('resultScreen').classList.add('active');
+        document.getElementById('progressBar').style.width = '100%';
+
+        const type1 = scores.step1 >= 18 ? 'O' : 'D';
+        const type2 = scores.step2 >= 20 ? 'S' : 'R';
+        const type3 = scores.step3 >= 14 ? 'P' : 'N';
+        const type4 = scores.step4 >= 14 ? 'W' : 'T';
+        
+        const finalType = type1 + type2 + type3 + type4;
+        const result = resultData[finalType];
+
+        document.getElementById('resultCode').innerText = finalType;
+        document.getElementById('resultKorean').innerText = result.koreanCode;
+        document.getElementById('resultName').innerText = `"${result.name}"`;
+        document.getElementById('resultSimpleDesc').innerText = result.simpleDesc;
+        document.getElementById('resultDesc').innerText = result.desc;
+        document.getElementById('resultCare').innerText = result.care;
+
+        const avoidDiv = document.getElementById('avoidTags');
+        avoidDiv.innerHTML = result.avoid.map(a => `<span class="avoid-tag">${a}</span>`).join('');
+
+        const ingredientDiv = document.getElementById('ingredientTags');
+        ingredientDiv.innerHTML = result.ingredients.map(i => `<span class="ingredient-tag">${i}</span>`).join('');
+
+        document.getElementById('shopLink').href = links[result.linkType];
+
+        drawRadarChart(finalType);
+        createMetricCards(finalType);
+    }
+
+    function drawRadarChart(type) {
+        const svg = document.getElementById('radarChart');
+        const centerX = 150, centerY = 130, radius = 90;
+
+        const maxScores = { oil: 24, hydration: 24, sensitive: 32, pigment: 20, elastic: 20, barrier: 32 };
+        
+        const oilScore = (rawScores.oil / maxScores.oil) * 100;
+        const hydrationScore = 100 - oilScore; 
+        const sensitiveScore = (rawScores.sensitive / maxScores.sensitive) * 100;
+        const pigmentScore = (rawScores.pigment / maxScores.pigment) * 100;
+        const elasticScore = 100 - ((rawScores.wrinkle / maxScores.elastic) * 100);
+        const barrierScore = 100 - sensitiveScore; 
+
+        const chartScores = [oilScore, hydrationScore, sensitiveScore, pigmentScore, elasticScore, barrierScore];
+        const labels = ['유분', '수분', '민감', '색소', '탄력', '장벽'];
+        const colors = ['#FFB74D', '#4FC3F7', '#F48FB1', '#BA68C8', '#81C784', '#90A4AE'];
+
+        let svgContent = '';
+
+        for(let level = 1; level <= 4; level++) {
+            const r = radius * (level / 4);
+            let points = [];
+            for(let i = 0; i < 6; i++) {
+                const angle = (Math.PI / 3) * i - Math.PI / 2;
+                const x = centerX + r * Math.cos(angle);
+                const y = centerY + r * Math.sin(angle);
+                points.push(`${x},${y}`);
+            }
+            svgContent += `<polygon points="${points.join(' ')}" fill="none" stroke="#ddd" stroke-width="1"/>`;
+        }
+
+        for(let i = 0; i < 6; i++) {
+            const angle = (Math.PI / 3) * i - Math.PI / 2;
+            const x = centerX + radius * Math.cos(angle);
+            const y = centerY + radius * Math.sin(angle);
+            svgContent += `<line x1="${centerX}" y1="${centerY}" x2="${x}" y2="${y}" stroke="#ddd" stroke-width="1"/>`;
+        }
+
+        let dataPoints = [];
+        for(let i = 0; i < 6; i++) {
+            const angle = (Math.PI / 3) * i - Math.PI / 2;
+            const r = radius * (chartScores[i] / 100);
+            const x = centerX + r * Math.cos(angle);
+            const y = centerY + r * Math.sin(angle);
+            dataPoints.push(`${x},${y}`);
+        }
+        svgContent += `<polygon points="${dataPoints.join(' ')}" fill="rgba(212, 175, 55, 0.3)" stroke="#D4AF37" stroke-width="2"/>`;
+
+        for(let i = 0; i < 6; i++) {
+            const angle = (Math.PI / 3) * i - Math.PI / 2;
+            const r = radius * (chartScores[i] / 100);
+            const x = centerX + r * Math.cos(angle);
+            const y = centerY + r * Math.sin(angle);
+            svgContent += `<circle cx="${x}" cy="${y}" r="5" fill="${colors[i]}" stroke="#fff" stroke-width="2"/>`;
+        }
+
+        for(let i = 0; i < 6; i++) {
+            const angle = (Math.PI / 3) * i - Math.PI / 2;
+            const x = centerX + (radius + 25) * Math.cos(angle);
+            const y = centerY + (radius + 25) * Math.sin(angle);
+            svgContent += `<text x="${x}" y="${y}" text-anchor="middle" dominant-baseline="middle" font-size="12" font-weight="600" fill="#333">${labels[i]}</text>`;
+        }
+
+        svg.innerHTML = svgContent;
+
+        window.chartScores = {
+            oil: oilScore,
+            hydration: hydrationScore,
+            sensitive: sensitiveScore,
+            pigment: pigmentScore,
+            elastic: elasticScore,
+            barrier: barrierScore
+        };
+    }
+
+    function createMetricCards(type) {
+        const grid = document.getElementById('metricsGrid');
+        const scores = window.chartScores;
+        
+        const metrics = [
+            { key: 'oil', score: scores.oil },
+            { key: 'hydration', score: scores.hydration },
+            { key: 'sensitive', score: scores.sensitive },
+            { key: 'pigment', score: scores.pigment },
+            { key: 'elastic', score: scores.elastic },
+            { key: 'barrier', score: scores.barrier }
+        ];
+
+        let html = '';
+        metrics.forEach(m => {
+            const info = metricInfo[m.key];
+            let status, statusClass, tip;
+            
+            if(m.key === 'oil' || m.key === 'sensitive' || m.key === 'pigment') {
+                if(m.score >= 70) { status = info.high; statusClass = 'high'; tip = info.highTip; }
+                else if(m.score >= 40) { status = info.medium; statusClass = 'medium'; tip = info.mediumTip; }
+                else { status = info.low; statusClass = 'low'; tip = info.lowTip; }
+            } else {
+                if(m.score >= 70) { status = info.high; statusClass = 'good'; tip = info.highTip; }
+                else if(m.score >= 40) { status = info.medium; statusClass = 'medium'; tip = info.mediumTip; }
+                else { status = info.low; statusClass = 'high'; tip = info.lowTip; }
+            }
+
+            html += `
+                <div class="metric-card ${m.key}">
+                    <div class="metric-name">${info.name}</div>
+                    <div class="metric-score">${Math.round(m.score)}점</div>
+                    <span class="metric-status ${statusClass}">${status}</span>
+                    <div class="metric-tip">${tip}</div>
+                </div>
+            `;
+        });
+
+        grid.innerHTML = html;
+    }
+
+    // [기능 1] 수정된 텍스트 상세 복사 기능
+    function copyResultDetails() {
+        const code = document.getElementById('resultCode').innerText;
+        const name = document.getElementById('resultName').innerText;
+        const desc = document.getElementById('resultDesc').innerText;
+        const care = document.getElementById('resultCare').innerText;
+        
+        // 1. 제품 링크 (버튼에서 가져오기)
+        const productLink = document.getElementById('shopLink').href;
+        
+        // 2. 진단 페이지 링크 (현재 URL)
+        const diagnosisLink = window.location.href;
+
+        const text = `[하얀광부 피부 갱도 진단 결과]
+━━━━━━━━━━━━━━━━
+🔬 타입: ${code}
+👤 별명: ${name}
+━━━━━━━━━━━━━━━━
+📊 분석:
+${desc}
+
+💊 처방:
+${care}
+
+👉 내 피부 전용 제품 보기:
+${productLink}
+
+🔍 내 피부 타입 진단하기:
+${diagnosisLink}
+━━━━━━━━━━━━━━━━
+*하얀광부와 함께 피부 금맥을 찾아보세요!*`;
+        
+        navigator.clipboard.writeText(text).then(() => {
+            alert('상세 진단 결과가 복사되었습니다! \n카카오톡이나 메모장에 붙여넣으세요.');
+        }).catch(err => {
+            alert('복사에 실패했습니다.');
+        });
+    }
+
+    // [기능 2] 이미지 저장 기능
+    function saveAsImage() {
+        // 캡처 영역 선택
+        const captureElement = document.getElementById('captureArea');
+        
+        // 사용자에게 안내
+        const originalText = document.querySelector('.save-img-btn').innerText;
+        document.querySelector('.save-img-btn').innerText = "📸 이미지 생성 중...";
+
+        html2canvas(captureElement, { scale: 2, backgroundColor: "#FFFFFF" }).then(canvas => {
+            const link = document.createElement('a');
+            link.download = '하얀광부_피부진단_' + document.getElementById('resultCode').innerText + '.png';
+            link.href = canvas.toDataURL();
+            link.click();
+            
+            document.querySelector('.save-img-btn').innerText = originalText;
+            alert("이미지가 저장되었습니다!");
+        }).catch(err => {
+            alert("이미지 저장에 실패했습니다.");
+            document.querySelector('.save-img-btn').innerText = originalText;
+        });
+    }
+</script>
+
+</body>
+</html>

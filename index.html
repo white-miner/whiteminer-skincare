@@ -1366,7 +1366,7 @@
         
         <div class="director-consultation-note">
             <p class="director-note-text">
-                💬 <strong>더 정밀한 관리는 담당 에스테틱 원장님과 상의하세요</strong>
+                💬 <strong>더 전문적인 관리는<br>담당 에스테틱 원장님과 상의하세요</strong>
             </p>
         </div>
 
@@ -1703,17 +1703,17 @@
 .director-consultation-note {
     margin: 24px 0;
     padding: 20px;
-    background: linear-gradient(135deg, #E8F5E9 0%, #C8E6C9 100%);
+    background: linear-gradient(135deg, #E3F2FD 0%, #BBDEFB 100%);
     border-radius: 12px;
-    border: 2px solid #66BB6A;
+    border: 2px solid #42A5F5;
     text-align: center;
 }
 
 .director-note-text {
     font-size: 1.05rem;
-    color: #2E7D32;
+    color: #1565C0;
     font-weight: 700;
-    line-height: 1.6;
+    line-height: 1.8;
     margin: 0;
 }
 
@@ -1752,7 +1752,7 @@ function toggleFaq(num) {
                 🖼️ 진단 결과 이미지로 저장
             </button>
             <button class="share-btn" onclick="copyResultDetails()">
-                📋 텍스트 상세 복사
+                📋 진단 결과 복사
             </button>
             <a href="https://instagram.com/whiteminer_skincare" target="_blank" class="share-btn insta">
                 📸 인스타그램 구경가기
@@ -3135,8 +3135,8 @@ function getPriorityExplanation(priority, stepName) {
         // 1. 제품 링크 (버튼에서 가져오기)
         const productLink = document.getElementById('shopLink').href;
         
-        // 2. 진단 페이지 링크 (현재 URL)
-        const diagnosisLink = window.location.href;
+        // 2. 진단 페이지 링크 (짧은 URL 고정)
+        const diagnosisLink = "https://white-miner.github.io/whiteminer-skincare/";
 
         const text = `[하얀광부 피부 갱도 진단 결과]
 ━━━━━━━━━━━━━━━━
@@ -3173,18 +3173,52 @@ ${diagnosisLink}
         const originalText = document.querySelector('.save-img-btn').innerText;
         document.querySelector('.save-img-btn').innerText = "📸 이미지 생성 중...";
 
-        html2canvas(captureElement, { scale: 2, backgroundColor: "#FFFFFF" }).then(canvas => {
-            const link = document.createElement('a');
-            link.download = '하얀광부_피부진단_' + document.getElementById('resultCode').innerText + '.png';
-            link.href = canvas.toDataURL();
-            link.click();
-            
-            document.querySelector('.save-img-btn').innerText = originalText;
-            alert("이미지가 저장되었습니다!");
+        html2canvas(captureElement, { 
+            scale: 2, 
+            backgroundColor: "#FFFFFF",
+            useCORS: true,
+            allowTaint: true
+        }).then(canvas => {
+            // 모바일 대응: Blob URL 방식 사용
+            canvas.toBlob(function(blob) {
+                // iOS Safari 대응
+                if (navigator.share && /iPhone|iPad|iPod/.test(navigator.userAgent)) {
+                    // iOS에서는 Web Share API 사용
+                    const file = new File([blob], '하얀광부_피부진단_' + document.getElementById('resultCode').innerText + '.png', { type: 'image/png' });
+                    
+                    navigator.share({
+                        files: [file],
+                        title: '하얀광부 피부진단 결과',
+                        text: '내 피부타입 진단 결과입니다'
+                    }).then(() => {
+                        document.querySelector('.save-img-btn').innerText = originalText;
+                        alert("이미지 공유가 완료되었습니다!\n사진 앱에서 저장하세요.");
+                    }).catch(err => {
+                        // 공유 실패 시 다운로드 시도
+                        fallbackDownload(blob, originalText);
+                    });
+                } else {
+                    // 일반 다운로드 (PC, Android)
+                    fallbackDownload(blob, originalText);
+                }
+            }, 'image/png');
         }).catch(err => {
-            alert("이미지 저장에 실패했습니다.");
+            alert("이미지 생성에 실패했습니다.");
             document.querySelector('.save-img-btn').innerText = originalText;
         });
+    }
+    
+    // 폴백 다운로드 함수
+    function fallbackDownload(blob, originalText) {
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement('a');
+        link.download = '하얀광부_피부진단_' + document.getElementById('resultCode').innerText + '.png';
+        link.href = url;
+        link.click();
+        URL.revokeObjectURL(url);
+        
+        document.querySelector('.save-img-btn').innerText = originalText;
+        alert("이미지가 다운로드되었습니다!\n다운로드 폴더를 확인하세요.");
     }
 </script>
 

@@ -182,6 +182,37 @@
             font-weight: bold;
         }
 
+        /* 실시간 열람자 스타일 */
+        .live-viewer-box {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 6px;
+            margin: 10px 0;
+            font-size: 0.9rem;
+            color: #2E7D32;
+            font-weight: 600;
+            background: #E8F5E9;
+            padding: 8px;
+            border-radius: 20px;
+            width: fit-content;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .live-dot {
+            width: 8px;
+            height: 8px;
+            background-color: #4CAF50;
+            border-radius: 50%;
+            display: inline-block;
+            animation: pulse-green 1.5s infinite;
+        }
+        @keyframes pulse-green {
+            0% { transform: scale(0.95); opacity: 0.7; }
+            50% { transform: scale(1.1); opacity: 1; }
+            100% { transform: scale(0.95); opacity: 0.7; }
+        }
+
         .quiz-info {
             display: flex;
             justify-content: center;
@@ -213,961 +244,208 @@
         .start-btn:hover { background: #333; transform: translateY(-2px); }
         .start-btn:active { transform: scale(0.98); }
 
-        /* ========== 질문 화면 ========== */
-        .step-badge {
-            display: inline-block;
-            background: var(--gold-light);
-            color: #8A6D1F;
-            padding: 8px 14px;
-            border-radius: 20px;
-            font-size: 0.85rem;
-            font-weight: 700;
-            margin-bottom: 20px;
-        }
-
-        .question-number {
-            font-size: 0.85rem;
-            color: var(--text-sub);
-            margin-bottom: 8px;
-        }
-
-        .question-text {
-            font-size: 1.35rem;
-            font-weight: 700;
-            margin-bottom: 30px;
-            line-height: 1.5;
-        }
-
-        .option-btn {
-            background: #fff;
-            border: 2px solid #eee;
-            color: var(--text-main);
-            padding: 16px 18px;
-            border-radius: 12px;
-            width: 100%;
-            text-align: left;
-            margin-bottom: 12px;
-            font-size: 1rem;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-        .option-btn:hover {
-            border-color: var(--gold-main);
-            background: #FFFCF2;
-            transform: translateX(5px);
-        }
-        .option-btn:active {
-            transform: scale(0.98);
-        }
-
-        /* ========== 결과 화면 ========== */
-        #captureArea {
-            background: var(--card-bg);
-            padding: 10px;
-        }
-
-        .result-header {
-            text-align: center;
-            padding: 20px 0;
-            border-bottom: 1px dashed #eee;
-            margin-bottom: 25px;
-        }
-
-        .result-img-container {
-            width: 120px;
-            height: 120px;
-            margin: 0 auto 15px;
-            background: linear-gradient(135deg, #FFF9E6 0%, #FFF5D6 100%);
-            border-radius: 50%;
-            overflow: hidden;
-            box-shadow: 0 4px 20px rgba(212, 175, 55, 0.2);
-        }
-
-        .result-label {
-            font-size: 0.9rem;
-            color: var(--text-sub);
-            margin-bottom: 8px;
-        }
-
-        .result-code {
-            font-size: 3.2rem;
-            font-weight: 900;
-            color: var(--gold-main);
-            letter-spacing: 4px;
-            margin: 10px 0;
-        }
-
-        .result-korean {
-            font-size: 1rem;
-            color: var(--text-sub);
-            margin-bottom: 8px;
-            font-weight: 500;
-        }
-
-        .result-name {
-            font-size: 1.6rem;
-            font-weight: 800;
-            color: var(--text-main);
-        }
-
-        .result-simple-desc {
-            font-size: 0.95rem;
-            color: var(--text-sub);
-            margin-top: 8px;
-            line-height: 1.5;
-        }
-
-        /* 육각형 레이더 차트 */
-        .chart-section {
-            background: #f9f9f9;
-            border-radius: 16px;
-            padding: 25px 20px;
-            margin-bottom: 20px;
-        }
-
-        .chart-title {
-            font-size: 1rem;
-            font-weight: 700;
-            text-align: center;
-            margin-bottom: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-        }
-
-        .radar-chart-container {
-            width: 100%;
-            max-width: 280px;
-            margin: 0 auto;
-        }
-
-        .radar-chart {
-            width: 100%;
-            height: auto;
-        }
-
-        /* 지표 설명 카드들 */
-        .metrics-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 12px;
-            margin-top: 20px;
-        }
-
-        .metric-card {
-            background: #fff;
-            border-radius: 12px;
-            padding: 14px;
-            border-left: 4px solid;
-        }
-
+        /* 결과 화면 스타일 */
+        #captureArea { background: var(--card-bg); padding: 10px; }
+        .result-header { text-align: center; padding: 20px 0; border-bottom: 1px dashed #eee; margin-bottom: 25px; }
+        .result-img-container { width: 120px; height: 120px; margin: 0 auto 15px; background: linear-gradient(135deg, #FFF9E6 0%, #FFF5D6 100%); border-radius: 50%; overflow: hidden; box-shadow: 0 4px 20px rgba(212, 175, 55, 0.2); }
+        .result-label { font-size: 0.9rem; color: var(--text-sub); margin-bottom: 8px; }
+        .result-code { font-size: 3.2rem; font-weight: 900; color: var(--gold-main); letter-spacing: 4px; margin: 10px 0; }
+        .result-korean { font-size: 1rem; color: var(--text-sub); margin-bottom: 8px; font-weight: 500; }
+        .result-name { font-size: 1.6rem; font-weight: 800; color: var(--text-main); }
+        .result-simple-desc { font-size: 0.95rem; color: var(--text-sub); margin-top: 8px; line-height: 1.5; }
+        
+        .chart-section { background: #f9f9f9; border-radius: 16px; padding: 25px 20px; margin-bottom: 20px; }
+        .chart-title { font-size: 1rem; font-weight: 700; text-align: center; margin-bottom: 20px; display: flex; align-items: center; justify-content: center; gap: 8px; }
+        .radar-chart-container { width: 100%; max-width: 280px; margin: 0 auto; }
+        .radar-chart { width: 100%; height: auto; }
+        
+        .metrics-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 20px; }
+        .metric-card { background: #fff; border-radius: 12px; padding: 14px; border-left: 4px solid; }
         .metric-card.oil { border-color: var(--chart-oil); }
         .metric-card.hydration { border-color: var(--chart-hydration); }
         .metric-card.sensitive { border-color: var(--chart-sensitive); }
         .metric-card.pigment { border-color: var(--chart-pigment); }
         .metric-card.elastic { border-color: var(--chart-elastic); }
         .metric-card.barrier { border-color: var(--chart-barrier); }
-
-        .metric-name {
-            font-size: 0.8rem;
-            color: var(--text-sub);
-            margin-bottom: 4px;
-        }
-
-        .metric-score {
-            font-size: 1.4rem;
-            font-weight: 800;
-            margin-bottom: 6px;
-        }
-
-        .metric-status {
-            font-size: 0.75rem;
-            padding: 3px 8px;
-            border-radius: 10px;
-            display: inline-block;
-            margin-bottom: 8px;
-        }
+        .metric-name { font-size: 0.8rem; color: var(--text-sub); margin-bottom: 4px; }
+        .metric-score { font-size: 1.4rem; font-weight: 800; margin-bottom: 6px; }
+        .metric-status { font-size: 0.75rem; padding: 3px 8px; border-radius: 10px; display: inline-block; margin-bottom: 8px; }
         .metric-status.high { background: #FFEBEE; color: #C62828; }
         .metric-status.medium { background: #FFF8E1; color: #F57F17; }
         .metric-status.low { background: #E8F5E9; color: #2E7D32; }
         .metric-status.good { background: #E3F2FD; color: #1565C0; }
-
-        .metric-tip {
-            font-size: 0.78rem;
-            color: #555;
-            line-height: 1.4;
-        }
-
-        /* 상세 분석 카드 */
-        .result-card {
-            background: #fff;
-            border-radius: 14px;
-            padding: 20px;
-            margin-bottom: 15px;
-            border: 1px solid #eee;
-        }
-
-        .card-title {
-            font-weight: 700;
-            margin-bottom: 12px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-size: 1rem;
-        }
-
-        .card-desc {
-            font-size: 0.95rem;
-            line-height: 1.7;
-            color: #444;
-        }
-
-        .prescription-card {
-            background: linear-gradient(135deg, #FFFDF5 0%, #FFF9E6 100%);
-            border: 2px solid var(--gold-main);
-        }
+        .metric-tip { font-size: 0.78rem; color: #555; line-height: 1.4; }
+        
+        .result-card { background: #fff; border-radius: 14px; padding: 20px; margin-bottom: 15px; border: 1px solid #eee; }
+        .card-title { font-weight: 700; margin-bottom: 12px; display: flex; align-items: center; gap: 8px; font-size: 1rem; }
+        .card-desc { font-size: 0.95rem; line-height: 1.7; color: #444; }
+        .prescription-card { background: linear-gradient(135deg, #FFFDF5 0%, #FFF9E6 100%); border: 2px solid var(--gold-main); }
         .prescription-card .card-title { color: var(--gold-main); }
-
-        /* 추천 성분 태그 */
-        .ingredient-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-            margin-top: 12px;
-        }
-        .ingredient-tag {
-            background: #fff;
-            border: 1px solid var(--gold-main);
-            color: #8A6D1F;
-            padding: 6px 12px;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: 600;
-        }
-
-        /* 피해야 할 것 */
-        .avoid-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-            margin-top: 12px;
-        }
-        .avoid-tag {
-            background: #FFEBEE;
-            color: #C62828;
-            padding: 6px 12px;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: 600;
-        }
-
-        /* CTA 버튼 */
-        .shop-section {
-            margin-top: 25px;
-            text-align: center;
-            background: linear-gradient(135deg, #FFF5F5 0%, #FFEBEB 100%);
-            border-radius: 16px;
-            padding: 25px 20px;
-            border: 1px solid #FFCDD2;
-        }
-
-        .shop-label {
-            font-weight: 700;
-            margin-bottom: 8px;
-            font-size: 1rem;
-            color: var(--text-main);
-        }
-
-        .shop-sub-label {
-            font-size: 0.85rem;
-            color: var(--text-sub);
-            margin-bottom: 15px;
-        }
-
-        .shop-link-btn {
-            display: block;
-            background: linear-gradient(135deg, var(--alert-red) 0%, #D32F2F 100%);
-            color: #fff;
-            text-decoration: none;
-            text-align: center;
-            padding: 18px;
-            border-radius: 14px;
-            font-weight: 700;
-            font-size: 1.05rem;
-            box-shadow: 0 6px 20px rgba(231, 76, 60, 0.35);
-            animation: pulse 2s infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.02); }
-        }
-
-        .shop-benefit {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            margin-top: 12px;
-            font-size: 0.8rem;
-            color: var(--text-sub);
-        }
-
-        .retry-btn {
-            background: #f5f5f5;
-            border: none;
-            color: var(--text-main);
-            padding: 16px;
-            border-radius: 12px;
-            width: 100%;
-            font-size: 1rem;
-            font-weight: 600;
-            cursor: pointer;
-            margin-top: 15px;
-        }
+        
+        .ingredient-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+        .ingredient-tag { background: #fff; border: 1px solid var(--gold-main); color: #8A6D1F; padding: 6px 12px; border-radius: 20px; font-size: 0.8rem; font-weight: 600; }
+        .avoid-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+        .avoid-tag { background: #FFEBEE; color: #C62828; padding: 6px 12px; border-radius: 20px; font-size: 0.8rem; font-weight: 600; }
+        
+        .shop-section { margin-top: 25px; text-align: center; background: linear-gradient(135deg, #FFF5F5 0%, #FFEBEB 100%); border-radius: 16px; padding: 25px 20px; border: 1px solid #FFCDD2; }
+        .shop-label { font-weight: 700; margin-bottom: 8px; font-size: 1rem; color: var(--text-main); }
+        .shop-sub-label { font-size: 0.85rem; color: var(--text-sub); margin-bottom: 15px; }
+        .shop-link-btn { display: block; background: linear-gradient(135deg, var(--alert-red) 0%, #D32F2F 100%); color: #fff; text-decoration: none; text-align: center; padding: 18px; border-radius: 14px; font-weight: 700; font-size: 1.05rem; box-shadow: 0 6px 20px rgba(231, 76, 60, 0.35); animation: pulse 2s infinite; }
+        @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.02); } }
+        .shop-benefit { display: flex; justify-content: center; gap: 15px; margin-top: 12px; font-size: 0.8rem; color: var(--text-sub); }
+        
+        .retry-btn { background: #f5f5f5; border: none; color: var(--text-main); padding: 16px; border-radius: 12px; width: 100%; font-size: 1rem; font-weight: 600; cursor: pointer; margin-top: 15px; }
         .retry-btn:hover { background: #eee; }
-
-        /* 푸터 수정: 글자색 검정 */
-        .footer {
-            margin-top: 40px;
-            text-align: center;
-            font-size: 0.85rem;
-            color: #000000;
-            padding: 20px;
-            border-top: 1px solid #eee;
-            font-weight: 500;
-        }
-        .footer a {
-            color: #000000;
-            text-decoration: none;
-            font-weight: 700;
-        }
-
-        /* 공유 버튼 영역 */
-        .share-section {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 10px;
-            margin-top: 15px;
-        }
+        .footer { margin-top: 40px; text-align: center; font-size: 0.85rem; color: #000000; padding: 20px; border-top: 1px solid #eee; font-weight: 500; }
+        .footer a { color: #000000; text-decoration: none; font-weight: 700; }
         
-        .save-img-btn {
-            grid-column: 1 / -1;
-            padding: 14px;
-            background: #333;
-            color: #fff;
-            border: none;
-            border-radius: 12px;
-            font-size: 1rem;
-            font-weight: 700;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-        }
+        .share-section { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 15px; }
+        .save-img-btn { grid-column: 1 / -1; padding: 14px; background: #333; color: #fff; border: none; border-radius: 12px; font-size: 1rem; font-weight: 700; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; }
         .save-img-btn:hover { background: #000; }
-
-        .share-btn {
-            padding: 12px;
-            border: 1px solid #ddd;
-            border-radius: 10px;
-            background: #fff;
-            font-size: 0.85rem;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 6px;
-            color: #333;
-            text-decoration: none;
-        }
+        .share-btn { padding: 12px; border: 1px solid #ddd; border-radius: 10px; background: #fff; font-size: 0.85rem; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 6px; color: #333; text-decoration: none; }
         .share-btn:hover { background: #f9f9f9; }
+        .share-btn.insta { border-color: #E1306C; color: #E1306C; font-weight: 600; }
+
+        /* 질문 화면 스타일 */
+        .step-badge { display: inline-block; background: var(--gold-light); color: #8A6D1F; padding: 8px 14px; border-radius: 20px; font-size: 0.85rem; font-weight: 700; margin-bottom: 20px; }
+        .question-number { font-size: 0.85rem; color: var(--text-sub); margin-bottom: 8px; }
+        .question-text { font-size: 1.35rem; font-weight: 700; margin-bottom: 30px; line-height: 1.5; }
+        .option-btn { background: #fff; border: 2px solid #eee; color: var(--text-main); padding: 16px 18px; border-radius: 12px; width: 100%; text-align: left; margin-bottom: 12px; font-size: 1rem; cursor: pointer; transition: all 0.2s; }
+        .option-btn:hover { border-color: var(--gold-main); background: #FFFCF2; transform: translateX(5px); }
+        .option-btn:active { transform: scale(0.98); }
+
+        /* 프로필 화면 스타일 */
+        .profile-container { display: flex; flex-direction: column; gap: 24px; padding: 0; }
+        .profile-hero { text-align: center; padding: 32px 0 24px; }
+        .profile-icon { font-size: 4rem; margin-bottom: 16px; animation: bounce 2s ease-in-out infinite; }
+        @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+        .profile-title { font-size: 1.75rem; font-weight: 800; line-height: 1.4; color: var(--text-main); margin-bottom: 12px; }
+        .profile-subtitle { font-size: 0.95rem; color: var(--text-sub); line-height: 1.6; }
+        .profile-section { background: var(--card-bg); border-radius: 16px; padding: 24px; box-shadow: var(--shadow); }
+        .profile-question { font-size: 1.1rem; font-weight: 700; margin-bottom: 16px; color: var(--text-main); }
+        .age-group-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+        .gender-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+        .profile-btn { background: #F8F8F8; border: 2px solid #E0E0E0; border-radius: 12px; padding: 20px 12px; cursor: pointer; transition: all 0.3s ease; display: flex; flex-direction: column; align-items: center; gap: 6px; }
+        .profile-btn:hover { transform: translateY(-3px); box-shadow: 0 6px 16px rgba(0,0,0,0.12); border-color: #C0C0C0; }
+        .profile-btn.selected { background: linear-gradient(135deg, #FFF9E6 0%, #FFE8C5 100%); border-color: var(--gold-main); box-shadow: 0 4px 16px rgba(212, 175, 55, 0.3); transform: translateY(-2px); }
+        .btn-emoji { font-size: 2.5rem; margin-bottom: 4px; }
+        .btn-text { font-size: 1.05rem; font-weight: 700; color: var(--text-main); }
+        .btn-sub { font-size: 0.75rem; color: var(--text-sub); }
+        .age-strategy-info { background: linear-gradient(135deg, #F0F7FF 0%, #E3F2FD 100%); border-radius: 12px; padding: 20px; border: 2px solid #BBDEFB; }
+        .strategy-title { font-size: 1rem; font-weight: 700; color: #1976D2; margin-bottom: 12px; text-align: center; }
+        .strategy-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+        .strategy-item { display: flex; flex-direction: column; align-items: center; gap: 4px; text-align: center; }
+        .strategy-age { font-size: 0.9rem; font-weight: 700; color: #1565C0; }
+        .strategy-desc { font-size: 0.75rem; color: #424242; line-height: 1.3; }
+        .privacy-note { background: #F0F7FF; border-left: 4px solid #4A90E2; padding: 16px; border-radius: 8px; font-size: 0.85rem; line-height: 1.6; color: #333; text-align: center; }
+        .profile-start-btn { margin-top: 8px; }
+        .profile-start-btn:disabled { background: #CCCCCC; cursor: not-allowed; opacity: 0.6; }
+        .profile-start-btn:disabled:hover { transform: none; }
+
+        /* 루틴 섹션 스타일 */
+        .routine-section { margin: 32px 0; padding: 24px; background: linear-gradient(135deg, #FFF9E6 0%, #FFFFFF 100%); border-radius: 16px; border: 2px solid var(--gold-light); }
+        .routine-header { text-align: center; margin-bottom: 24px; }
+        .routine-title { font-size: 1.5rem; font-weight: 800; color: var(--text-main); margin-bottom: 8px; }
+        .routine-subtitle { font-size: 0.95rem; color: var(--text-sub); margin-bottom: 16px; }
+        .coupon-info-box { background: linear-gradient(135deg, #FFE5E5 0%, #FFF5E5 100%); border: 2px dashed #FF6B6B; border-radius: 12px; padding: 16px; margin-top: 16px; text-align: center; font-size: 0.95rem; line-height: 1.8; color: #333; white-space: normal; word-break: keep-all; }
+        .coupon-highlight { color: #FF4757; font-size: 1.1rem; font-weight: 800; }
+        .coupon-sub { font-size: 0.85rem; color: #666; }
+        .routine-card { background: white; border-radius: 12px; padding: 20px; margin-bottom: 16px; box-shadow: 0 2px 12px rgba(0,0,0,0.08); border: 2px solid #E8E8E8; transition: all 0.3s ease; }
+        .routine-card.priority-must { border-color: #FF6B6B; background: linear-gradient(135deg, #FFF5F5 0%, #FFFFFF 100%); }
+        .routine-card.priority-high { border-color: #FFA502; background: linear-gradient(135deg, #FFF9F0 0%, #FFFFFF 100%); }
+        .routine-card.priority-normal { border-color: #4ECDC4; background: linear-gradient(135deg, #F0FFFE 0%, #FFFFFF 100%); }
+        .routine-card:hover { transform: translateY(-2px); box-shadow: 0 4px 16px rgba(0,0,0,0.12); }
+        .routine-card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; padding-bottom: 12px; border-bottom: 2px solid #F5F5F5; }
+        .step-info { display: flex; align-items: center; gap: 12px; }
+        .step-number { background: var(--gold-main); color: white; padding: 4px 12px; border-radius: 20px; font-size: 0.75rem; font-weight: 700; }
+        .step-name { font-size: 1.1rem; font-weight: 700; color: var(--text-main); }
+        .header-right { display: flex; gap: 8px; align-items: center; }
+        .priority-badge { padding: 6px 12px; border-radius: 20px; font-size: 0.75rem; font-weight: 700; letter-spacing: -0.5px; }
+        .priority-badge.priority-must { background: #FFE5E5; color: #FF4757; }
+        .priority-badge.priority-high { background: #FFF3E0; color: #FF9800; }
+        .priority-badge.priority-normal { background: #E0F7FA; color: #00ACC1; }
+        .brand-badge { padding: 6px 14px; border-radius: 20px; font-size: 0.8rem; font-weight: 600; }
+        .brand-doctorlab { background: #E3F2FD; color: #1976D2; }
+        .brand-reviderm { background: #F3E5F5; color: #7B1FA2; }
+        .priority-stars { background: #FAFAFA; padding: 12px; border-radius: 8px; margin-bottom: 16px; display: flex; align-items: center; gap: 12px; }
+        .priority-stars .stars { font-size: 1.2rem; line-height: 1; }
+        .priority-stars .priority-text { font-size: 0.85rem; color: #666; line-height: 1.4; flex: 1; }
+        .product-basic-info { margin-bottom: 16px; }
+        .product-name { font-size: 1rem; font-weight: 600; color: var(--text-main); margin-bottom: 6px; }
+        .product-short-desc { font-size: 0.9rem; color: var(--text-sub); line-height: 1.5; margin-bottom: 8px; }
+        .product-price { font-size: 1.1rem; font-weight: 700; color: var(--gold-main); }
+        .routine-detail-btn { width: 100%; padding: 12px; background: #F8F8F8; border: 1px solid #E0E0E0; border-radius: 8px; font-size: 0.9rem; font-weight: 600; color: var(--text-main); cursor: pointer; transition: all 0.2s ease; }
+        .routine-detail-btn:hover { background: #EFEFEF; }
+        .routine-detail-content { margin-top: 16px; padding-top: 16px; border-top: 1px solid #E8E8E8; }
+        .detail-block { margin-bottom: 16px; }
+        .detail-label { font-size: 0.85rem; font-weight: 700; color: var(--gold-main); margin-bottom: 6px; }
+        .detail-text { font-size: 0.9rem; color: var(--text-sub); line-height: 1.6; }
+        .product-buy-btn { display: block; width: 100%; padding: 14px; background: var(--gold-main); color: white; text-align: center; border-radius: 8px; font-weight: 700; text-decoration: none; transition: background 0.2s ease; }
+        .product-buy-btn:hover { background: var(--btn-hover); }
+        .routine-summary { margin-top: 24px; padding: 16px; background: #FFF9E6; border-radius: 8px; border-left: 4px solid var(--gold-main); }
+        .routine-note { font-size: 0.9rem; line-height: 1.6; color: var(--text-main); margin-bottom: 8px; }
+        .routine-note:last-child { margin-bottom: 0; }
+        .age-badge-container { text-align: center; margin-bottom: 16px; padding: 16px; background: linear-gradient(135deg, #E8F5E9 0%, #C8E6C9 100%); border-radius: 12px; border: 2px solid #81C784; }
+        .age-badge { display: block; font-size: 1.3rem; font-weight: 800; color: #2E7D32; margin-bottom: 6px; }
+        .age-subtitle { font-size: 0.9rem; color: #388E3C; font-weight: 600; }
+        .routine-budget { font-size: 0.85rem; color: var(--text-sub); text-align: center; margin-top: 8px; margin-bottom: 16px; }
         
-        /* 인스타그램 버튼 전용 스타일 */
-        .share-btn.insta {
-            border-color: #E1306C;
-            color: #E1306C;
-            font-weight: 600;
+        /* FAQ 스타일 */
+        .faq-section { margin: 32px 0; padding: 24px; background: #F8F9FA; border-radius: 16px; }
+        .faq-header { text-align: center; margin-bottom: 24px; }
+        .faq-title { font-size: 1.4rem; font-weight: 800; color: var(--text-main); margin-bottom: 8px; }
+        .faq-subtitle { font-size: 0.9rem; color: var(--text-sub); }
+        .faq-item { background: white; border-radius: 12px; margin-bottom: 12px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+        .faq-question { width: 100%; padding: 20px; background: white; border: none; display: flex; justify-content: space-between; align-items: center; cursor: pointer; transition: background 0.2s ease; }
+        .faq-question:hover { background: #F8F9FA; }
+        .faq-q-text { font-size: 1rem; font-weight: 700; color: var(--text-main); text-align: left; line-height: 1.5; }
+        .faq-arrow { font-size: 1rem; color: var(--gold-main); transition: transform 0.3s ease; margin-left: 12px; flex-shrink: 0; }
+        .faq-arrow.open { transform: rotate(180deg); }
+        .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; }
+        .faq-answer.open { max-height: 2000px; }
+        .faq-content { padding: 0 20px 20px 20px; color: var(--text-main); line-height: 1.8; }
+        .faq-content p { margin-bottom: 16px; }
+        .faq-content strong { color: var(--gold-main); }
+        .faq-principle { background: #FFF9E6; border-left: 4px solid var(--gold-main); padding: 16px; border-radius: 8px; margin: 16px 0; }
+        .principle-title { font-size: 0.95rem; font-weight: 700; color: var(--text-main); margin-bottom: 12px; }
+        .principle-list { margin-left: 20px; color: var(--text-main); }
+        .principle-list li { margin-bottom: 8px; line-height: 1.6; }
+        .faq-example { background: #F8F9FA; padding: 12px 16px; border-radius: 8px; margin: 12px 0; }
+        .example-title { font-size: 0.9rem; font-weight: 700; margin-bottom: 6px; }
+        .example-result { font-size: 0.85rem; color: var(--text-sub); margin-top: 4px; }
+        .faq-warning { background: #FFF5F5; border-left: 4px solid #E74C3C; padding: 16px; border-radius: 8px; margin: 16px 0; }
+        .warning-title { font-size: 0.95rem; font-weight: 700; color: #E74C3C; margin-bottom: 12px; }
+        .warning-list { margin-left: 20px; color: var(--text-main); }
+        .warning-list li { margin-bottom: 6px; }
+        .highlight-red { color: #E74C3C; font-size: 1.05rem; }
+        .faq-tip { background: #E3F2FD; padding: 12px; border-radius: 8px; font-size: 0.9rem; color: #1976D2; margin-top: 16px; }
+        
+        .director-consultation-note { margin: 24px 0; padding: 20px; background: linear-gradient(135deg, #E8F5E9 0%, #C8E6C9 100%); border-radius: 12px; border: 2px solid #66BB6A; text-align: center; }
+        .director-note-text { font-size: 1.05rem; color: #2E7D32; font-weight: 700; line-height: 1.6; margin: 0; }
+
+        @media (max-width: 480px) {
+            .profile-title { font-size: 1.5rem; }
+            .age-group-grid { grid-template-columns: repeat(2, 1fr); }
+            .profile-btn { padding: 16px 8px; }
+            .btn-emoji { font-size: 2rem; }
+            .btn-text { font-size: 0.95rem; }
+            .strategy-grid { grid-template-columns: 1fr; gap: 8px; }
+            .routine-section { padding: 16px; }
+            .routine-title { font-size: 1.3rem; }
+            .routine-card { padding: 16px; }
+            .routine-card-header { flex-direction: column; align-items: flex-start; gap: 8px; }
+            .header-right { width: 100%; justify-content: flex-start; }
+            .step-name { font-size: 1rem; }
+            .priority-stars { flex-direction: column; align-items: flex-start; gap: 8px; }
+            .coupon-info-box { font-size: 0.85rem; padding: 12px; }
+            .coupon-highlight { font-size: 1rem; }
+            .faq-section { padding: 16px; }
+            .faq-title { font-size: 1.2rem; }
+            .faq-question { padding: 16px; }
+            .faq-q-text { font-size: 0.95rem; }
+            .director-consultation-note { padding: 16px; }
+            .director-note-text { font-size: 0.95rem; }
         }
-    
-
-/* ========== 프로필 선택 화면 스타일 ========== */
-.profile-container {
-    display: flex;
-    flex-direction: column;
-    gap: 24px;
-    padding: 0;
-}
-
-.profile-hero {
-    text-align: center;
-    padding: 32px 0 24px;
-}
-
-.profile-icon {
-    font-size: 4rem;
-    margin-bottom: 16px;
-    animation: bounce 2s ease-in-out infinite;
-}
-
-@keyframes bounce {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-10px); }
-}
-
-.profile-title {
-    font-size: 1.75rem;
-    font-weight: 800;
-    line-height: 1.4;
-    color: var(--text-main);
-    margin-bottom: 12px;
-}
-
-.profile-subtitle {
-    font-size: 0.95rem;
-    color: var(--text-sub);
-    line-height: 1.6;
-}
-
-.profile-section {
-    background: var(--card-bg);
-    border-radius: 16px;
-    padding: 24px;
-    box-shadow: var(--shadow);
-}
-
-.profile-question {
-    font-size: 1.1rem;
-    font-weight: 700;
-    margin-bottom: 16px;
-    color: var(--text-main);
-}
-
-/* 나이대 그리드 (3x2) */
-.age-group-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 12px;
-}
-
-/* 성별 그리드 (2x1) */
-.gender-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 12px;
-}
-
-.profile-btn {
-    background: #F8F8F8;
-    border: 2px solid #E0E0E0;
-    border-radius: 12px;
-    padding: 20px 12px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 6px;
-}
-
-.profile-btn:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 6px 16px rgba(0,0,0,0.12);
-    border-color: #C0C0C0;
-}
-
-.profile-btn.selected {
-    background: linear-gradient(135deg, #FFF9E6 0%, #FFE8C5 100%);
-    border-color: var(--gold-main);
-    box-shadow: 0 4px 16px rgba(212, 175, 55, 0.3);
-    transform: translateY(-2px);
-}
-
-.btn-emoji {
-    font-size: 2.5rem;
-    margin-bottom: 4px;
-}
-
-.btn-text {
-    font-size: 1.05rem;
-    font-weight: 700;
-    color: var(--text-main);
-}
-
-.btn-sub {
-    font-size: 0.75rem;
-    color: var(--text-sub);
-}
-
-/* 연령대별 전략 안내 */
-.age-strategy-info {
-    background: linear-gradient(135deg, #F0F7FF 0%, #E3F2FD 100%);
-    border-radius: 12px;
-    padding: 20px;
-    border: 2px solid #BBDEFB;
-}
-
-.strategy-title {
-    font-size: 1rem;
-    font-weight: 700;
-    color: #1976D2;
-    margin-bottom: 12px;
-    text-align: center;
-}
-
-.strategy-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 12px;
-}
-
-.strategy-item {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 4px;
-    text-align: center;
-}
-
-.strategy-age {
-    font-size: 0.9rem;
-    font-weight: 700;
-    color: #1565C0;
-}
-
-.strategy-desc {
-    font-size: 0.75rem;
-    color: #424242;
-    line-height: 1.3;
-}
-
-/* 개인정보 안내 */
-.privacy-note {
-    background: #F0F7FF;
-    border-left: 4px solid #4A90E2;
-    padding: 16px;
-    border-radius: 8px;
-    font-size: 0.85rem;
-    line-height: 1.6;
-    color: #333;
-    text-align: center;
-}
-
-/* 시작 버튼 */
-.profile-start-btn {
-    margin-top: 8px;
-}
-
-.profile-start-btn:disabled {
-    background: #CCCCCC;
-    cursor: not-allowed;
-    opacity: 0.6;
-}
-
-.profile-start-btn:disabled:hover {
-    transform: none;
-}
-
-/* 모바일 대응 */
-@media (max-width: 480px) {
-    .profile-title {
-        font-size: 1.5rem;
-    }
-    
-    .age-group-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-    
-    .profile-btn {
-        padding: 16px 8px;
-    }
-    
-    .btn-emoji {
-        font-size: 2rem;
-    }
-    
-    .btn-text {
-        font-size: 0.95rem;
-    }
-    
-    .strategy-grid {
-        grid-template-columns: 1fr;
-        gap: 8px;
-    }
-}
-
-
-/* ========== 루틴 섹션 스타일 v2.1 (별점+쿠폰 추가) ========== */
-
-.routine-section {
-    margin: 32px 0;
-    padding: 24px;
-    background: linear-gradient(135deg, #FFF9E6 0%, #FFFFFF 100%);
-    border-radius: 16px;
-    border: 2px solid var(--gold-light);
-}
-
-.routine-header {
-    text-align: center;
-    margin-bottom: 24px;
-}
-
-.routine-title {
-    font-size: 1.5rem;
-    font-weight: 800;
-    color: var(--text-main);
-    margin-bottom: 8px;
-}
-
-.routine-subtitle {
-    font-size: 0.95rem;
-    color: var(--text-sub);
-    margin-bottom: 16px;
-}
-
-/* 쿠폰 정보 박스 */
-.coupon-info-box {
-    background: linear-gradient(135deg, #FFE5E5 0%, #FFF5E5 100%);
-    border: 2px dashed #FF6B6B;
-    border-radius: 12px;
-    padding: 16px;
-    margin-top: 16px;
-    text-align: center;
-    font-size: 0.95rem;
-    line-height: 1.8;
-    color: #333;
-    white-space: normal;
-    word-break: keep-all;
-}
-
-.coupon-highlight {
-    color: #FF4757;
-    font-size: 1.1rem;
-    font-weight: 800;
-}
-
-.coupon-sub {
-    font-size: 0.85rem;
-    color: #666;
-}
-
-/* 루틴 카드 */
-.routine-card {
-    background: white;
-    border-radius: 12px;
-    padding: 20px;
-    margin-bottom: 16px;
-    box-shadow: 0 2px 12px rgba(0,0,0,0.08);
-    border: 2px solid #E8E8E8;
-    transition: all 0.3s ease;
-}
-
-/* 우선순위별 테두리 색상 */
-.routine-card.priority-must {
-    border-color: #FF6B6B;
-    background: linear-gradient(135deg, #FFF5F5 0%, #FFFFFF 100%);
-}
-
-.routine-card.priority-high {
-    border-color: #FFA502;
-    background: linear-gradient(135deg, #FFF9F0 0%, #FFFFFF 100%);
-}
-
-.routine-card.priority-normal {
-    border-color: #4ECDC4;
-    background: linear-gradient(135deg, #F0FFFE 0%, #FFFFFF 100%);
-}
-
-.routine-card:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 16px rgba(0,0,0,0.12);
-}
-
-.routine-card-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 12px;
-    padding-bottom: 12px;
-    border-bottom: 2px solid #F5F5F5;
-}
-
-.step-info {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-}
-
-.step-number {
-    background: var(--gold-main);
-    color: white;
-    padding: 4px 12px;
-    border-radius: 20px;
-    font-size: 0.75rem;
-    font-weight: 700;
-}
-
-.step-name {
-    font-size: 1.1rem;
-    font-weight: 700;
-    color: var(--text-main);
-}
-
-.header-right {
-    display: flex;
-    gap: 8px;
-    align-items: center;
-}
-
-/* 우선순위 배지 */
-.priority-badge {
-    padding: 6px 12px;
-    border-radius: 20px;
-    font-size: 0.75rem;
-    font-weight: 700;
-    letter-spacing: -0.5px;
-}
-
-.priority-badge.priority-must {
-    background: #FFE5E5;
-    color: #FF4757;
-}
-
-.priority-badge.priority-high {
-    background: #FFF3E0;
-    color: #FF9800;
-}
-
-.priority-badge.priority-normal {
-    background: #E0F7FA;
-    color: #00ACC1;
-}
-
-/* 브랜드 배지 */
-.brand-badge {
-    padding: 6px 14px;
-    border-radius: 20px;
-    font-size: 0.8rem;
-    font-weight: 600;
-}
-
-.brand-doctorlab {
-    background: #E3F2FD;
-    color: #1976D2;
-}
-
-.brand-reviderm {
-    background: #F3E5F5;
-    color: #7B1FA2;
-}
-
-/* 별점 섹션 */
-.priority-stars {
-    background: #FAFAFA;
-    padding: 12px;
-    border-radius: 8px;
-    margin-bottom: 16px;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-}
-
-.priority-stars .stars {
-    font-size: 1.2rem;
-    line-height: 1;
-}
-
-.priority-stars .priority-text {
-    font-size: 0.85rem;
-    color: #666;
-    line-height: 1.4;
-    flex: 1;
-}
-
-/* 제품 기본 정보 */
-.product-basic-info {
-    margin-bottom: 16px;
-}
-
-.product-name {
-    font-size: 1rem;
-    font-weight: 600;
-    color: var(--text-main);
-    margin-bottom: 6px;
-}
-
-.product-short-desc {
-    font-size: 0.9rem;
-    color: var(--text-sub);
-    line-height: 1.5;
-    margin-bottom: 8px;
-}
-
-.product-price {
-    font-size: 1.1rem;
-    font-weight: 700;
-    color: var(--gold-main);
-}
-
-/* 상세보기 버튼 */
-.routine-detail-btn {
-    width: 100%;
-    padding: 12px;
-    background: #F8F8F8;
-    border: 1px solid #E0E0E0;
-    border-radius: 8px;
-    font-size: 0.9rem;
-    font-weight: 600;
-    color: var(--text-main);
-    cursor: pointer;
-    transition: all 0.2s ease;
-}
-
-.routine-detail-btn:hover {
-    background: #EFEFEF;
-}
-
-/* 상세 내용 */
-.routine-detail-content {
-    margin-top: 16px;
-    padding-top: 16px;
-    border-top: 1px solid #E8E8E8;
-}
-
-.detail-block {
-    margin-bottom: 16px;
-}
-
-.detail-label {
-    font-size: 0.85rem;
-    font-weight: 700;
-    color: var(--gold-main);
-    margin-bottom: 6px;
-}
-
-.detail-text {
-    font-size: 0.9rem;
-    color: var(--text-sub);
-    line-height: 1.6;
-}
-
-/* 제품 구매 버튼 */
-.product-buy-btn {
-    display: block;
-    width: 100%;
-    padding: 14px;
-    background: var(--gold-main);
-    color: white;
-    text-align: center;
-    border-radius: 8px;
-    font-weight: 700;
-    text-decoration: none;
-    transition: background 0.2s ease;
-}
-
-.product-buy-btn:hover {
-    background: var(--btn-hover);
-}
-
-/* 루틴 요약 */
-.routine-summary {
-    margin-top: 24px;
-    padding: 16px;
-    background: #FFF9E6;
-    border-radius: 8px;
-    border-left: 4px solid var(--gold-main);
-}
-
-.routine-note {
-    font-size: 0.9rem;
-    line-height: 1.6;
-    color: var(--text-main);
-    margin-bottom: 8px;
-}
-
-.routine-note:last-child {
-    margin-bottom: 0;
-}
-
-/* 모바일 대응 */
-@media (max-width: 480px) {
-    .routine-section {
-        padding: 16px;
-    }
-    
-    .routine-title {
-        font-size: 1.3rem;
-    }
-    
-    .routine-card {
-        padding: 16px;
-    }
-    
-    .routine-card-header {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 8px;
-    }
-    
-    .header-right {
-        width: 100%;
-        justify-content: flex-start;
-    }
-    
-    .step-name {
-        font-size: 1rem;
-    }
-    
-    .priority-stars {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 8px;
-    }
-    
-    .coupon-info-box {
-        font-size: 0.85rem;
-        padding: 12px;
-    }
-    
-    .coupon-highlight {
-        font-size: 1rem;
-    }
-}
-
-
-
-.age-badge-container {
-    text-align: center;
-    margin-bottom: 16px;
-    padding: 16px;
-    background: linear-gradient(135deg, #E8F5E9 0%, #C8E6C9 100%);
-    border-radius: 12px;
-    border: 2px solid #81C784;
-}
-
-.age-badge {
-    display: block;
-    font-size: 1.3rem;
-    font-weight: 800;
-    color: #2E7D32;
-    margin-bottom: 6px;
-}
-
-.age-subtitle {
-    font-size: 0.9rem;
-    color: #388E3C;
-    font-weight: 600;
-}
-
-.routine-budget {
-    font-size: 0.85rem;
-    color: var(--text-sub);
-    text-align: center;
-    margin-top: 8px;
-    margin-bottom: 16px;
-}
-
     </style>
 </head>
 <body>
@@ -1200,6 +478,16 @@
             <b style="color:var(--gold-main);">딱 맞는 해결책</b>을 찾아드릴게요.</p>
         </div>
 
+        <div style="text-align: center; margin-bottom: 10px; color: #555; font-size: 14px;">
+            🔥 현재까지 <span id="participant-counter" style="font-weight: bold; color: #d32f2f;">1,842</span>명이<br>
+            피부 광산을 진단받았습니다.
+        </div>
+
+        <div class="live-viewer-box">
+            <span class="live-dot"></span>
+            현재 <span id="viewer-count">34</span>명이 진단 중입니다...
+        </div>
+
         <div class="symptom-checklist">
             <h4>⚠️ 이런 증상이 있다면 꼭 진단받으세요</h4>
             <div class="symptom-item"><span class="check">✓</span> 갑자기 트러블이 늘었다</div>
@@ -1219,100 +507,98 @@
         </button>
     </div>
 
-
-<!-- ========== 프로필 선택 화면 ========== -->
-<div id="profileScreen" class="screen">
-    <div class="profile-container">
-        <div class="profile-hero">
-            <div class="profile-icon">👤</div>
-            <h2 class="profile-title">
-                나에게 딱 맞는<br>
-                제품을 추천해드릴게요!
-            </h2>
-            <p class="profile-subtitle">
-                연령대와 성별에 따라<br>
-                최적의 가성비 루틴을 제안합니다
-            </p>
-        </div>
-
-        <div class="profile-section">
-            <h3 class="profile-question">📅 연령대를 선택해주세요</h3>
-            <div class="age-group-grid">
-                <button class="profile-btn age-btn" data-age="10s" onclick="selectAge('10s')">
-                    <span class="btn-emoji">🧒</span>
-                    <span class="btn-text">10대</span>
-                    <span class="btn-sub">16~19세</span>
-                </button>
-                <button class="profile-btn age-btn" data-age="20s" onclick="selectAge('20s')">
-                    <span class="btn-emoji">👨‍🎓</span>
-                    <span class="btn-text">20대</span>
-                    <span class="btn-sub">20~29세</span>
-                </button>
-                <button class="profile-btn age-btn" data-age="30s" onclick="selectAge('30s')">
-                    <span class="btn-emoji">👔</span>
-                    <span class="btn-text">30대</span>
-                    <span class="btn-sub">30~39세</span>
-                </button>
-                <button class="profile-btn age-btn" data-age="40s" onclick="selectAge('40s')">
-                    <span class="btn-emoji">👨‍💼</span>
-                    <span class="btn-text">40대</span>
-                    <span class="btn-sub">40~49세</span>
-                </button>
-                <button class="profile-btn age-btn" data-age="50s" onclick="selectAge('50s')">
-                    <span class="btn-emoji">👨‍🦳</span>
-                    <span class="btn-text">50대</span>
-                    <span class="btn-sub">50~59세</span>
-                </button>
-                <button class="profile-btn age-btn" data-age="60s" onclick="selectAge('60s')">
-                    <span class="btn-emoji">👴</span>
-                    <span class="btn-text">60대 이상</span>
-                    <span class="btn-sub">60세~</span>
-                </button>
+    <div id="profileScreen" class="screen">
+        <div class="profile-container">
+            <div class="profile-hero">
+                <div class="profile-icon">👤</div>
+                <h2 class="profile-title">
+                    나에게 딱 맞는<br>
+                    제품을 추천해드릴게요!
+                </h2>
+                <p class="profile-subtitle">
+                    연령대와 성별에 따라<br>
+                    최적의 가성비 루틴을 제안합니다
+                </p>
             </div>
-        </div>
 
-        <div class="profile-section">
-            <h3 class="profile-question">👤 성별을 선택해주세요</h3>
-            <div class="gender-grid">
-                <button class="profile-btn gender-btn" data-gender="male" onclick="selectGender('male')">
-                    <span class="btn-emoji">♂️</span>
-                    <span class="btn-text">남성</span>
-                </button>
-                <button class="profile-btn gender-btn" data-gender="female" onclick="selectGender('female')">
-                    <span class="btn-emoji">♀️</span>
-                    <span class="btn-text">여성</span>
-                </button>
-            </div>
-        </div>
-
-        <div class="age-strategy-info">
-            <h4 class="strategy-title">💡 연령대별 추천 전략</h4>
-            <div class="strategy-grid">
-                <div class="strategy-item">
-                    <span class="strategy-age">10~20대</span>
-                    <span class="strategy-desc">닥터랩 중심 (가성비)</span>
-                </div>
-                <div class="strategy-item">
-                    <span class="strategy-age">30~40대</span>
-                    <span class="strategy-desc">균형잡힌 조합</span>
-                </div>
-                <div class="strategy-item">
-                    <span class="strategy-age">50~60대</span>
-                    <span class="strategy-desc">레비덤 중심 (고기능)</span>
+            <div class="profile-section">
+                <h3 class="profile-question">📅 연령대를 선택해주세요</h3>
+                <div class="age-group-grid">
+                    <button class="profile-btn age-btn" data-age="10s" onclick="selectAge('10s')">
+                        <span class="btn-emoji">🧒</span>
+                        <span class="btn-text">10대</span>
+                        <span class="btn-sub">16~19세</span>
+                    </button>
+                    <button class="profile-btn age-btn" data-age="20s" onclick="selectAge('20s')">
+                        <span class="btn-emoji">👨‍🎓</span>
+                        <span class="btn-text">20대</span>
+                        <span class="btn-sub">20~29세</span>
+                    </button>
+                    <button class="profile-btn age-btn" data-age="30s" onclick="selectAge('30s')">
+                        <span class="btn-emoji">👔</span>
+                        <span class="btn-text">30대</span>
+                        <span class="btn-sub">30~39세</span>
+                    </button>
+                    <button class="profile-btn age-btn" data-age="40s" onclick="selectAge('40s')">
+                        <span class="btn-emoji">👨‍💼</span>
+                        <span class="btn-text">40대</span>
+                        <span class="btn-sub">40~49세</span>
+                    </button>
+                    <button class="profile-btn age-btn" data-age="50s" onclick="selectAge('50s')">
+                        <span class="btn-emoji">👨‍🦳</span>
+                        <span class="btn-text">50대</span>
+                        <span class="btn-sub">50~59세</span>
+                    </button>
+                    <button class="profile-btn age-btn" data-age="60s" onclick="selectAge('60s')">
+                        <span class="btn-emoji">👴</span>
+                        <span class="btn-text">60대 이상</span>
+                        <span class="btn-sub">60세~</span>
+                    </button>
                 </div>
             </div>
-        </div>
 
-        <div class="privacy-note">
-            📌 입력하신 정보는 제품 추천에만 사용되며,<br>
-            언제든지 진단을 다시 시작할 수 있어요.
-        </div>
+            <div class="profile-section">
+                <h3 class="profile-question">👤 성별을 선택해주세요</h3>
+                <div class="gender-grid">
+                    <button class="profile-btn gender-btn" data-gender="male" onclick="selectGender('male')">
+                        <span class="btn-emoji">♂️</span>
+                        <span class="btn-text">남성</span>
+                    </button>
+                    <button class="profile-btn gender-btn" data-gender="female" onclick="selectGender('female')">
+                        <span class="btn-emoji">♀️</span>
+                        <span class="btn-text">여성</span>
+                    </button>
+                </div>
+            </div>
 
-        <button class="start-btn profile-start-btn" id="profileStartBtn" onclick="startQuizFromProfile()" disabled>
-            피부 진단 시작하기 →
-        </button>
+            <div class="age-strategy-info">
+                <h4 class="strategy-title">💡 연령대별 추천 전략</h4>
+                <div class="strategy-grid">
+                    <div class="strategy-item">
+                        <span class="strategy-age">10~20대</span>
+                        <span class="strategy-desc">닥터랩 중심 (가성비)</span>
+                    </div>
+                    <div class="strategy-item">
+                        <span class="strategy-age">30~40대</span>
+                        <span class="strategy-desc">균형잡힌 조합</span>
+                    </div>
+                    <div class="strategy-item">
+                        <span class="strategy-age">50~60대</span>
+                        <span class="strategy-desc">레비덤 중심 (고기능)</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="privacy-note">
+                📌 입력하신 정보는 제품 추천에만 사용되며,<br>
+                언제든지 진단을 다시 시작할 수 있어요.
+            </div>
+
+            <button class="start-btn profile-start-btn" id="profileStartBtn" onclick="startQuizFromProfile()" disabled>
+                피부 진단 시작하기 →
+            </button>
+        </div>
     </div>
-</div>
 
     <div id="quizScreen" class="screen">
         <div class="step-badge" id="stepBadge">STEP 1. 유분도 체크</div>
@@ -1366,12 +652,11 @@
         
         <div class="director-consultation-note">
             <p class="director-note-text">
-                💬 <strong>더 전문적인 관리는<br>담당 에스테틱 원장님과 상의하세요</strong>
+                💬 <strong>더 정밀한 관리는 담당 에스테틱 원장님과 상의하세요</strong>
             </p>
         </div>
 
-
-    <div class="shop-section">
+        <div class="shop-section">
             <p class="shop-label">🎁 내 피부타입 전용 제품 추천</p>
             <p class="shop-sub-label">피부샵 전문 브랜드 제품을 합리적인 가격에</p>
             <a href="#" id="shopLink" target="_blank" class="shop-link-btn">
@@ -1384,375 +669,115 @@
             </div>
         </div>
 
-        
-<!-- ========== FAQ 아코디언 섹션 ========== -->
-<div class="faq-section">
-    <div class="faq-header">
-        <h3 class="faq-title">💡 자주 묻는 질문 (FAQ)</h3>
-        <p class="faq-subtitle">하얀광부가 답변드립니다</p>
-    </div>
+        <div class="faq-section">
+            <div class="faq-header">
+                <h3 class="faq-title">💡 자주 묻는 질문 (FAQ)</h3>
+                <p class="faq-subtitle">하얀광부가 답변드립니다</p>
+            </div>
 
-    <div class="faq-item">
-        <button class="faq-question" onclick="toggleFaq(1)">
-            <span class="faq-q-text">Q1. 토너, 앰플, 세럼, 에센스... 다 발라야 하나요?</span>
-            <span class="faq-arrow" id="faq-arrow-1">▼</span>
-        </button>
-        <div class="faq-answer" id="faq-answer-1">
-            <div class="faq-content">
-                <p><strong>결론: 아니요. 핵심 도구 하나만 제대로 쓰세요.</strong></p>
-                
-                <p>많은 분들이 "토너 → 세럼 → 에센스 → 앰플 → 크림 → 수분크림"처럼 7~8단계를 바르고 계십니다. 하지만 이건 <strong>'화장품 과부하'</strong>입니다.</p>
-                
-                <div class="faq-principle">
-                    <p class="principle-title">📌 화장품 다이어트 원칙</p>
-                    <ul class="principle-list">
-                        <li><strong>클렌징 1개</strong> - 피부 타입에 맞게</li>
-                        <li><strong>토너 1개</strong> - 수분 공급용</li>
-                        <li><strong>기능성 1개</strong> - 세럼/앰플 중 하나만 (미백 OR 주름)</li>
-                        <li><strong>크림 1개</strong> - 마무리 보습</li>
-                        <li><strong>선크림 필수</strong> - 아침에만</li>
-                    </ul>
+            <div class="faq-item">
+                <button class="faq-question" onclick="toggleFaq(1)">
+                    <span class="faq-q-text">Q1. 토너, 앰플, 세럼, 에센스... 다 발라야 하나요?</span>
+                    <span class="faq-arrow" id="faq-arrow-1">▼</span>
+                </button>
+                <div class="faq-answer" id="faq-answer-1">
+                    <div class="faq-content">
+                        <p><strong>결론: 아니요. 핵심 도구 하나만 제대로 쓰세요.</strong></p>
+                        <p>많은 분들이 "토너 → 세럼 → 에센스 → 앰플 → 크림 → 수분크림"처럼 7~8단계를 바르고 계십니다. 하지만 이건 <strong>'화장품 과부하'</strong>입니다.</p>
+                        <div class="faq-principle">
+                            <p class="principle-title">📌 화장품 다이어트 원칙</p>
+                            <ul class="principle-list">
+                                <li><strong>클렌징 1개</strong> - 피부 타입에 맞게</li>
+                                <li><strong>토너 1개</strong> - 수분 공급용</li>
+                                <li><strong>기능성 1개</strong> - 세럼/앰플 중 하나만 (미백 OR 주름)</li>
+                                <li><strong>크림 1개</strong> - 마무리 보습</li>
+                                <li><strong>선크림 필수</strong> - 아침에만</li>
+                            </ul>
+                        </div>
+                        <p>총 <strong>4~5단계면 충분</strong>합니다. 10가지를 발라서 좋아지는 게 아니라, <strong>내 피부에 맞는 핵심 제품 하나</strong>가 피부를 바꿉니다.</p>
+                        <p class="faq-tip">💡 TIP: 위에서 추천한 4단계 루틴이 바로 이 원칙을 따릅니다.</p>
+                    </div>
                 </div>
-                
-                <p>총 <strong>4~5단계면 충분</strong>합니다. 10가지를 발라서 좋아지는 게 아니라, <strong>내 피부에 맞는 핵심 제품 하나</strong>가 피부를 바꿉니다.</p>
-                
-                <p class="faq-tip">💡 TIP: 위에서 추천한 4단계 루틴이 바로 이 원칙을 따릅니다.</p>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question" onclick="toggleFaq(2)">
+                    <span class="faq-q-text">Q2. 화장품 바르는 순서, 비싼 거 먼저? 묽은 거 먼저?</span>
+                    <span class="faq-arrow" id="faq-arrow-2">▼</span>
+                </button>
+                <div class="faq-answer" id="faq-answer-2">
+                    <div class="faq-content">
+                        <p><strong>정답: 묽은 거 먼저입니다. (가격 무관)</strong></p>
+                        <div class="faq-principle">
+                            <p class="principle-title">📌 흡수 원리: 입자 크기 순서</p>
+                            <ol class="principle-list">
+                                <li><strong>토너 (물)</strong> - 입자가 가장 작음 → 가장 깊숙이 침투</li>
+                                <li><strong>세럼/앰플 (액체)</strong> - 중간 크기 → 진피층까지</li>
+                                <li><strong>크림/로션 (유분)</strong> - 입자가 큼 → 표면 밀봉</li>
+                            </ol>
+                        </div>
+                        <p>크림을 먼저 바르면 <strong>유분막이 형성</strong>되어, 그 다음에 바르는 세럼이 피부 안으로 들어가지 못합니다. 돈만 낭비하는 거죠.</p>
+                        <div class="faq-example">
+                            <p class="example-title">❌ 잘못된 순서</p>
+                            <p>크림(유분) → 세럼(수분) → 토너(물)</p>
+                            <p class="example-result">→ 세럼과 토너가 유분막에 막혀 증발만 함</p>
+                        </div>
+                        <div class="faq-example">
+                            <p class="example-title">✅ 올바른 순서</p>
+                            <p>토너(물) → 세럼(수분) → 크림(유분)</p>
+                            <p class="example-result">→ 수분부터 차례로 흡수 → 유분으로 밀봉</p>
+                        </div>
+                        <p class="faq-tip">💡 TIP: 비싼 제품일수록 나중에 바르고 싶지만, 원리를 무시하면 효과가 없습니다.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question" onclick="toggleFaq(3)">
+                    <span class="faq-q-text">Q3. 좋은 제품 썼는데 왜 얼굴이 뒤집어지죠? (명현현상)</span>
+                    <span class="faq-arrow" id="faq-arrow-3">▼</span>
+                </button>
+                <div class="faq-answer" id="faq-answer-3">
+                    <div class="faq-content">
+                        <p><strong>⚠️ 명현현상은 거의 없습니다. 즉시 중단하세요.</strong></p>
+                        <p>"좋은 성분이 독소를 배출하는 과정"이라는 <strong>명현현상은 대부분 마케팅</strong>입니다. 실제로는 다음 3가지 중 하나입니다:</p>
+                        <div class="faq-principle">
+                            <p class="principle-title">📌 트러블이 생기는 진짜 이유</p>
+                            <ol class="principle-list">
+                                <li><strong>화장품 과부하</strong> - 너무 많이 바름 → 피부 호흡 막힘</li>
+                                <li><strong>성분 불내성</strong> - 내 피부에 안 맞는 성분 (알레르기)</li>
+                                <li><strong>잘못된 순서</strong> - 유분 먼저 → 수분 흡수 차단 → 염증</li>
+                            </ol>
+                        </div>
+                        <div class="faq-warning">
+                            <p class="warning-title">🚨 즉시 중단 신호</p>
+                            <ul class="warning-list">
+                                <li>붉은 뾰루지가 갑자기 많이 생김</li>
+                                <li>얼굴이 화끈거리고 가려움</li>
+                                <li>3일 이상 증상이 지속됨</li>
+                            </ul>
+                        </div>
+                        <p><strong class="highlight-red">→ 즉시 사용 중단하고, 담당 에스테틱 원장님께 방문하세요.</strong></p>
+                        <div class="faq-principle">
+                            <p class="principle-title">📌 올바른 신제품 도입 방법</p>
+                            <ol class="principle-list">
+                                <li><strong>1주일에 1개씩</strong> - 한 번에 여러 개 바꾸지 마세요</li>
+                                <li><strong>패치 테스트</strong> - 귀 뒤나 턱선에 먼저 발라보기</li>
+                                <li><strong>소량부터</strong> - 처음엔 적게, 익숙해지면 늘리기</li>
+                            </ol>
+                        </div>
+                        <p class="faq-tip">💡 TIP: 3일 이상 트러블이 계속되면 "명현현상"이 아니라 "부작용"입니다.</p>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
 
-    <div class="faq-item">
-        <button class="faq-question" onclick="toggleFaq(2)">
-            <span class="faq-q-text">Q2. 화장품 바르는 순서, 비싼 거 먼저? 묽은 거 먼저?</span>
-            <span class="faq-arrow" id="faq-arrow-2">▼</span>
-        </button>
-        <div class="faq-answer" id="faq-answer-2">
-            <div class="faq-content">
-                <p><strong>정답: 묽은 거 먼저입니다. (가격 무관)</strong></p>
-                
-                <div class="faq-principle">
-                    <p class="principle-title">📌 흡수 원리: 입자 크기 순서</p>
-                    <ol class="principle-list">
-                        <li><strong>토너 (물)</strong> - 입자가 가장 작음 → 가장 깊숙이 침투</li>
-                        <li><strong>세럼/앰플 (액체)</strong> - 중간 크기 → 진피층까지</li>
-                        <li><strong>크림/로션 (유분)</strong> - 입자가 큼 → 표면 밀봉</li>
-                    </ol>
-                </div>
-                
-                <p>크림을 먼저 바르면 <strong>유분막이 형성</strong>되어, 그 다음에 바르는 세럼이 피부 안으로 들어가지 못합니다. 돈만 낭비하는 거죠.</p>
-                
-                <div class="faq-example">
-                    <p class="example-title">❌ 잘못된 순서</p>
-                    <p>크림(유분) → 세럼(수분) → 토너(물)</p>
-                    <p class="example-result">→ 세럼과 토너가 유분막에 막혀 증발만 함</p>
-                </div>
-                
-                <div class="faq-example">
-                    <p class="example-title">✅ 올바른 순서</p>
-                    <p>토너(물) → 세럼(수분) → 크림(유분)</p>
-                    <p class="example-result">→ 수분부터 차례로 흡수 → 유분으로 밀봉</p>
-                </div>
-                
-                <p class="faq-tip">💡 TIP: 비싼 제품일수록 나중에 바르고 싶지만, 원리를 무시하면 효과가 없습니다.</p>
-            </div>
-        </div>
-    </div>
-
-    <div class="faq-item">
-        <button class="faq-question" onclick="toggleFaq(3)">
-            <span class="faq-q-text">Q3. 좋은 제품 썼는데 왜 얼굴이 뒤집어지죠? (명현현상)</span>
-            <span class="faq-arrow" id="faq-arrow-3">▼</span>
-        </button>
-        <div class="faq-answer" id="faq-answer-3">
-            <div class="faq-content">
-                <p><strong>⚠️ 명현현상은 거의 없습니다. 즉시 중단하세요.</strong></p>
-                
-                <p>"좋은 성분이 독소를 배출하는 과정"이라는 <strong>명현현상은 대부분 마케팅</strong>입니다. 실제로는 다음 3가지 중 하나입니다:</p>
-                
-                <div class="faq-principle">
-                    <p class="principle-title">📌 트러블이 생기는 진짜 이유</p>
-                    <ol class="principle-list">
-                        <li><strong>화장품 과부하</strong> - 너무 많이 바름 → 피부 호흡 막힘</li>
-                        <li><strong>성분 불내성</strong> - 내 피부에 안 맞는 성분 (알레르기)</li>
-                        <li><strong>잘못된 순서</strong> - 유분 먼저 → 수분 흡수 차단 → 염증</li>
-                    </ol>
-                </div>
-                
-                <div class="faq-warning">
-                    <p class="warning-title">🚨 즉시 중단 신호</p>
-                    <ul class="warning-list">
-                        <li>붉은 뾰루지가 갑자기 많이 생김</li>
-                        <li>얼굴이 화끈거리고 가려움</li>
-                        <li>3일 이상 증상이 지속됨</li>
-                    </ul>
-                </div>
-                
-                <p><strong class="highlight-red">→ 즉시 사용 중단하고, 담당 에스테틱 원장님께 방문하세요.</strong></p>
-                
-                <div class="faq-principle">
-                    <p class="principle-title">📌 올바른 신제품 도입 방법</p>
-                    <ol class="principle-list">
-                        <li><strong>1주일에 1개씩</strong> - 한 번에 여러 개 바꾸지 마세요</li>
-                        <li><strong>패치 테스트</strong> - 귀 뒤나 턱선에 먼저 발라보기</li>
-                        <li><strong>소량부터</strong> - 처음엔 적게, 익숙해지면 늘리기</li>
-                    </ol>
-                </div>
-                
-                <p class="faq-tip">💡 TIP: 3일 이상 트러블이 계속되면 "명현현상"이 아니라 "부작용"입니다.</p>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- ========== FAQ 스타일 ========== -->
-<style>
-.faq-section {
-    margin: 32px 0;
-    padding: 24px;
-    background: #F8F9FA;
-    border-radius: 16px;
-}
-
-.faq-header {
-    text-align: center;
-    margin-bottom: 24px;
-}
-
-.faq-title {
-    font-size: 1.4rem;
-    font-weight: 800;
-    color: var(--text-main);
-    margin-bottom: 8px;
-}
-
-.faq-subtitle {
-    font-size: 0.9rem;
-    color: var(--text-sub);
-}
-
-.faq-item {
-    background: white;
-    border-radius: 12px;
-    margin-bottom: 12px;
-    overflow: hidden;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
-}
-
-.faq-question {
-    width: 100%;
-    padding: 20px;
-    background: white;
-    border: none;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    cursor: pointer;
-    transition: background 0.2s ease;
-}
-
-.faq-question:hover {
-    background: #F8F9FA;
-}
-
-.faq-q-text {
-    font-size: 1rem;
-    font-weight: 700;
-    color: var(--text-main);
-    text-align: left;
-    line-height: 1.5;
-}
-
-.faq-arrow {
-    font-size: 1rem;
-    color: var(--gold-main);
-    transition: transform 0.3s ease;
-    margin-left: 12px;
-    flex-shrink: 0;
-}
-
-.faq-arrow.open {
-    transform: rotate(180deg);
-}
-
-.faq-answer {
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.3s ease;
-}
-
-.faq-answer.open {
-    max-height: 2000px;
-}
-
-.faq-content {
-    padding: 0 20px 20px 20px;
-    color: var(--text-main);
-    line-height: 1.8;
-}
-
-.faq-content p {
-    margin-bottom: 16px;
-}
-
-.faq-content strong {
-    color: var(--gold-main);
-}
-
-.faq-principle {
-    background: #FFF9E6;
-    border-left: 4px solid var(--gold-main);
-    padding: 16px;
-    border-radius: 8px;
-    margin: 16px 0;
-}
-
-.principle-title {
-    font-size: 0.95rem;
-    font-weight: 700;
-    color: var(--text-main);
-    margin-bottom: 12px;
-}
-
-.principle-list {
-    margin-left: 20px;
-    color: var(--text-main);
-}
-
-.principle-list li {
-    margin-bottom: 8px;
-    line-height: 1.6;
-}
-
-.faq-example {
-    background: #F8F9FA;
-    padding: 12px 16px;
-    border-radius: 8px;
-    margin: 12px 0;
-}
-
-.example-title {
-    font-size: 0.9rem;
-    font-weight: 700;
-    margin-bottom: 6px;
-}
-
-.example-result {
-    font-size: 0.85rem;
-    color: var(--text-sub);
-    margin-top: 4px;
-}
-
-.faq-warning {
-    background: #FFF5F5;
-    border-left: 4px solid #E74C3C;
-    padding: 16px;
-    border-radius: 8px;
-    margin: 16px 0;
-}
-
-.warning-title {
-    font-size: 0.95rem;
-    font-weight: 700;
-    color: #E74C3C;
-    margin-bottom: 12px;
-}
-
-.warning-list {
-    margin-left: 20px;
-    color: var(--text-main);
-}
-
-.warning-list li {
-    margin-bottom: 6px;
-}
-
-.highlight-red {
-    color: #E74C3C;
-    font-size: 1.05rem;
-}
-
-.faq-tip {
-    background: #E3F2FD;
-    padding: 12px;
-    border-radius: 8px;
-    font-size: 0.9rem;
-    color: #1976D2;
-    margin-top: 16px;
-}
-
-/* 모바일 */
-@media (max-width: 480px) {
-    .faq-section {
-        padding: 16px;
-    }
-    
-    .faq-title {
-        font-size: 1.2rem;
-    }
-    
-    .faq-question {
-        padding: 16px;
-    }
-    
-    .faq-q-text {
-        font-size: 0.95rem;
-    }
-}
-
-
-.director-consultation-note {
-    margin: 24px 0;
-    padding: 20px;
-    background: linear-gradient(135deg, #E3F2FD 0%, #BBDEFB 100%);
-    border-radius: 12px;
-    border: 2px solid #42A5F5;
-    text-align: center;
-}
-
-.director-note-text {
-    font-size: 1.05rem;
-    color: #1565C0;
-    font-weight: 700;
-    line-height: 1.8;
-    margin: 0;
-}
-
-@media (max-width: 480px) {
-    .director-consultation-note {
-        padding: 16px;
-    }
-    
-    .director-note-text {
-        font-size: 0.95rem;
-    }
-}
-
-    </style>
-
-<!-- ========== FAQ 토글 JavaScript ========== -->
-<script>
-function toggleFaq(num) {
-    const answer = document.getElementById(`faq-answer-${num}`);
-    const arrow = document.getElementById(`faq-arrow-${num}`);
-    
-    const isOpen = answer.classList.contains('open');
-    
-    if (isOpen) {
-        answer.classList.remove('open');
-        arrow.classList.remove('open');
-    } else {
-        answer.classList.add('open');
-        arrow.classList.add('open');
-    }
-}
-</script>
-
-    <div class="share-section">
+        <div class="share-section">
             <button class="save-img-btn" onclick="saveAsImage()">
                 🖼️ 진단 결과 이미지로 저장
             </button>
             <button class="share-btn" onclick="copyResultDetails()">
-                📋 진단 결과 복사
+                📋 텍스트 상세 복사
             </button>
             <a href="https://instagram.com/whiteminer_skincare" target="_blank" class="share-btn insta">
                 📸 인스타그램 구경가기
@@ -1769,13 +794,94 @@ function toggleFaq(num) {
 </div>
 
 <script>
-    // 카카오 SDK 초기화 (사용자가 키를 넣으면 작동, 안 넣으면 무시)
-    try { Kakao.init('여기에_카카오_자바스크립트_키_입력'); } catch(e) {}
-
-    // =============================================
-    // [데이터베이스]
-    // =============================================
+    // =========================================================
+    // ★★★ [하얀광부 전용 채굴 주소] (따옴표 적용 완료) ★★★
+    // =========================================================
+    const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyGcZ1nUiZg1mWFpmXvKA2tm3gilqj08ocDruZBrnlhCPiQkt7-GKKts9dRwxgVI50NHg/exec"; 
     
+    // -------------------------------------------------------------
+    // [기능 1] 누적 참여자 수 계산 (시간 기반 시뮬레이션)
+    function updateParticipantCount() {
+        const startDate = new Date("2026-01-01T00:00:00").getTime();
+        const baseCount = 1842; 
+        const now = new Date().getTime();
+        const timeDiff = now - startDate;
+        const increase = Math.floor(timeDiff / (3600000 / 4.5));
+        
+        const totalCount = baseCount + increase;
+        const counterElement = document.getElementById("participant-counter");
+        if (counterElement) {
+            counterElement.innerText = totalCount.toLocaleString();
+        }
+    }
+
+    // [기능 2] 실시간 열람자 수 시뮬레이션 (랜덤)
+    function updateViewerCount() {
+        const countElement = document.getElementById('viewer-count');
+        if(countElement) {
+            const current = parseInt(countElement.innerText);
+            // -2 ~ +3 사이 랜덤 증감
+            const change = Math.floor(Math.random() * 6) - 2; 
+            let next = current + change;
+            if (next < 25) next = 25;
+            if (next > 55) next = 55;
+            countElement.innerText = next;
+        }
+    }
+
+    // [기능 3] 구글 시트로 데이터 전송 (자동 저장)
+    function sendDataToSheet(resultType) {
+        if (!GOOGLE_SCRIPT_URL || GOOGLE_SCRIPT_URL.includes("여기에")) {
+            console.log("구글 스크립트 URL이 설정되지 않았습니다.");
+            return;
+        }
+
+        const urlParams = new URLSearchParams(window.location.search);
+        const source = urlParams.get('source') || 'direct'; 
+
+        fetch(GOOGLE_SCRIPT_URL, {
+            method: 'POST',
+            mode: 'no-cors', 
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                source: source,
+                resultType: resultType,
+                timestamp: new Date().toISOString()
+            })
+        }).then(() => {
+            console.log("데이터 전송 성공!");
+        }).catch(err => {
+            console.error("데이터 전송 실패:", err);
+        });
+    }
+
+    // 초기 실행
+    window.onload = function() {
+        updateParticipantCount();
+        setInterval(updateViewerCount, 3000); 
+    };
+
+    // 카카오 SDK
+    try { Kakao.init('YOUR_KAKAO_KEY_HERE'); } catch(e) {}
+
+    // FAQ 토글
+    function toggleFaq(num) {
+        const answer = document.getElementById(`faq-answer-${num}`);
+        const arrow = document.getElementById(`faq-arrow-${num}`);
+        const isOpen = answer.classList.contains('open');
+        
+        if (isOpen) {
+            answer.classList.remove('open');
+            arrow.classList.remove('open');
+        } else {
+            answer.classList.add('open');
+            arrow.classList.add('open');
+        }
+    }
+
+    // 데이터 정의
     const steps = [
         { name: "STEP 1. 유분 체크", count: 6 },
         { name: "STEP 2. 민감도 체크", count: 8 },
@@ -1784,15 +890,12 @@ function toggleFaq(num) {
     ];
 
     const questions = [
-        // STEP 1: O vs D (6문항)
         { q: "세안 후 아무것도 안 바르고 2시간 뒤, 얼굴 상태는?", a: [{t:"이마와 코가 번들거려요", s:4}, {t:"T존만 약간 기름져요", s:3}, {t:"특별한 변화 없어요", s:2}, {t:"당기고 건조해요", s:1}] },
         { q: "아침에 일어나면 베개에 유분이 묻어나나요?", a: [{t:"항상 묻어나요", s:4}, {t:"자주 묻어나요", s:3}, {t:"가끔 묻어나요", s:2}, {t:"거의 안 묻어나요", s:1}] },
         { q: "화장 후 몇 시간 만에 유분이 올라오나요?", a: [{t:"1-2시간 이내", s:4}, {t:"3-4시간 정도", s:3}, {t:"5시간 이상", s:2}, {t:"거의 안 올라와요", s:1}] },
         { q: "코와 이마의 모공이 눈에 잘 보이나요?", a: [{t:"매우 크고 뚜렷해요", s:4}, {t:"꽤 보이는 편이에요", s:3}, {t:"자세히 봐야 보여요", s:2}, {t:"거의 안 보여요", s:1}] },
         { q: "블랙헤드나 화이트헤드가 있나요?", a: [{t:"많이 있어요", s:4}, {t:"꽤 있는 편이에요", s:3}, {t:"약간 있어요", s:2}, {t:"거의 없어요", s:1}] },
         { q: "피부에 각질이 일어나는 경우가 있나요?", a: [{t:"전혀 없어요", s:4}, {t:"거의 없어요", s:3}, {t:"가끔 있어요", s:2}, {t:"자주 있어요", s:1}] },
-        
-        // STEP 2: S vs R (8문항)
         { q: "새로운 화장품을 사용하면 피부 반응이 있나요?", a: [{t:"트러블/붉어짐이 자주 생겨요", s:4}, {t:"종종 반응이 있어요", s:3}, {t:"가끔 반응이 있어요", s:2}, {t:"어떤 제품이든 괜찮아요", s:1}] },
         { q: "여드름이나 뾰루지가 얼마나 자주 생기나요?", a: [{t:"항상 있어요", s:4}, {t:"자주 생겨요", s:3}, {t:"가끔 생겨요", s:2}, {t:"거의 안 생겨요", s:1}] },
         { q: "얼굴이 쉽게 붉어지나요? (운동, 음주, 온도변화 시)", a: [{t:"매우 쉽게 붉어져요", s:4}, {t:"자주 붉어져요", s:3}, {t:"가끔 붉어져요", s:2}, {t:"거의 안 붉어져요", s:1}] },
@@ -1801,15 +904,11 @@ function toggleFaq(num) {
         { q: "가족 중에 민감성 피부나 알레르기가 있나요?", a: [{t:"직계가족 여러 명", s:4}, {t:"직계가족 1명", s:3}, {t:"친척 중에 있어요", s:2}, {t:"없어요", s:1}] },
         { q: "환절기에 피부 트러블이 심해지나요?", a: [{t:"매우 심해져요", s:4}, {t:"꽤 심해져요", s:3}, {t:"약간 영향 있어요", s:2}, {t:"영향 없어요", s:1}] },
         { q: "피부에 가려움증이 있나요?", a: [{t:"자주 가려워요", s:4}, {t:"종종 가려워요", s:3}, {t:"가끔 가려워요", s:2}, {t:"안 가려워요", s:1}] },
-
-        // STEP 3: P vs N (5문항)
         { q: "기미, 주근깨, 잡티가 있나요?", a: [{t:"많이 있어요", s:4}, {t:"꽤 있어요", s:3}, {t:"약간 있어요", s:2}, {t:"거의 없어요", s:1}] },
         { q: "여드름/상처가 나은 후 자국이 얼마나 오래 남나요?", a: [{t:"6개월 이상", s:4}, {t:"3-6개월", s:3}, {t:"1-3개월", s:2}, {t:"거의 안 남아요", s:1}] },
         { q: "햇볕에 노출되면 피부가 어떻게 되나요?", a: [{t:"쉽게 검게 그을려요", s:4}, {t:"붉어졌다가 그을려요", s:3}, {t:"붉어졌다 원래대로 와요", s:2}, {t:"타거나 벗겨져요", s:1}] },
         { q: "부모님 중에 기미나 주근깨가 있나요?", a: [{t:"두 분 다 있어요", s:4}, {t:"한 분만 있어요", s:3}, {t:"약간만 있어요", s:2}, {t:"없어요", s:1}] },
         { q: "호르몬 변화 시 색소 변화가 있었나요? (임신/피임약 등)", a: [{t:"뚜렷한 변화가 있었어요", s:4}, {t:"약간 변화가 있었어요", s:3}, {t:"잘 모르겠어요", s:2}, {t:"없었어요/해당없음", s:1}] },
-
-        // STEP 4: W vs T (5문항)
         { q: "이마, 눈가, 미간에 주름이 있나요?", a: [{t:"뚜렷한 주름이 있어요", s:4}, {t:"잔주름이 보여요", s:3}, {t:"표정 지을 때만 보여요", s:2}, {t:"주름이 없어요", s:1}] },
         { q: "주변에서 몇 살로 보인다고 하나요?", a: [{t:"나이보다 많아 보인대요", s:4}, {t:"나이대로 보인대요", s:3}, {t:"조금 어려 보인대요", s:2}, {t:"많이 어려 보인대요", s:1}] },
         { q: "자외선 차단제를 얼마나 꾸준히 사용했나요?", a: [{t:"거의 안 썼어요", s:4}, {t:"가끔 썼어요", s:3}, {t:"자주 썼어요", s:2}, {t:"매일 꾸준히 썼어요", s:1}] },
@@ -1817,171 +916,25 @@ function toggleFaq(num) {
         { q: "부모님이 실제 나이보다 젊어 보이시나요?", a: [{t:"나이보다 많아 보여요", s:4}, {t:"나이대로 보여요", s:3}, {t:"젊어 보여요", s:2}, {t:"많이 젊어 보여요", s:1}] }
     ];
 
-    // 결과 데이터
     const resultData = {
-        "OSPT": {
-            koreanCode: "지성 + 민감 + 잡티 + 탄력◎",
-            name: "트러블 많은 민감 지성 피부",
-            simpleDesc: "피지 조절과 진정 케어가 동시에 필요한 피부예요",
-            desc: "피지 분비가 많으면서 피부 장벽이 약해 트러블과 색소침착이 동시에 생기기 쉬운 상태입니다. 다행히 탄력은 유지되고 있어, 진정과 피지 조절에 집중하면 빠르게 개선될 수 있어요.",
-            care: "자극 없이 피지를 조절하면서 진정 케어를 병행해야 합니다. 각질 제거는 최소화하고, 수분 공급을 충분히 하면서 유수분 밸런스를 맞춰주세요.",
-            avoid: ["고농도 알코올 토너", "과도한 클렌징", "자극적인 스크럽"],
-            ingredients: ["나이아신아마이드", "살리실산(BHA)", "센텔라", "티트리"],
-            linkType: "ACNE"
-        },
-        "OSNT": {
-            koreanCode: "지성 + 민감 + 잡티× + 탄력◎",
-            name: "여드름 잘 나는 민감 지성 피부",
-            simpleDesc: "트러블만 잡으면 건강해지는 피부예요",
-            desc: "피지는 많지만 잡티 걱정은 적은 타입입니다. 한국 남성에게 가장 흔한 피부 타입이에요. 여드름과 모공만 관리하면 빠르게 좋아질 수 있습니다.",
-            care: "가벼운 수분 제품으로 유수분 밸런스만 맞춰도 좋아집니다. 무거운 크림은 피하고, 수분 젤이나 로션 타입을 사용하세요.",
-            avoid: ["무거운 크림", "기름진 제품", "자극적인 토너"],
-            ingredients: ["티트리", "살리실산", "나이아신아마이드", "녹차추출물"],
-            linkType: "OILY"
-        },
-        "OSPW": {
-            koreanCode: "지성 + 민감 + 잡티 + 탄력↓",
-            name: "복합 고민 피부",
-            simpleDesc: "여러 고민을 단계적으로 케어해야 하는 피부예요",
-            desc: "트러블, 잡티, 주름, 예민함까지 여러 고민이 겹쳐 있어요. 한 번에 다 해결하려 하면 오히려 악화될 수 있어요. 진정부터 차근차근 접근해야 합니다.",
-            care: "자극 없이 진정 → 미백 → 주름 케어 순서로 하나씩 접근하세요. 강한 기능성 제품은 피부가 안정된 다음에 써야 해요.",
-            avoid: ["강한 필링", "고농도 레티놀 바로 사용", "여러 기능성 제품 동시 사용"],
-            ingredients: ["저농도 비타민C", "아젤라익산", "펩타이드", "센텔라"],
-            linkType: "ACNE"
-        },
-        "OSNW": {
-            koreanCode: "지성 + 민감 + 잡티× + 탄력↓",
-            name: "홍조성 민감 피부",
-            simpleDesc: "붉어짐과 탄력 관리가 필요해요",
-            desc: "조금만 자극받아도 얼굴이 쉽게 붉어지고, 탄력도 떨어지는 상태예요. 열감을 줄이고 진정시키는 게 가장 중요해요.",
-            care: "열감을 줄이고 탄력을 채워주세요. 뜨거운 환경, 매운 음식, 술은 피하고, 진정 성분을 꾸준히 써주세요.",
-            avoid: ["뜨거운 느낌 주는 성분", "알코올", "강한 기능성 제품"],
-            ingredients: ["센텔라", "아젤라익산", "녹차추출물", "판테놀"],
-            linkType: "SENSITIVE"
-        },
-        "ORPT": {
-            koreanCode: "지성 + 튼튼 + 잡티 + 탄력◎",
-            name: "튼튼한 잡티 피부",
-            simpleDesc: "색소침착 관리만 집중하면 되는 피부예요",
-            desc: "피부는 튼튼해서 어떤 제품을 써도 트러블이 잘 안 나지만, 잡티가 잘 남는 편이에요. 미백 관리와 자외선 차단에 집중하세요.",
-            care: "피부가 강해서 적극적인 미백 케어가 가능합니다. 비타민C, 레티놀 등 강한 성분도 잘 받아들여요. 자외선 차단만 철저히 하세요.",
-            avoid: ["자외선 무방비 노출"],
-            ingredients: ["비타민C", "알부틴", "레티놀", "나이아신아마이드"],
-            linkType: "OILY"
-        },
-        "ORNT": {
-            koreanCode: "지성 + 튼튼 + 잡티× + 탄력◎",
-            name: "건강한 지성 피부",
-            simpleDesc: "피지 조절만 하면 완벽한 피부예요! 👍",
-            desc: "축복받은 피부입니다! 피지만 잘 관리하면 다른 고민이 거의 없어요. 너무 과하게 관리하지 말고 심플하게 유지하세요.",
-            care: "복잡한 루틴 필요 없어요. 클렌징과 가벼운 보습만 잘 하면 돼요. 피부가 좋으니 오히려 과한 관리가 독이 될 수 있어요.",
-            avoid: ["과도한 보습", "불필요한 기능성 제품"],
-            ingredients: ["나이아신아마이드", "히알루론산"],
-            linkType: "OILY"
-        },
-        "ORPW": {
-            koreanCode: "지성 + 튼튼 + 잡티 + 탄력↓",
-            name: "노화성 잡티 피부",
-            simpleDesc: "안티에이징과 미백을 동시에 해야 하는 피부예요",
-            desc: "피부는 튼튼하지만 노화와 색소침착이 진행되고 있습니다. 강한 성분도 잘 받아들이니 적극적인 안티에이징 케어가 가능해요.",
-            care: "레티놀, 비타민C 등 기능성 제품을 적극적으로 사용하세요. 피부가 강하니 고농도 제품도 시도해볼 수 있어요.",
-            avoid: ["자외선 무방비 노출"],
-            ingredients: ["레티놀", "비타민C", "펩타이드", "알부틴"],
-            linkType: "ANTI_AGING"
-        },
-        "ORNW": {
-            koreanCode: "지성 + 튼튼 + 잡티× + 탄력↓",
-            name: "탄력 저하 지성 피부",
-            simpleDesc: "안티에이징에만 집중하면 되는 피부예요",
-            desc: "색소 고민은 없지만 탄력이 떨어지고 있습니다. 피부가 튼튼해서 강한 안티에이징 제품을 사용할 수 있어요.",
-            care: "안티에이징 제품 하나만 제대로 쓰세요. 레티놀이나 펩타이드 제품을 꾸준히 사용하면 효과를 볼 수 있어요.",
-            avoid: ["특별히 없음"],
-            ingredients: ["레티놀", "펩타이드", "콜라겐", "아데노신"],
-            linkType: "ANTI_AGING"
-        },
-        "DSPT": {
-            koreanCode: "건성 + 민감 + 잡티 + 탄력◎",
-            name: "예민한 건조 피부",
-            simpleDesc: "보습과 진정이 최우선인 피부예요",
-            desc: "건조하고 예민해서 조금만 자극받아도 붉어지거나 트러블이 생깁니다. 색소침착도 잘 되는 편이에요. 장벽 강화가 가장 중요합니다.",
-            care: "저자극 고보습 제품으로 피부 장벽을 세워주세요. 장벽이 회복되면 다른 고민도 자연스럽게 줄어듭니다.",
-            avoid: ["알코올", "향료", "자극 성분", "과도한 각질제거"],
-            ingredients: ["세라마이드", "히알루론산", "알로에", "판테놀"],
-            linkType: "SENSITIVE"
-        },
-        "DSNT": {
-            koreanCode: "건성 + 민감 + 잡티× + 탄력◎",
-            name: "장벽 약화 건성 피부",
-            simpleDesc: "피부 장벽만 세우면 건강해지는 피부예요",
-            desc: "한국 여성에게 가장 흔한 피부 타입입니다. 건조하고 예민하지만, 색소나 주름 고민은 적어요. 보습과 진정에만 집중하면 됩니다.",
-            care: "순한 보습제로 장벽만 세워주세요. 복잡한 루틴보다 기본에 충실한 것이 중요합니다.",
-            avoid: ["자극 성분", "과도한 각질제거", "강한 세안"],
-            ingredients: ["세라마이드", "판테놀", "마데카소사이드", "스쿠알란"],
-            linkType: "DRY"
-        },
-        "DSPW": {
-            koreanCode: "건성 + 민감 + 잡티 + 탄력↓",
-            name: "집중 관리 피부",
-            simpleDesc: "모든 케어가 필요하지만 효과도 빠른 피부예요",
-            desc: "건조함이 노화를 가속화시키고, 민감해서 아무거나 쓰기도 어려운 상태입니다. 하지만 제대로 관리하면 개선 효과가 가장 빠른 타입이기도 해요.",
-            care: "장벽 강화를 먼저 하고, 피부가 안정되면 단계적으로 미백과 안티에이징 제품을 추가하세요.",
-            avoid: ["자극 성분", "고농도 레티놀 초기사용", "강한 필링"],
-            ingredients: ["세라마이드", "저농도 비타민C", "펩타이드", "히알루론산"],
-            linkType: "ANTI_AGING"
-        },
-        "DSNW": {
-            koreanCode: "건성 + 민감 + 비색소 + 주름",
-            name: "건조성 노화 피부",
-            simpleDesc: "보습과 안티에이징을 동시에 해야 하는 피부예요",
-            desc: "수분 부족으로 인해 주름이 자글자글해집니다. 민감해서 강한 제품은 쓰기 어려워요.",
-            care: "수분과 유분을 동시에 채워주세요. 저자극 레티놀이나 펩타이드 제품을 순하게 시작하세요.",
-            avoid: ["자극적 레티놀", "알코올 토너"],
-            ingredients: ["저자극 레티놀", "펩타이드", "스쿠알란", "시어버터"],
-            linkType: "ANTI_AGING"
-        },
-        "DRPT": {
-            koreanCode: "건성 + 튼튼 + 잡티 + 탄력◎",
-            name: "잡티 고민 건성 피부",
-            simpleDesc: "보습과 미백에 집중하면 되는 피부예요",
-            desc: "건조하지만 피부 자체는 튼튼합니다. 색소침착만 관리하면 되는 비교적 케어하기 쉬운 타입이에요.",
-            care: "보습과 미백을 병행하세요. 피부가 강해서 비타민C나 미백 앰플을 적극적으로 사용할 수 있습니다.",
-            avoid: ["지성용 제품"],
-            ingredients: ["비타민C", "알부틴", "나이아신아마이드", "히알루론산"],
-            linkType: "DRY"
-        },
-        "DRNT": {
-            koreanCode: "건성 + 튼튼 + 잡티× + 탄력◎",
-            name: "워너비 건성 피부",
-            simpleDesc: "건조함만 해결하면 완벽한 피부예요",
-            desc: "피부 고민이 가장 적은 타입입니다! 건조함만 잡으면 다른 고민은 거의 없어요. 좋은 보습제 하나만 잘 쓰세요.",
-            care: "심플하고 리치한 보습 루틴이 전부입니다. 복잡한 제품을 쓸 필요가 없어요.",
-            avoid: ["지성용 제품", "불필요한 기능성 제품"],
-            ingredients: ["히알루론산", "호호바오일", "시어버터", "세라마이드"],
-            linkType: "DRY"
-        },
-        "DRPW": {
-            koreanCode: "건성 + 튼튼 + 잡티 + 탄력↓",
-            name: "광노화 피부",
-            simpleDesc: "자외선 데미지 복구가 핵심인 피부예요",
-            desc: "자외선에 의한 노화(광노화)가 진행된 상태입니다. 색소침착과 주름이 함께 나타나요. 피부가 튼튼해서 적극적인 케어가 가능합니다.",
-            care: "선크림 필수! 비타민C와 레티놀로 적극적인 안티에이징과 미백 케어를 하세요.",
-            avoid: ["자외선 무방비 노출"],
-            ingredients: ["비타민C", "레티놀", "펩타이드", "선크림(필수)"],
-            linkType: "ANTI_AGING"
-        },
-        "DRNW": {
-            koreanCode: "건성 + 튼튼 + 잡티× + 탄력↓",
-            name: "영양 부족 건성 피부",
-            simpleDesc: "영양 공급에 집중해야 하는 피부예요",
-            desc: "건조해서 탄력을 잃어가고 있습니다. 색소 고민은 없고 피부도 튼튼하니, 영양감 있는 안티에이징 제품을 쓰면 좋아질 수 있어요.",
-            care: "리치한 영양 크림과 오일 세럼을 사용하세요. 레티놀이나 펩타이드도 잘 받아들입니다.",
-            avoid: ["가벼운 수분 제품만 사용"],
-            ingredients: ["레티놀", "펩타이드", "오일 세럼", "영양 크림"],
-            linkType: "ANTI_AGING"
-        }
+        "OSPT": { koreanCode: "지성 + 민감 + 잡티 + 탄력◎", name: "트러블 많은 민감 지성 피부", simpleDesc: "피지 조절과 진정 케어가 동시에 필요한 피부예요", desc: "피지 분비가 많으면서 피부 장벽이 약해 트러블과 색소침착이 동시에 생기기 쉬운 상태입니다. 다행히 탄력은 유지되고 있어, 진정과 피지 조절에 집중하면 빠르게 개선될 수 있어요.", care: "자극 없이 피지를 조절하면서 진정 케어를 병행해야 합니다. 각질 제거는 최소화하고, 수분 공급을 충분히 하면서 유수분 밸런스를 맞춰주세요.", avoid: ["고농도 알코올 토너", "과도한 클렌징", "자극적인 스크럽"], ingredients: ["나이아신아마이드", "살리실산(BHA)", "센텔라", "티트리"], linkType: "ACNE" },
+        "OSNT": { koreanCode: "지성 + 민감 + 잡티× + 탄력◎", name: "여드름 잘 나는 민감 지성 피부", simpleDesc: "트러블만 잡으면 건강해지는 피부예요", desc: "피지는 많지만 잡티 걱정은 적은 타입입니다. 한국 남성에게 가장 흔한 피부 타입이에요. 여드름과 모공만 관리하면 빠르게 좋아질 수 있습니다.", care: "가벼운 수분 제품으로 유수분 밸런스만 맞춰도 좋아집니다. 무거운 크림은 피하고, 수분 젤이나 로션 타입을 사용하세요.", avoid: ["무거운 크림", "기름진 제품", "자극적인 토너"], ingredients: ["티트리", "살리실산", "나이아신아마이드", "녹차추출물"], linkType: "OILY" },
+        "OSPW": { koreanCode: "지성 + 민감 + 잡티 + 탄력↓", name: "복합 고민 피부", simpleDesc: "여러 고민을 단계적으로 케어해야 하는 피부예요", desc: "트러블, 잡티, 주름, 예민함까지 여러 고민이 겹쳐 있어요. 한 번에 다 해결하려 하면 오히려 악화될 수 있어요. 진정부터 차근차근 접근해야 합니다.", care: "자극 없이 진정 → 미백 → 주름 케어 순서로 하나씩 접근하세요. 강한 기능성 제품은 피부가 안정된 다음에 써야 해요.", avoid: ["강한 필링", "고농도 레티놀 바로 사용", "여러 기능성 제품 동시 사용"], ingredients: ["저농도 비타민C", "아젤라익산", "펩타이드", "센텔라"], linkType: "ACNE" },
+        "OSNW": { koreanCode: "지성 + 민감 + 잡티× + 탄력↓", name: "홍조성 민감 피부", simpleDesc: "붉어짐과 탄력 관리가 필요해요", desc: "조금만 자극받아도 얼굴이 쉽게 붉어지고, 탄력도 떨어지는 상태예요. 열감을 줄이고 진정시키는 게 가장 중요해요.", care: "열감을 줄이고 탄력을 채워주세요. 뜨거운 환경, 매운 음식, 술은 피하고, 진정 성분을 꾸준히 써주세요.", avoid: ["뜨거운 느낌 주는 성분", "알코올", "강한 기능성 제품"], ingredients: ["센텔라", "아젤라익산", "녹차추출물", "판테놀"], linkType: "SENSITIVE" },
+        "ORPT": { koreanCode: "지성 + 튼튼 + 잡티 + 탄력◎", name: "튼튼한 잡티 피부", simpleDesc: "색소침착 관리만 집중하면 되는 피부예요", desc: "피부는 튼튼해서 어떤 제품을 써도 트러블이 잘 안 나지만, 잡티가 잘 남는 편이에요. 미백 관리와 자외선 차단에 집중하세요.", care: "피부가 강해서 적극적인 미백 케어가 가능합니다. 비타민C, 레티놀 등 강한 성분도 잘 받아들여요. 자외선 차단만 철저히 하세요.", avoid: ["자외선 무방비 노출"], ingredients: ["비타민C", "알부틴", "레티놀", "나이아신아마이드"], linkType: "OILY" },
+        "ORNT": { koreanCode: "지성 + 튼튼 + 잡티× + 탄력◎", name: "건강한 지성 피부", simpleDesc: "피지 조절만 하면 완벽한 피부예요! 👍", desc: "축복받은 피부입니다! 피지만 잘 관리하면 다른 고민이 거의 없어요. 너무 과하게 관리하지 말고 심플하게 유지하세요.", care: "복잡한 루틴 필요 없어요. 클렌징과 가벼운 보습만 잘 하면 돼요. 피부가 좋으니 오히려 과한 관리가 독이 될 수 있어요.", avoid: ["과도한 보습", "불필요한 기능성 제품"], ingredients: ["나이아신아마이드", "히알루론산"], linkType: "OILY" },
+        "ORPW": { koreanCode: "지성 + 튼튼 + 잡티 + 탄력↓", name: "노화성 잡티 피부", simpleDesc: "안티에이징과 미백을 동시에 해야 하는 피부예요", desc: "피부는 튼튼하지만 노화와 색소침착이 진행되고 있습니다. 강한 성분도 잘 받아들이니 적극적인 안티에이징 케어가 가능해요.", care: "레티놀, 비타민C 등 기능성 제품을 적극적으로 사용하세요. 피부가 강하니 고농도 제품도 시도해볼 수 있어요.", avoid: ["자외선 무방비 노출"], ingredients: ["레티놀", "비타민C", "펩타이드", "알부틴"], linkType: "ANTI_AGING" },
+        "ORNW": { koreanCode: "지성 + 튼튼 + 잡티× + 탄력↓", name: "탄력 저하 지성 피부", simpleDesc: "안티에이징에만 집중하면 되는 피부예요", desc: "색소 고민은 없지만 탄력이 떨어지고 있습니다. 피부가 튼튼해서 강한 안티에이징 제품을 사용할 수 있어요.", care: "안티에이징 제품 하나만 제대로 쓰세요. 레티놀이나 펩타이드 제품을 꾸준히 사용하면 효과를 볼 수 있어요.", avoid: ["특별히 없음"], ingredients: ["레티놀", "펩타이드", "콜라겐", "아데노신"], linkType: "ANTI_AGING" },
+        "DSPT": { koreanCode: "건성 + 민감 + 잡티 + 탄력◎", name: "예민한 건조 피부", simpleDesc: "보습과 진정이 최우선인 피부예요", desc: "건조하고 예민해서 조금만 자극받아도 붉어지거나 트러블이 생깁니다. 색소침착도 잘 되는 편이에요. 장벽 강화가 가장 중요합니다.", care: "저자극 고보습 제품으로 피부 장벽을 세워주세요. 장벽이 회복되면 다른 고민도 자연스럽게 줄어듭니다.", avoid: ["알코올", "향료", "자극 성분", "과도한 각질제거"], ingredients: ["세라마이드", "히알루론산", "알로에", "판테놀"], linkType: "SENSITIVE" },
+        "DSNT": { koreanCode: "건성 + 민감 + 잡티× + 탄력◎", name: "장벽 약화 건성 피부", simpleDesc: "피부 장벽만 세우면 건강해지는 피부예요", desc: "한국 여성에게 가장 흔한 피부 타입입니다. 건조하고 예민하지만, 색소나 주름 고민은 적어요. 보습과 진정에만 집중하면 됩니다.", care: "순한 보습제로 장벽만 세워주세요. 복잡한 루틴보다 기본에 충실한 것이 중요합니다.", avoid: ["자극 성분", "과도한 각질제거", "강한 세안"], ingredients: ["세라마이드", "판테놀", "마데카소사이드", "스쿠알란"], linkType: "DRY" },
+        "DSPW": { koreanCode: "건성 + 민감 + 잡티 + 탄력↓", name: "집중 관리 피부", simpleDesc: "모든 케어가 필요하지만 효과도 빠른 피부예요", desc: "건조함이 노화를 가속화시키고, 민감해서 아무거나 쓰기도 어려운 상태입니다. 하지만 제대로 관리하면 개선 효과가 가장 빠른 타입이기도 해요.", care: "장벽 강화를 먼저 하고, 피부가 안정되면 단계적으로 미백과 안티에이징 제품을 추가하세요.", avoid: ["자극 성분", "고농도 레티놀 초기사용", "강한 필링"], ingredients: ["세라마이드", "저농도 비타민C", "펩타이드", "히알루론산"], linkType: "ANTI_AGING" },
+        "DSNW": { koreanCode: "건성 + 민감 + 비색소 + 주름", name: "건조성 노화 피부", simpleDesc: "보습과 안티에이징을 동시에 해야 하는 피부예요", desc: "수분 부족으로 인해 주름이 자글자글해집니다. 민감해서 강한 제품은 쓰기 어려워요.", care: "수분과 유분을 동시에 채워주세요. 저자극 레티놀이나 펩타이드 제품을 순하게 시작하세요.", avoid: ["자극적 레티놀", "알코올 토너"], ingredients: ["저자극 레티놀", "펩타이드", "스쿠알란", "시어버터"], linkType: "ANTI_AGING" },
+        "DRPT": { koreanCode: "건성 + 튼튼 + 잡티 + 탄력◎", name: "잡티 고민 건성 피부", simpleDesc: "보습과 미백에 집중하면 되는 피부예요", desc: "건조하지만 피부 자체는 튼튼합니다. 색소침착만 관리하면 되는 비교적 케어하기 쉬운 타입이에요.", care: "보습과 미백을 병행하세요. 피부가 강해서 비타민C나 미백 앰플을 적극적으로 사용할 수 있습니다.", avoid: ["지성용 제품"], ingredients: ["비타민C", "알부틴", "나이아신아마이드", "히알루론산"], linkType: "DRY" },
+        "DRNT": { koreanCode: "건성 + 튼튼 + 잡티× + 탄력◎", name: "워너비 건성 피부", simpleDesc: "건조함만 해결하면 완벽한 피부예요", desc: "피부 고민이 가장 적은 타입입니다! 건조함만 잡으면 다른 고민은 거의 없어요. 좋은 보습제 하나만 잘 쓰세요.", care: "심플하고 리치한 보습 루틴이 전부입니다. 복잡한 제품을 쓸 필요가 없어요.", avoid: ["지성용 제품", "불필요한 기능성 제품"], ingredients: ["히알루론산", "호호바오일", "시어버터", "세라마이드"], linkType: "DRY" },
+        "DRPW": { koreanCode: "건성 + 튼튼 + 잡티 + 탄력↓", name: "광노화 피부", simpleDesc: "자외선 데미지 복구가 핵심인 피부예요", desc: "자외선에 의한 노화(광노화)가 진행된 상태입니다. 색소침착과 주름이 함께 나타나요. 피부가 튼튼해서 적극적인 케어가 가능합니다.", care: "선크림 필수! 비타민C와 레티놀로 적극적인 안티에이징과 미백 케어를 하세요.", avoid: ["자외선 무방비 노출"], ingredients: ["비타민C", "레티놀", "펩타이드", "선크림(필수)"], linkType: "ANTI_AGING" },
+        "DRNW": { koreanCode: "건성 + 튼튼 + 잡티× + 탄력↓", name: "영양 부족 건성 피부", simpleDesc: "영양 공급에 집중해야 하는 피부예요", desc: "건조해서 탄력을 잃어가고 있습니다. 색소 고민은 없고 피부도 튼튼하니, 영양감 있는 안티에이징 제품을 쓰면 좋아질 수 있어요.", care: "리치한 영양 크림과 오일 세럼을 사용하세요. 레티놀이나 펩타이드도 잘 받아들입니다.", avoid: ["가벼운 수분 제품만 사용"], ingredients: ["레티놀", "펩타이드", "오일 세럼", "영양 크림"], linkType: "ANTI_AGING" }
     };
 
-    // 스토어 링크
     const links = {
         "ACNE": "https://smartstore.naver.com/inspirationplus/category/0e8853bfba8a4306ba8510b16fee430a?cp=1",
         "OILY": "https://smartstore.naver.com/inspirationplus/category/42bab2f6a2474194826e5c43d49f7047?cp=1",
@@ -1990,944 +943,131 @@ function toggleFaq(num) {
         "ANTI_AGING": "https://smartstore.naver.com/inspirationplus/products/11226243461"
     };
 
-    // 지표 설명 데이터
-
-
-// ========== 제품 데이터 (25개 핵심 제품) ==========
-const productData = {
-    "P001": {
-        name: "닥터랩 바이오펩타 리바이탈라이징 앰플",
-        shortDesc: "처진 피부를 끌어올리는 고농축 펩타이드 앰플",
-        why: "펩타이드가 피부 탄력을 개선하고 주름을 완화합니다",
-        risk: "탄력 저하를 방치하면 주름이 깊어지고 처짐이 심해집니다",
-        url: "https://smartstore.naver.com/inspirationplus/products/11908014154",
-        price: 163000,
-        brand: "닥터랩"
-    },
-    "P007": {
-        name: "닥터랩 피에이치 밸런싱 프로폴리스 솔루션",
-        shortDesc: "산뜻하게 수분을 채우는 지성 전용 앰플",
-        why: "끈적임 없이 수분만 공급해서 피지 분비를 조절합니다",
-        risk: "수분이 부족하면 피부는 더 많은 피지를 분비합니다",
-        url: "https://smartstore.naver.com/inspirationplus/products/11885924057",
-        price: 78000,
-        brand: "닥터랩"
-    },
-    "P008": {
-        name: "닥터랩 하이드라 더마 센텔라시카 솔루션",
-        shortDesc: "예민한 피부 장벽을 회복하는 시카 앰플",
-        why: "센텔라 성분이 손상된 피부 장벽을 빠르게 회복시킵니다",
-        risk: "약해진 장벽을 방치하면 작은 자극에도 피부가 반응합니다",
-        url: "https://smartstore.naver.com/inspirationplus/products/11883177810",
-        price: 108000,
-        brand: "닥터랩"
-    },
-    "P009": {
-        name: "닥터랩 하이드라15 히아루론산 솔루션",
-        shortDesc: "건조한 피부에 깊은 수분을 채우는 앰플",
-        why: "히알루론산이 피부 깊숙이 수분을 끌어당겨 채워줍니다",
-        risk: "속건조를 방치하면 잔주름이 늘어나고 피부가 거칠어집니다",
-        url: "https://smartstore.naver.com/inspirationplus/products/11871391330",
-        price: 159000,
-        brand: "닥터랩"
-    },
-    "P014": {
-        name: "닥터랩 레드 스팟 케어 크림",
-        shortDesc: "예민한 트러블 피부를 보호하는 산뜻한 진정 크림",
-        why: "진정 성분이 붉은 트러블을 빠르게 가라앉힙니다",
-        risk: "트러블을 방치하면 자국이 남고 염증이 악화됩니다",
-        url: "https://smartstore.naver.com/inspirationplus/products/11851186680",
-        price: 58000,
-        brand: "닥터랩"
-    },
-    "P022": {
-        name: "닥터랩 하이드라 더마 아줄렌 크림",
-        shortDesc: "달아오른 피부를 식히는 쿨링 크림",
-        why: "아줄렌 성분이 피부 열감을 낮추고 진정시킵니다",
-        risk: "피부 열을 방치하면 홍조가 심해지고 노화가 빨라집니다",
-        url: "https://smartstore.naver.com/inspirationplus/products/11759157595",
-        price: 138000,
-        brand: "닥터랩"
-    },
-    "P027": {
-        name: "닥터랩 액티브자임 페이셜 워시",
-        shortDesc: "각질을 부드럽게 제거하는 저자극 효소 클렌저",
-        why: "효소가 묵은 각질만 선택적으로 제거해 피부결을 매끈하게 합니다",
-        risk: "과도한 각질 제거는 피부 장벽을 손상시킬 수 있습니다",
-        url: "https://smartstore.naver.com/inspirationplus/products/11700673007",
-        price: 65000,
-        brand: "닥터랩"
-    },
-    "P028": {
-        name: "더매직 플루이드 3종 앰플 세트",
-        shortDesc: "피부 상태에 맞춰 선택하는 3종 앰플 세트",
-        why: "수분, 미백, 탄력 중 그날의 피부 상태에 맞춰 처방합니다",
-        risk: "한 가지 케어만 하면 복합적인 피부 고민을 해결하기 어렵습니다",
-        url: "https://smartstore.naver.com/inspirationplus/products/11622665954",
-        price: 198000,
-        brand: "더매직"
-    },
-    "P033": {
-        name: "레비덤 B3 브라이트닝 앰플",
-        shortDesc: "피부톤을 균일하게 맞추는 브라이트닝 앰플",
-        why: "나이아신아마이드가 잡티와 붉은기를 동시에 개선합니다",
-        risk: "색소 침착을 방치하면 점점 진해지고 개선이 어려워집니다",
-        url: "https://smartstore.naver.com/inspirationplus/products/11488199223",
-        price: 100000,
-        brand: "레비덤"
-    },
-    "P035": {
-        name: "닥터랩 하이드라 15 수딩 겔 크림",
-        shortDesc: "열감을 낮추고 수분을 채우는 수분 젤",
-        why: "산뜻한 젤 제형이 끈적임 없이 충분한 수분을 공급합니다",
-        risk: "지성 피부에 무거운 크림을 쓰면 트러블이 악화됩니다",
-        url: "https://smartstore.naver.com/inspirationplus/products/11447106045",
-        price: 58000,
-        brand: "닥터랩"
-    },
-    "P045": {
-        name: "닥터랩 바이오펩타 리바이탈라이징 크림",
-        shortDesc: "지친 피부에 활력을 주는 영양 크림",
-        why: "펩타이드 복합체가 피부에 영양을 공급하고 탄력을 개선합니다",
-        risk: "영양 부족 피부는 탄력이 떨어지고 힘없이 처집니다",
-        url: "https://smartstore.naver.com/inspirationplus/products/11277127484",
-        price: 135000,
-        brand: "닥터랩"
-    },
-    "P046": {
-        name: "닥터랩 하이드로-15 수딩 토너",
-        shortDesc: "세안 후 첫 수분을 빠르게 채우는 토너",
-        why: "세안으로 건조해진 피부에 즉각적인 수분을 공급합니다",
-        risk: "세안 후 바로 보습하지 않으면 피부가 더 건조해집니다",
-        url: "https://smartstore.naver.com/inspirationplus/products/11276504947",
-        price: 56000,
-        brand: "닥터랩"
-    },
-    "P047": {
-        name: "레비덤 퓨리파잉 젤 클렌저",
-        shortDesc: "피지와 노폐물을 깨끗이 제거하는 젤 클렌저",
-        why: "과도한 피지와 먼지를 깔끔하게 씻어내 모공을 청결하게 합니다",
-        risk: "피지를 제대로 제거하지 않으면 모공이 막혀 트러블이 생깁니다",
-        url: "https://smartstore.naver.com/inspirationplus/products/11190802305",
-        price: 90000,
-        brand: "레비덤"
-    },
-    "P048": {
-        name: "레비덤 젠틀 PH 밸런서 토너",
-        shortDesc: "pH 균형을 맞춰주는 민감 전용 토너",
-        why: "세안 후 흐트러진 pH를 정상화하여 피부 장벽을 보호합니다",
-        risk: "pH 불균형이 지속되면 피부 장벽이 약해지고 예민해집니다",
-        url: "https://smartstore.naver.com/inspirationplus/products/11183599896",
-        price: 130000,
-        brand: "레비덤"
-    },
-    "P049": {
-        name: "닥터랩 아줄렌 무스 클렌저",
-        shortDesc: "민감 피부도 안심하는 부드러운 무스 클렌저",
-        why: "풍성한 거품이 피부 자극 없이 부드럽게 세안합니다",
-        risk: "자극적인 클렌저는 민감 피부를 더 예민하게 만듭니다",
-        url: "https://smartstore.naver.com/inspirationplus/products/11270378001",
-        price: 42000,
-        brand: "닥터랩"
-    },
-    "P051": {
-        name: "레비덤 아하 클렌징 폼",
-        shortDesc: "각질을 녹이는 AHA 클렌징 폼",
-        why: "AHA 성분이 묵은 각질을 부드럽게 용해시켜 피부결을 개선합니다",
-        risk: "각질이 쌓이면 피부가 칙칙해지고 화장품 흡수가 떨어집니다",
-        url: "https://smartstore.naver.com/inspirationplus/products/11181876598",
-        price: 100000,
-        brand: "레비덤"
-    },
-    "P052": {
-        name: "레비덤 아하 토너",
-        shortDesc: "피부 결을 매끈하게 정돈하는 AHA 토너",
-        why: "AHA가 거친 피부 결을 부드럽게 정리해줍니다",
-        risk: "거친 피부 결을 방치하면 화장이 들뜨고 칙칙해 보입니다",
-        url: "https://smartstore.naver.com/inspirationplus/products/11181838027",
-        price: 170000,
-        brand: "레비덤"
-    },
-    "P052b": {
-        name: "닥터랩 하이드라 15 수딩앰플",
-        shortDesc: "깊은 수분을 공급하는 히알루론산 앰플",
-        why: "고농축 히알루론산이 피부 깊숙이 수분을 채워줍니다",
-        risk: "건조를 방치하면 모든 케어 효과가 떨어집니다",
-        url: "https://smartstore.naver.com/inspirationplus/products/11263517689",
-        price: 90000,
-        brand: "닥터랩"
-    },
-    "P053": {
-        name: "레비덤 퓨리파잉 토닉",
-        shortDesc: "트러블 피부를 정화하는 토닉",
-        why: "피부 속 노폐물을 배출하고 염증 환경을 개선합니다",
-        risk: "노폐물이 쌓이면 트러블이 반복적으로 재발합니다",
-        url: "https://smartstore.naver.com/inspirationplus/products/11181739040",
-        price: 130000,
-        brand: "레비덤"
-    },
-    "P054": {
-        name: "레비덤 ECM 리페어 컨센트레이트",
-        shortDesc: "주름을 개선하는 집중 재생 세럼",
-        why: "성장인자가 피부 재생을 촉진하고 깊은 주름을 완화합니다",
-        risk: "주름 케어를 미루면 더 깊어지고 개선이 어려워집니다",
-        url: "https://smartstore.naver.com/inspirationplus/products/11226243461",
-        price: 290000,
-        brand: "레비덤"
-    },
-    "P060": {
-        name: "레비덤 뉴로 센스티브 토너",
-        shortDesc: "예민한 피부를 진정시키는 토너",
-        why: "신경 펩타이드가 과민 반응을 줄이고 피부를 안정시킵니다",
-        risk: "민감도를 방치하면 모든 제품이 자극으로 느껴집니다",
-        url: "https://smartstore.naver.com/inspirationplus/products/11136318316",
-        price: 100000,
-        brand: "레비덤"
-    },
-    "P076": {
-        name: "레비덤 프로 마이크로 바이옴 오일리 스킨",
-        shortDesc: "지성 피부의 유수분 밸런스를 맞추는 크림",
-        why: "피부 미생물 환경을 개선하여 과도한 피지 분비를 조절합니다",
-        risk: "유수분 불균형이 지속되면 트러블이 반복됩니다",
-        url: "https://smartstore.naver.com/inspirationplus/products/11177823220",
-        price: 170000,
-        brand: "레비덤"
-    },
-    "P079": {
-        name: "레비덤 프로 마이크로 바이오옴 드라이 스킨",
-        shortDesc: "건성 피부의 보습력을 높이는 토너",
-        why: "피부 미생물 환경을 최적화하여 수분 보유력을 높입니다",
-        risk: "미생물 균형이 깨지면 건조가 심해집니다",
-        url: "https://smartstore.naver.com/inspirationplus/products/11177653465",
-        price: 170000,
-        brand: "레비덤"
-    },
-    "P104": {
-        name: "레비덤 뉴로 센스티브 더블 디스트레스 세럼",
-        shortDesc: "민감 피부를 2단계로 집중 케어하는 세럼",
-        why: "데이&나이트 2단계 케어로 민감도를 근본적으로 개선합니다",
-        risk: "민감 피부를 단계적으로 케어하지 않으면 만성화됩니다",
-        url: "https://smartstore.naver.com/inspirationplus/products/11127945487",
-        price: 180000,
-        brand: "레비덤"
-    }
-};
-
-// ========== 16개 타입 루틴 매칭 ==========
-const routineData = {
-    "OSPT": {
-        cleansing: "P049",
-        toner: "P048",
-        serum: "P033",
-        cream: "P022"
-    },
-    "OSNT": {
-        cleansing: "P047",
-        toner: "P053",
-        serum: "P007",
-        cream: "P076"
-    },
-    "OSPW": {
-        cleansing: "P049",
-        toner: "P060",
-        serum: "P033",
-        cream: "P022"
-    },
-    "OSNW": {
-        cleansing: "P047",
-        toner: "P060",
-        serum: "P001",
-        cream: "P014"
-    },
-    "ORPT": {
-        cleansing: "P051",
-        toner: "P052",
-        serum: "P033",
-        cream: "P076"
-    },
-    "ORNT": {
-        cleansing: "P047",
-        toner: "P053",
-        serum: "P007",
-        cream: "P076"
-    },
-    "ORPW": {
-        cleansing: "P051",
-        toner: "P052",
-        serum: "P001",
-        cream: "P045"
-    },
-    "ORNW": {
-        cleansing: "P047",
-        toner: "P053",
-        serum: "P001",
-        cream: "P045"
-    },
-    "DSPT": {
-        cleansing: "P049",
-        toner: "P046",
-        serum: "P104",
-        cream: "P035"
-    },
-    "DSNT": {
-        cleansing: "P049",
-        toner: "P046",
-        serum: "P104",
-        cream: "P035"
-    },
-    "DSPW": {
-        cleansing: "P049",
-        toner: "P046",
-        serum: "P028",
-        cream: "P035"
-    },
-    "DSNW": {
-        cleansing: "P049",
-        toner: "P046",
-        serum: "P104",
-        cream: "P035"
-    },
-    "DRPT": {
-        cleansing: "P027",
-        toner: "P079",
-        serum: "P028",
-        cream: "P035"
-    },
-    "DRNT": {
-        cleansing: "P027",
-        toner: "P079",
-        serum: "P052b",
-        cream: "P035"
-    },
-    "DRPW": {
-        cleansing: "P027",
-        toner: "P079",
-        serum: "P028",
-        cream: "P035"
-    },
-    "DRNW": {
-        cleansing: "P027",
-        toner: "P079",
-        serum: "P054",
-        cream: "P035"
-    }
-};
-
-
-// ========== 16개 타입별 제품 우선순위 (별점) ==========
-// 5점: 필수 (이거 없으면 시작도 못함)
-// 4점: 권장 (효과 극대화)
-// 3점: 추천 (있으면 좋음)
-
-const routinePriority = {
-    "OSPT": {
-        cleansing: 5, // 민감하니까 자극 최소화 필수!
-        toner: 4,     // pH 균형 중요
-        serum: 5,     // 브라이트닝 필수
-        cream: 4      // 진정 케어 중요
-    },
-    "OSNT": {
-        cleansing: 5, // 피지 제거 필수
-        toner: 4,     // 독소 배출 중요
-        serum: 3,     // 수분 공급 보조
-        cream: 5      // 유수분 밸런스 필수
-    },
-    "OSPW": {
-        cleansing: 5, // 자극 최소화 필수
-        toner: 4,     // 민감 진정 중요
-        serum: 4,     // 복합 고민 해결
-        cream: 4      // 진정 케어
-    },
-    "OSNW": {
-        cleansing: 5, // 피지 제거 필수
-        toner: 4,     // 민감 진정
-        serum: 5,     // 탄력 회복 필수
-        cream: 4      // 트러블 진정
-    },
-    "ORPT": {
-        cleansing: 5, // 각질 제거 필수
-        toner: 4,     // 피부 결 정돈
-        serum: 5,     // 미백 필수
-        cream: 3      // 유수분 밸런스
-    },
-    "ORNT": {
-        cleansing: 5, // 피지 제거 필수
-        toner: 3,     // 있으면 좋음
-        serum: 3,     // 보조적 수분
-        cream: 4      // 유수분 밸런스
-    },
-    "ORPW": {
-        cleansing: 4, // 각질 제거
-        toner: 3,     // 피부 결 정돈
-        serum: 5,     // 탄력+미백 필수
-        cream: 5      // 영양 공급 필수
-    },
-    "ORNW": {
-        cleansing: 5, // 피지 제거 필수
-        toner: 3,     // 독소 배출
-        serum: 5,     // 탄력 회복 필수
-        cream: 5      // 영양 공급 필수
-    },
-    "DSPT": {
-        cleansing: 5, // 저자극 클렌징 필수
-        toner: 4,     // 첫 수분 공급
-        serum: 5,     // 민감 진정 필수
-        cream: 4      // 수분 밀봉
-    },
-    "DSNT": {
-        cleansing: 5, // 저자극 클렌징 필수
-        toner: 4,     // 첫 수분 공급
-        serum: 5,     // 민감 진정 필수
-        cream: 4      // 수분 밀봉
-    },
-    "DSPW": {
-        cleansing: 5, // 저자극 클렌징 필수
-        toner: 4,     // 첫 수분 공급
-        serum: 5,     // 복합 케어 필수
-        cream: 4      // 수분 밀봉
-    },
-    "DSNW": {
-        cleansing: 5, // 저자극 클렌징 필수
-        toner: 4,     // 첫 수분 공급
-        serum: 5,     // 민감 진정 필수
-        cream: 4      // 수분 밀봉
-    },
-    "DRPT": {
-        cleansing: 4, // 효소 클렌징
-        toner: 5,     // 마이크로바이옴 필수
-        serum: 4,     // 복합 케어
-        cream: 4      // 수분 밀봉
-    },
-    "DRNT": {
-        cleansing: 4, // 효소 클렌징
-        toner: 5,     // 마이크로바이옴 필수
-        serum: 5,     // 수분 공급 필수
-        cream: 4      // 수분 밀봉
-    },
-    "DRPW": {
-        cleansing: 4, // 효소 클렌징
-        toner: 5,     // 마이크로바이옴 필수
-        serum: 5,     // 복합 케어 필수
-        cream: 4      // 수분 밀봉
-    },
-    "DRNW": {
-        cleansing: 4, // 효소 클렌징
-        toner: 5,     // 마이크로바이옴 필수
-        serum: 5,     // 재생 세럼 필수
-        cream: 4      // 수분 밀봉
-    }
-};
-
-// 별점 렌더링 함수
-function renderStars(priority) {
-    const filledStar = '⭐';
-    const emptyStar = '☆';
-    let stars = '';
-    for (let i = 1; i <= 5; i++) {
-        stars += i <= priority ? filledStar : emptyStar;
-    }
-    return stars;
-}
-
-// 우선순위 레이블
-function getPriorityLabel(priority) {
-    if (priority === 5) return '필수';
-    if (priority === 4) return '권장';
-    return '추천';
-}
-
-// 우선순위 설명
-function getPriorityExplanation(priority, stepName) {
-    const explanations = {
-        5: {
-            cleansing: '이 클렌저 없이는 피부 관리를 시작할 수 없어요',
-            toner: '이 토너가 모든 케어의 기초를 다져줘요',
-            serum: '이 세럼이 고민 해결의 핵심이에요',
-            cream: '이 크림 없이는 수분이 다 날아가요'
-        },
-        4: {
-            cleansing: '더 나은 결과를 위해 꼭 사용하세요',
-            toner: '효과를 극대화하려면 필요해요',
-            serum: '이 세럼이 있으면 효과가 2배예요',
-            cream: '지속력을 높이려면 필수예요'
-        },
-        3: {
-            cleansing: '예산이 된다면 추천드려요',
-            toner: '있으면 더 좋지만 필수는 아니에요',
-            serum: '여유가 있다면 추가해보세요',
-            cream: '기본 케어가 완성되면 추가하세요'
-        }
-    };
-    
-    const step = stepName.includes('클렌징') ? 'cleansing' 
-               : stepName.includes('토너') ? 'toner'
-               : stepName.includes('세럼') || stepName.includes('앰플') ? 'serum'
-               : 'cream';
-    
-    return explanations[priority][step];
-}
-
-
-// ========== 사용자 프로필 저장 ==========
-let userProfile = {
-    age: null,      // '10s', '20s', '30s', '40s', '50s', '60s'
-    gender: null,   // 'male', 'female'
-    skinType: null  // 'OSPT', 'DSNT', etc.
-};
-
-// ========== 프로필 선택 함수 ==========
-function selectAge(age) {
-    userProfile.age = age;
-    
-    // 모든 나이 버튼 선택 해제
-    document.querySelectorAll('.age-btn').forEach(btn => {
-        btn.classList.remove('selected');
-    });
-    
-    // 선택한 버튼 활성화
-    event.target.closest('.age-btn').classList.add('selected');
-    
-    // 시작 버튼 활성화 체크
-    checkProfileComplete();
-}
-
-function selectGender(gender) {
-    userProfile.gender = gender;
-    
-    // 모든 성별 버튼 선택 해제
-    document.querySelectorAll('.gender-btn').forEach(btn => {
-        btn.classList.remove('selected');
-    });
-    
-    // 선택한 버튼 활성화
-    event.target.closest('.gender-btn').classList.add('selected');
-    
-    // 시작 버튼 활성화 체크
-    checkProfileComplete();
-}
-
-function checkProfileComplete() {
-    const startBtn = document.getElementById('profileStartBtn');
-    if (userProfile.age && userProfile.gender) {
-        startBtn.disabled = false;
-    } else {
-        startBtn.disabled = true;
-    }
-}
-
-function startQuizFromProfile() {
-    if (!userProfile.age || !userProfile.gender) {
-        alert('나이대와 성별을 모두 선택해주세요!');
-        return;
-    }
-    
-    // 프로필 화면 숨기고 퀴즈 화면 표시
-    document.getElementById('profileScreen').classList.remove('active');
-    document.getElementById('quizScreen').classList.add('active');
-    
-    // 진행바 업데이트
-    const progressBar = document.getElementById('progressBar');
-    progressBar.style.width = '0%';
-    
-    // 첫 질문 표시
-    showQuestion();
-}
-
-// ========== 나이대별 브랜드 전략 ==========
-const ageStrategy = {
-    '10s': {
-        doctorLabRatio: 4,  // 닥터랩 4개
-        revidermRatio: 0,   // 레비덤 0개
-        description: '가성비 중심 - 100% 닥터랩',
-        budgetRange: '20~25만원'
-    },
-    '20s': {
-        doctorLabRatio: 3,  // 닥터랩 3개
-        revidermRatio: 1,   // 레비덤 1개
-        description: '균형잡힌 시작 - 핵심만 레비덤',
-        budgetRange: '25~30만원'
-    },
-    '30s': {
-        doctorLabRatio: 2,  // 닥터랩 2개
-        revidermRatio: 2,   // 레비덤 2개
-        description: '균형 조합 - 효과 중심',
-        budgetRange: '30~40만원'
-    },
-    '40s': {
-        doctorLabRatio: 1,  // 닥터랩 1개
-        revidermRatio: 3,   // 레비덤 3개
-        description: '안티에이징 집중',
-        budgetRange: '50~60만원'
-    },
-    '50s': {
-        doctorLabRatio: 0,  // 닥터랩 0개
-        revidermRatio: 4,   // 레비덤 4개
-        description: '프리미엄 케어 - 100% 레비덤',
-        budgetRange: '70~80만원'
-    },
-    '60s': {
-        doctorLabRatio: 0,  // 닥터랩 0개
-        revidermRatio: 4,   // 레비덤 4개
-        description: '최고급 라인 - 집중 재생',
-        budgetRange: '80~90만원'
-    }
-};
-
-// ========== 나이대+성별별 제품 선택 로직 ==========
-function getAgeAdjustedRoutine(skinType, age, gender) {
-    const baseRoutine = routineData[skinType];
-    const strategy = ageStrategy[age];
-    
-    // 나이대별 대체 제품 매핑
-    const ageProductMapping = {
-        // 클렌징 (나이 높을수록 레비덤)
-        'P049': { // 닥터랩 아줄렌 무스 (민감용)
-            '10s': 'P049', '20s': 'P049', '30s': 'P049',
-            '40s': 'P049', '50s': 'P049', '60s': 'P049'
-        },
-        'P047': { // 레비덤 퓨리파잉 젤 (지성용)
-            '10s': 'P049', '20s': 'P047', '30s': 'P047',
-            '40s': 'P047', '50s': 'P051', '60s': 'P051'
-        },
-        'P027': { // 닥터랩 액티브자임 (효소)
-            '10s': 'P027', '20s': 'P027', '30s': 'P027',
-            '40s': 'P027', '50s': 'P051', '60s': 'P051'
-        },
-        'P051': { // 레비덤 아하 클렌징
-            '10s': 'P027', '20s': 'P027', '30s': 'P051',
-            '40s': 'P051', '50s': 'P051', '60s': 'P051'
-        },
-        
-        // 토너 (나이 높을수록 레비덤)
-        'P046': { // 닥터랩 수딩 토너
-            '10s': 'P046', '20s': 'P046', '30s': 'P046',
-            '40s': 'P060', '50s': 'P060', '60s': 'P060'
-        },
-        'P053': { // 레비덤 퓨리파잉 토닉
-            '10s': 'P046', '20s': 'P053', '30s': 'P053',
-            '40s': 'P053', '50s': 'P053', '60s': 'P060'
-        },
-        'P079': { // 레비덤 마이크로바이옴 드라이
-            '10s': 'P046', '20s': 'P046', '30s': 'P079',
-            '40s': 'P079', '50s': 'P079', '60s': 'P079'
-        },
-        'P048': { // 레비덤 젠틀 PH 밸런서
-            '10s': 'P046', '20s': 'P048', '30s': 'P048',
-            '40s': 'P048', '50s': 'P060', '60s': 'P060'
-        },
-        'P052': { // 레비덤 아하 토너
-            '10s': 'P046', '20s': 'P046', '30s': 'P052',
-            '40s': 'P052', '50s': 'P052', '60s': 'P052'
-        },
-        'P060': { // 레비덤 뉴로 센스티브
-            '10s': 'P046', '20s': 'P046', '30s': 'P060',
-            '40s': 'P060', '50s': 'P060', '60s': 'P060'
-        },
-        
-        // 세럼 (핵심이라 나이대별 유지, 단 10대만 닥터랩)
-        'P033': { // 레비덤 B3 브라이트닝
-            '10s': 'P007', '20s': 'P033', '30s': 'P033',
-            '40s': 'P033', '50s': 'P033', '60s': 'P033'
-        },
-        'P104': { // 레비덤 더블 디스트레스
-            '10s': 'P009', '20s': 'P104', '30s': 'P104',
-            '40s': 'P104', '50s': 'P104', '60s': 'P104'
-        },
-        'P028': { // 더매직 3종 세트
-            '10s': 'P009', '20s': 'P028', '30s': 'P028',
-            '40s': 'P028', '50s': 'P028', '60s': 'P028'
-        },
-        'P001': { // 닥터랩 바이오펩타
-            '10s': 'P001', '20s': 'P001', '30s': 'P001',
-            '40s': 'P001', '50s': 'P001', '60s': 'P054'
-        },
-        'P054': { // 레비덤 ECM 리페어
-            '10s': 'P001', '20s': 'P001', '30s': 'P054',
-            '40s': 'P054', '50s': 'P054', '60s': 'P054'
-        },
-        'P007': { // 닥터랩 프로폴리스
-            '10s': 'P007', '20s': 'P007', '30s': 'P007',
-            '40s': 'P033', '50s': 'P033', '60s': 'P033'
-        },
-        'P052b': { // 닥터랩 수딩앰플
-            '10s': 'P052b', '20s': 'P052b', '30s': 'P052b',
-            '40s': 'P052b', '50s': 'P104', '60s': 'P104'
-        },
-        
-        // 크림 (나이 높을수록 레비덤)
-        'P035': { // 닥터랩 수딩 젤
-            '10s': 'P035', '20s': 'P035', '30s': 'P035',
-            '40s': 'P035', '50s': 'P045', '60s': 'P045'
-        },
-        'P022': { // 닥터랩 아줄렌 크림
-            '10s': 'P022', '20s': 'P022', '30s': 'P022',
-            '40s': 'P045', '50s': 'P045', '60s': 'P045'
-        },
-        'P076': { // 레비덤 마이크로바이옴 오일리
-            '10s': 'P035', '20s': 'P076', '30s': 'P076',
-            '40s': 'P076', '50s': 'P076', '60s': 'P076'
-        },
-        'P045': { // 닥터랩 바이오펩타 크림
-            '10s': 'P045', '20s': 'P045', '30s': 'P045',
-            '40s': 'P045', '50s': 'P045', '60s': 'P045'
-        },
-        'P014': { // 닥터랩 레드 스팟
-            '10s': 'P014', '20s': 'P014', '30s': 'P014',
-            '40s': 'P014', '50s': 'P045', '60s': 'P045'
-        }
-    };
-    
-    // 나이대에 맞게 제품 교체
-    const adjustedRoutine = {};
-    for (let step in baseRoutine) {
-        const originalProduct = baseRoutine[step];
-        const mapping = ageProductMapping[originalProduct];
-        
-        if (mapping && mapping[age]) {
-            adjustedRoutine[step] = mapping[age];
-        } else {
-            adjustedRoutine[step] = originalProduct;
-        }
-    }
-    
-    return adjustedRoutine;
-}
-
-// ========== 나이대 설명 텍스트 생성 ==========
-function getAgeDescription(age, gender) {
-    const ageText = {
-        '10s': '10대',
-        '20s': '20대',
-        '30s': '30대',
-        '40s': '40대',
-        '50s': '50대',
-        '60s': '60대 이상'
-    }[age];
-    
-    const genderText = gender === 'male' ? '남성' : '여성';
-    
-    const strategy = ageStrategy[age];
-    
-    return {
-        title: `${ageText} ${genderText}을 위한 맞춤 루틴`,
-        subtitle: strategy.description,
-        budgetInfo: `예상 금액: ${strategy.budgetRange}`
-    };
-}
-
-
-function renderRoutineSection(skinType) {
-    // 나이대+성별 맞춤 루틴 가져오기
-    const adjustedRoutine = getAgeAdjustedRoutine(skinType, userProfile.age, userProfile.gender);
-    const priority = routinePriority[skinType];
-    const ageDesc = getAgeDescription(userProfile.age, userProfile.gender);
-    
-    if (!adjustedRoutine || !priority) return;
-
-    const routineHTML = `
-        <div class="routine-section">
-            <div class="routine-header">
-                <div class="age-badge-container">
-                    <span class="age-badge">${ageDesc.title}</span>
-                    <span class="age-subtitle">${ageDesc.subtitle}</span>
-                </div>
-                
-                <h3 class="routine-title">💎 맞춤 4단계 루틴</h3>
-                <p class="routine-subtitle">피부샵 전문가가 추천하는 필수 조합</p>
-                <p class="routine-budget">${ageDesc.budgetInfo}</p>
-                
-                <div class="coupon-info-box">
-                    🎁 <strong>스마트스토어 '알림받기'</strong> 하면<br>
-                    <strong class="coupon-highlight">10% 쿠폰 즉시 발급!</strong><br>
-                    <span class="coupon-sub">매달 추가 쿠폰도 랜덤 지급 중이에요 🎉</span>
-                </div>
-            </div>
-            
-            ${generateRoutineCard('클렌징', adjustedRoutine.cleansing, priority.cleansing, 1, skinType)}
-            ${generateRoutineCard('토너', adjustedRoutine.toner, priority.toner, 2, skinType)}
-            ${generateRoutineCard('세럼/앰플', adjustedRoutine.serum, priority.serum, 3, skinType)}
-            ${generateRoutineCard('크림/로션', adjustedRoutine.cream, priority.cream, 4, skinType)}
-            
-            <div class="routine-summary">
-                <p class="routine-note">
-                    💡 <strong>TIP:</strong> 위 4단계를 기본으로 하고, 자외선 차단제를 마지막에 바르세요!
-                </p>
-                <p class="routine-note">
-                    💰 <strong>예산 부족?</strong> 별점 5개(⭐⭐⭐⭐⭐) 제품부터 우선 구매하세요!
-                </p>
-                <p class="routine-note">
-                    🎯 <strong>${ageDesc.title}</strong>에게 최적화된 가성비 조합이에요!
-                </p>
-            </div>
-        </div>
-    `;
-
-    // shop-section 앞에 삽입
-    const shopSection = document.querySelector('.shop-section');
-    shopSection.insertAdjacentHTML('beforebegin', routineHTML);
-
-    // 상세 토글 이벤트 연결
-    document.querySelectorAll('.routine-detail-btn').forEach(btn => {
-        btn.addEventListener('click', function() {
-            const detailContent = this.nextElementSibling;
-            const isOpen = detailContent.style.display === 'block';
-            
-            detailContent.style.display = isOpen ? 'none' : 'block';
-            this.textContent = isOpen ? '더 알아보기 ▼' : '접기 ▲';
-        });
-    });
-}
-
-// generateRoutineCard는 기존 v2.1과 동일하게 유지
-// (별점, 브랜드 배지 등 모두 포함)
-
-
-
-function generateRoutineCard(stepName, productId, priorityScore, stepNumber, skinType) {
-    const product = productData[productId];
-    if (!product) return '';
-
-    const priceFormatted = product.price.toLocaleString();
-    const brandBadgeClass = product.brand === '닥터랩' ? 'brand-doctorlab' : 'brand-reviderm';
-    
-    // 별점 렌더링
-    const stars = renderStars(priorityScore);
-    const priorityLabel = getPriorityLabel(priorityScore);
-    const priorityClass = priorityScore === 5 ? 'priority-must' 
-                        : priorityScore === 4 ? 'priority-high' 
-                        : 'priority-normal';
-    const priorityExplanation = getPriorityExplanation(priorityScore, stepName);
-
-    return `
-        <div class="routine-card ${priorityClass}">
-            <div class="routine-card-header">
-                <div class="step-info">
-                    <span class="step-number">STEP ${stepNumber}</span>
-                    <h4 class="step-name">${stepName}</h4>
-                </div>
-                <div class="header-right">
-                    <span class="priority-badge ${priorityClass}">${priorityLabel}</span>
-                    <span class="brand-badge ${brandBadgeClass}">${product.brand}</span>
-                </div>
-            </div>
-            
-            <div class="priority-stars">
-                <span class="stars">${stars}</span>
-                <span class="priority-text">${priorityExplanation}</span>
-            </div>
-            
-            <div class="product-basic-info">
-                <p class="product-name">${product.name}</p>
-                <p class="product-short-desc">${product.shortDesc}</p>
-                <p class="product-price">${priceFormatted}원</p>
-            </div>
-            
-            <button class="routine-detail-btn">더 알아보기 ▼</button>
-            
-            <div class="routine-detail-content" style="display:none;">
-                <div class="detail-block">
-                    <p class="detail-label">📌 왜 필요한가요?</p>
-                    <p class="detail-text">${product.why}</p>
-                </div>
-                
-                <div class="detail-block">
-                    <p class="detail-label">⚠️ 안 쓰면 어떻게 되나요?</p>
-                    <p class="detail-text">${product.risk}</p>
-                </div>
-                
-                <a href="${product.url}" target="_blank" class="product-buy-btn">
-                    제품 보러 가기 →
-                </a>
-            </div>
-        </div>
-    `;
-}
-
-// ========== 헬퍼 함수들 ==========
-function renderStars(priority) {
-    const filledStar = '⭐';
-    const emptyStar = '☆';
-    let stars = '';
-    for (let i = 1; i <= 5; i++) {
-        stars += i <= priority ? filledStar : emptyStar;
-    }
-    return stars;
-}
-
-function getPriorityLabel(priority) {
-    if (priority === 5) return '필수';
-    if (priority === 4) return '권장';
-    return '추천';
-}
-
-function getPriorityExplanation(priority, stepName) {
-    const explanations = {
-        5: {
-            cleansing: '이 클렌저 없이는 피부 관리를 시작할 수 없어요',
-            toner: '이 토너가 모든 케어의 기초를 다져줘요',
-            serum: '이 세럼이 고민 해결의 핵심이에요',
-            cream: '이 크림 없이는 수분이 다 날아가요'
-        },
-        4: {
-            cleansing: '더 나은 결과를 위해 꼭 사용하세요',
-            toner: '효과를 극대화하려면 필요해요',
-            serum: '이 세럼이 있으면 효과가 2배예요',
-            cream: '지속력을 높이려면 필수예요'
-        },
-        3: {
-            cleansing: '예산이 된다면 추천드려요',
-            toner: '있으면 더 좋지만 필수는 아니에요',
-            serum: '여유가 있다면 추가해보세요',
-            cream: '기본 케어가 완성되면 추가하세요'
-        }
-    };
-    
-    const step = stepName.includes('클렌징') ? 'cleansing' 
-               : stepName.includes('토너') ? 'toner'
-               : stepName.includes('세럼') || stepName.includes('앰플') ? 'serum'
-               : 'cream';
-    
-    return explanations[priority][step];
-}
-
-        const metricInfo = {
-        oil: { name: "유분", high: "많음", medium: "보통", low: "부족", 
-               highTip: "피지 조절 성분(나이아신아마이드, BHA)을 사용하세요",
-               mediumTip: "현재 유분 밸런스가 좋습니다. 유지하세요",
-               lowTip: "유분 공급 제품(오일, 밤)을 추가하세요" },
-        hydration: { name: "수분", high: "충분", medium: "보통", low: "부족",
-                     highTip: "수분 밸런스가 좋습니다. 유지하세요",
-                     mediumTip: "히알루론산 제품으로 수분을 보충하세요",
-                     lowTip: "고보습 세럼과 크림이 필수입니다" },
-        sensitive: { name: "민감도", high: "매우 민감", medium: "다소 민감", low: "튼튼함",
-                     highTip: "저자극 제품 위주로, 진정 성분을 사용하세요",
-                     mediumTip: "새 제품은 패치테스트 후 사용하세요",
-                     lowTip: "피부가 튼튼해서 다양한 제품을 시도할 수 있어요" },
-        pigment: { name: "색소침착", high: "침착 잘됨", medium: "보통", low: "침착 안됨",
-                   highTip: "자외선 차단 필수, 미백 성분을 꾸준히 사용하세요",
-                   mediumTip: "자외선 차단만 잘 해도 관리됩니다",
-                   lowTip: "색소 고민이 적습니다. 현재 관리를 유지하세요" },
-        elastic: { name: "탄력도", high: "탄력 좋음", medium: "보통", low: "탄력 저하",
-                   highTip: "탄력이 좋습니다. 현재 상태를 유지하세요",
-                   mediumTip: "펩타이드 제품으로 예방적 관리를 시작하세요",
-                   lowTip: "레티놀, 펩타이드로 적극적인 탄력 케어가 필요합니다" },
-        barrier: { name: "장벽건강", high: "장벽 튼튼", medium: "다소 약함", low: "장벽 손상",
-                   highTip: "장벽이 건강합니다. 과한 관리는 피하세요",
-                   mediumTip: "세라마이드로 장벽을 강화하세요",
-                   lowTip: "장벽 회복이 최우선입니다. 자극을 최소화하세요" }
+    const metricInfo = {
+        oil: { name: "유분", high: "많음", medium: "보통", low: "부족", highTip: "피지 조절 성분을 사용하세요", mediumTip: "현재 유분 밸런스가 좋습니다", lowTip: "유분 공급 제품을 추가하세요" },
+        hydration: { name: "수분", high: "충분", medium: "보통", low: "부족", highTip: "수분 밸런스가 좋습니다", mediumTip: "수분을 보충하세요", lowTip: "고보습 세럼과 크림이 필수입니다" },
+        sensitive: { name: "민감도", high: "매우 민감", medium: "다소 민감", low: "튼튼함", highTip: "저자극 제품 위주로 사용하세요", mediumTip: "패치테스트 후 사용하세요", lowTip: "피부가 튼튼합니다" },
+        pigment: { name: "색소침착", high: "침착 잘됨", medium: "보통", low: "침착 안됨", highTip: "자외선 차단 필수", mediumTip: "자외선 차단만 잘 해도 관리됩니다", lowTip: "색소 고민이 적습니다" },
+        elastic: { name: "탄력도", high: "탄력 좋음", medium: "보통", low: "탄력 저하", highTip: "탄력이 좋습니다", mediumTip: "예방적 관리를 시작하세요", lowTip: "적극적인 탄력 케어가 필요합니다" },
+        barrier: { name: "장벽건강", high: "장벽 튼튼", medium: "다소 약함", low: "장벽 손상", highTip: "장벽이 건강합니다", mediumTip: "장벽을 강화하세요", lowTip: "장벽 회복이 최우선입니다" }
     };
 
-    // =============================================
-    // [로직]
-    // =============================================
-    
+    const productData = {
+        "P001": { name: "닥터랩 바이오펩타 리바이탈라이징 앰플", shortDesc: "처진 피부를 끌어올리는 고농축 펩타이드 앰플", why: "펩타이드가 피부 탄력을 개선하고 주름을 완화합니다", risk: "탄력 저하를 방치하면 주름이 깊어지고 처짐이 심해집니다", url: "https://smartstore.naver.com/inspirationplus/products/11908014154", price: 163000, brand: "닥터랩" },
+        "P007": { name: "닥터랩 피에이치 밸런싱 프로폴리스 솔루션", shortDesc: "산뜻하게 수분을 채우는 지성 전용 앰플", why: "끈적임 없이 수분만 공급해서 피지 분비를 조절합니다", risk: "수분이 부족하면 피부는 더 많은 피지를 분비합니다", url: "https://smartstore.naver.com/inspirationplus/products/11885924057", price: 78000, brand: "닥터랩" },
+        "P008": { name: "닥터랩 하이드라 더마 센텔라시카 솔루션", shortDesc: "예민한 피부 장벽을 회복하는 시카 앰플", why: "센텔라 성분이 손상된 피부 장벽을 빠르게 회복시킵니다", risk: "약해진 장벽을 방치하면 작은 자극에도 피부가 반응합니다", url: "https://smartstore.naver.com/inspirationplus/products/11883177810", price: 108000, brand: "닥터랩" },
+        "P009": { name: "닥터랩 하이드라15 히아루론산 솔루션", shortDesc: "건조한 피부에 깊은 수분을 채우는 앰플", why: "히알루론산이 피부 깊숙이 수분을 끌어당겨 채워줍니다", risk: "속건조를 방치하면 잔주름이 늘어나고 피부가 거칠어집니다", url: "https://smartstore.naver.com/inspirationplus/products/11871391330", price: 159000, brand: "닥터랩" },
+        "P014": { name: "닥터랩 레드 스팟 케어 크림", shortDesc: "예민한 트러블 피부를 보호하는 산뜻한 진정 크림", why: "진정 성분이 붉은 트러블을 빠르게 가라앉힙니다", risk: "트러블을 방치하면 자국이 남고 염증이 악화됩니다", url: "https://smartstore.naver.com/inspirationplus/products/11851186680", price: 58000, brand: "닥터랩" },
+        "P022": { name: "닥터랩 하이드라 더마 아줄렌 크림", shortDesc: "달아오른 피부를 식히는 쿨링 크림", why: "아줄렌 성분이 피부 열감을 낮추고 진정시킵니다", risk: "피부 열을 방치하면 홍조가 심해지고 노화가 빨라집니다", url: "https://smartstore.naver.com/inspirationplus/products/11759157595", price: 138000, brand: "닥터랩" },
+        "P027": { name: "닥터랩 액티브자임 페이셜 워시", shortDesc: "각질을 부드럽게 제거하는 저자극 효소 클렌저", why: "효소가 묵은 각질만 선택적으로 제거해 피부결을 매끈하게 합니다", risk: "과도한 각질 제거는 피부 장벽을 손상시킬 수 있습니다", url: "https://smartstore.naver.com/inspirationplus/products/11700673007", price: 65000, brand: "닥터랩" },
+        "P028": { name: "더매직 플루이드 3종 앰플 세트", shortDesc: "피부 상태에 맞춰 선택하는 3종 앰플 세트", why: "수분, 미백, 탄력 중 그날의 피부 상태에 맞춰 처방합니다", risk: "한 가지 케어만 하면 복합적인 피부 고민을 해결하기 어렵습니다", url: "https://smartstore.naver.com/inspirationplus/products/11622665954", price: 198000, brand: "더매직" },
+        "P033": { name: "레비덤 B3 브라이트닝 앰플", shortDesc: "피부톤을 균일하게 맞추는 브라이트닝 앰플", why: "나이아신아마이드가 잡티와 붉은기를 동시에 개선합니다", risk: "색소 침착을 방치하면 점점 진해지고 개선이 어려워집니다", url: "https://smartstore.naver.com/inspirationplus/products/11488199223", price: 100000, brand: "레비덤" },
+        "P035": { name: "닥터랩 하이드라 15 수딩 겔 크림", shortDesc: "열감을 낮추고 수분을 채우는 수분 젤", why: "산뜻한 젤 제형이 끈적임 없이 충분한 수분을 공급합니다", risk: "지성 피부에 무거운 크림을 쓰면 트러블이 악화됩니다", url: "https://smartstore.naver.com/inspirationplus/products/11447106045", price: 58000, brand: "닥터랩" },
+        "P045": { name: "닥터랩 바이오펩타 리바이탈라이징 크림", shortDesc: "지친 피부에 활력을 주는 영양 크림", why: "펩타이드 복합체가 피부에 영양을 공급하고 탄력을 개선합니다", risk: "영양 부족 피부는 탄력이 떨어지고 힘없이 처집니다", url: "https://smartstore.naver.com/inspirationplus/products/11277127484", price: 135000, brand: "닥터랩" },
+        "P046": { name: "닥터랩 하이드로-15 수딩 토너", shortDesc: "세안 후 첫 수분을 빠르게 채우는 토너", why: "세안으로 건조해진 피부에 즉각적인 수분을 공급합니다", risk: "세안 후 바로 보습하지 않으면 피부가 더 건조해집니다", url: "https://smartstore.naver.com/inspirationplus/products/11276504947", price: 56000, brand: "닥터랩" },
+        "P047": { name: "레비덤 퓨리파잉 젤 클렌저", shortDesc: "피지와 노폐물을 깨끗이 제거하는 젤 클렌저", why: "과도한 피지와 먼지를 깔끔하게 씻어내 모공을 청결하게 합니다", risk: "피지를 제대로 제거하지 않으면 모공이 막혀 트러블이 생깁니다", url: "https://smartstore.naver.com/inspirationplus/products/11190802305", price: 90000, brand: "레비덤" },
+        "P048": { name: "레비덤 젠틀 PH 밸런서 토너", shortDesc: "pH 균형을 맞춰주는 민감 전용 토너", why: "세안 후 흐트러진 pH를 정상화하여 피부 장벽을 보호합니다", risk: "pH 불균형이 지속되면 피부 장벽이 약해지고 예민해집니다", url: "https://smartstore.naver.com/inspirationplus/products/11183599896", price: 130000, brand: "레비덤" },
+        "P049": { name: "닥터랩 아줄렌 무스 클렌저", shortDesc: "민감 피부도 안심하는 부드러운 무스 클렌저", why: "풍성한 거품이 피부 자극 없이 부드럽게 세안합니다", risk: "자극적인 클렌저는 민감 피부를 더 예민하게 만듭니다", url: "https://smartstore.naver.com/inspirationplus/products/11270378001", price: 42000, brand: "닥터랩" },
+        "P051": { name: "레비덤 아하 클렌징 폼", shortDesc: "각질을 녹이는 AHA 클렌징 폼", why: "AHA 성분이 묵은 각질을 부드럽게 용해시켜 피부결을 개선합니다", risk: "각질이 쌓이면 피부가 칙칙해지고 화장품 흡수가 떨어집니다", url: "https://smartstore.naver.com/inspirationplus/products/11181876598", price: 100000, brand: "레비덤" },
+        "P052": { name: "레비덤 아하 토너", shortDesc: "피부 결을 매끈하게 정돈하는 AHA 토너", why: "AHA가 거친 피부 결을 부드럽게 정리해줍니다", risk: "거친 피부 결을 방치하면 화장이 들뜨고 칙칙해 보입니다", url: "https://smartstore.naver.com/inspirationplus/products/11181838027", price: 170000, brand: "레비덤" },
+        "P052b": { name: "닥터랩 하이드라 15 수딩앰플", shortDesc: "깊은 수분을 공급하는 히알루론산 앰플", why: "고농축 히알루론산이 피부 깊숙이 수분을 채워줍니다", risk: "건조를 방치하면 모든 케어 효과가 떨어집니다", url: "https://smartstore.naver.com/inspirationplus/products/11263517689", price: 90000, brand: "닥터랩" },
+        "P053": { name: "레비덤 퓨리파잉 토닉", shortDesc: "트러블 피부를 정화하는 토닉", why: "피부 속 노폐물을 배출하고 염증 환경을 개선합니다", risk: "노폐물이 쌓이면 트러블이 반복적으로 재발합니다", url: "https://smartstore.naver.com/inspirationplus/products/11181739040", price: 130000, brand: "레비덤" },
+        "P054": { name: "레비덤 ECM 리페어 컨센트레이트", shortDesc: "주름을 개선하는 집중 재생 세럼", why: "성장인자가 피부 재생을 촉진하고 깊은 주름을 완화합니다", risk: "주름 케어를 미루면 더 깊어지고 개선이 어려워집니다", url: "https://smartstore.naver.com/inspirationplus/products/11226243461", price: 290000, brand: "레비덤" },
+        "P060": { name: "레비덤 뉴로 센스티브 토너", shortDesc: "예민한 피부를 진정시키는 토너", why: "신경 펩타이드가 과민 반응을 줄이고 피부를 안정시킵니다", risk: "민감도를 방치하면 모든 제품이 자극으로 느껴집니다", url: "https://smartstore.naver.com/inspirationplus/products/11136318316", price: 100000, brand: "레비덤" },
+        "P076": { name: "레비덤 프로 마이크로 바이옴 오일리 스킨", shortDesc: "지성 피부의 유수분 밸런스를 맞추는 크림", why: "피부 미생물 환경을 개선하여 과도한 피지 분비를 조절합니다", risk: "유수분 불균형이 지속되면 트러블이 반복됩니다", url: "https://smartstore.naver.com/inspirationplus/products/11177823220", price: 170000, brand: "레비덤" },
+        "P079": { name: "레비덤 프로 마이크로 바이오옴 드라이 스킨", shortDesc: "건성 피부의 보습력을 높이는 토너", why: "피부 미생물 환경을 최적화하여 수분 보유력을 높입니다", risk: "미생물 균형이 깨지면 건조가 심해집니다", url: "https://smartstore.naver.com/inspirationplus/products/11177653465", price: 170000, brand: "레비덤" },
+        "P104": { name: "레비덤 뉴로 센스티브 더블 디스트레스 세럼", shortDesc: "민감 피부를 2단계로 집중 케어하는 세럼", why: "데이&나이트 2단계 케어로 민감도를 근본적으로 개선합니다", risk: "민감 피부를 단계적으로 케어하지 않으면 만성화됩니다", url: "https://smartstore.naver.com/inspirationplus/products/11127945487", price: 180000, brand: "레비덤" }
+    };
+
+    const routineData = {
+        "OSPT": { cleansing: "P049", toner: "P048", serum: "P033", cream: "P022" },
+        "OSNT": { cleansing: "P047", toner: "P053", serum: "P007", cream: "P076" },
+        "OSPW": { cleansing: "P049", toner: "P060", serum: "P033", cream: "P022" },
+        "OSNW": { cleansing: "P047", toner: "P060", serum: "P001", cream: "P014" },
+        "ORPT": { cleansing: "P051", toner: "P052", serum: "P033", cream: "P076" },
+        "ORNT": { cleansing: "P047", toner: "P053", serum: "P007", cream: "P076" },
+        "ORPW": { cleansing: "P051", toner: "P052", serum: "P001", cream: "P045" },
+        "ORNW": { cleansing: "P047", toner: "P053", serum: "P001", cream: "P045" },
+        "DSPT": { cleansing: "P049", toner: "P046", serum: "P104", cream: "P035" },
+        "DSNT": { cleansing: "P049", toner: "P046", serum: "P104", cream: "P035" },
+        "DSPW": { cleansing: "P049", toner: "P046", serum: "P028", cream: "P035" },
+        "DSNW": { cleansing: "P049", toner: "P046", serum: "P104", cream: "P035" },
+        "DRPT": { cleansing: "P027", toner: "P079", serum: "P028", cream: "P035" },
+        "DRNT": { cleansing: "P027", toner: "P079", serum: "P052b", cream: "P035" },
+        "DRPW": { cleansing: "P027", toner: "P079", serum: "P028", cream: "P035" },
+        "DRNW": { cleansing: "P027", toner: "P079", serum: "P054", cream: "P035" }
+    };
+
+    const routinePriority = {
+        "OSPT": { cleansing: 5, toner: 4, serum: 5, cream: 4 },
+        "OSNT": { cleansing: 5, toner: 4, serum: 3, cream: 5 },
+        "OSPW": { cleansing: 5, toner: 4, serum: 4, cream: 4 },
+        "OSNW": { cleansing: 5, toner: 4, serum: 5, cream: 4 },
+        "ORPT": { cleansing: 5, toner: 4, serum: 5, cream: 3 },
+        "ORNT": { cleansing: 5, toner: 3, serum: 3, cream: 4 },
+        "ORPW": { cleansing: 4, toner: 3, serum: 5, cream: 5 },
+        "ORNW": { cleansing: 5, toner: 3, serum: 5, cream: 5 },
+        "DSPT": { cleansing: 5, toner: 4, serum: 5, cream: 4 },
+        "DSNT": { cleansing: 5, toner: 4, serum: 5, cream: 4 },
+        "DSPW": { cleansing: 5, toner: 4, serum: 5, cream: 4 },
+        "DSNW": { cleansing: 5, toner: 4, serum: 5, cream: 4 },
+        "DRPT": { cleansing: 4, toner: 5, serum: 4, cream: 4 },
+        "DRNT": { cleansing: 4, toner: 5, serum: 5, cream: 4 },
+        "DRPW": { cleansing: 4, toner: 5, serum: 5, cream: 4 },
+        "DRNW": { cleansing: 4, toner: 5, serum: 5, cream: 4 }
+    };
+
+    const ageStrategy = {
+        '10s': { doctorLabRatio: 4, revidermRatio: 0, description: '가성비 중심 - 100% 닥터랩', budgetRange: '20~25만원' },
+        '20s': { doctorLabRatio: 3, revidermRatio: 1, description: '균형잡힌 시작 - 핵심만 레비덤', budgetRange: '25~30만원' },
+        '30s': { doctorLabRatio: 2, revidermRatio: 2, description: '균형 조합 - 효과 중심', budgetRange: '30~40만원' },
+        '40s': { doctorLabRatio: 1, revidermRatio: 3, description: '안티에이징 집중', budgetRange: '50~60만원' },
+        '50s': { doctorLabRatio: 0, revidermRatio: 4, description: '프리미엄 케어 - 100% 레비덤', budgetRange: '70~80만원' },
+        '60s': { doctorLabRatio: 0, revidermRatio: 4, description: '최고급 라인 - 집중 재생', budgetRange: '80~90만원' }
+    };
+
+    let userProfile = { age: null, gender: null, skinType: null };
     let currentQ = 0;
     let scores = { step1: 0, step2: 0, step3: 0, step4: 0 };
     let rawScores = { oil: 0, sensitive: 0, pigment: 0, wrinkle: 0 };
 
+    function selectAge(age) {
+        userProfile.age = age;
+        document.querySelectorAll('.age-btn').forEach(btn => btn.classList.remove('selected'));
+        event.target.closest('.age-btn').classList.add('selected');
+        checkProfileComplete();
+    }
+
+    function selectGender(gender) {
+        userProfile.gender = gender;
+        document.querySelectorAll('.gender-btn').forEach(btn => btn.classList.remove('selected'));
+        event.target.closest('.gender-btn').classList.add('selected');
+        checkProfileComplete();
+    }
+
+    function checkProfileComplete() {
+        const startBtn = document.getElementById('profileStartBtn');
+        if (userProfile.age && userProfile.gender) {
+            startBtn.disabled = false;
+        } else {
+            startBtn.disabled = true;
+        }
+    }
+
     function startDiagnosis() {
         document.getElementById('introScreen').classList.remove('active');
         document.getElementById('profileScreen').classList.add('active');
+    }
+
+    function startQuizFromProfile() {
+        if (!userProfile.age || !userProfile.gender) {
+            alert('나이대와 성별을 모두 선택해주세요!');
+            return;
+        }
+        document.getElementById('profileScreen').classList.remove('active');
+        document.getElementById('quizScreen').classList.add('active');
+        document.getElementById('progressBar').style.width = '0%';
+        showQuestion();
     }
 
     function showQuestion() {
@@ -2986,6 +1126,10 @@ function getPriorityExplanation(priority, stepName) {
         const type4 = scores.step4 >= 14 ? 'W' : 'T';
         
         const finalType = type1 + type2 + type3 + type4;
+        
+        // ★ [핵심] 여기서 구글 시트로 데이터 전송!
+        sendDataToSheet(finalType);
+
         const result = resultData[finalType];
 
         document.getElementById('resultCode').innerText = finalType;
@@ -3012,22 +1156,18 @@ function getPriorityExplanation(priority, stepName) {
     function drawRadarChart(type) {
         const svg = document.getElementById('radarChart');
         const centerX = 150, centerY = 130, radius = 90;
-
         const maxScores = { oil: 24, hydration: 24, sensitive: 32, pigment: 20, elastic: 20, barrier: 32 };
-        
         const oilScore = (rawScores.oil / maxScores.oil) * 100;
         const hydrationScore = 100 - oilScore; 
         const sensitiveScore = (rawScores.sensitive / maxScores.sensitive) * 100;
         const pigmentScore = (rawScores.pigment / maxScores.pigment) * 100;
         const elasticScore = 100 - ((rawScores.wrinkle / maxScores.elastic) * 100);
         const barrierScore = 100 - sensitiveScore; 
-
         const chartScores = [oilScore, hydrationScore, sensitiveScore, pigmentScore, elasticScore, barrierScore];
         const labels = ['유분', '수분', '민감', '색소', '탄력', '장벽'];
         const colors = ['#FFB74D', '#4FC3F7', '#F48FB1', '#BA68C8', '#81C784', '#90A4AE'];
 
         let svgContent = '';
-
         for(let level = 1; level <= 4; level++) {
             const r = radius * (level / 4);
             let points = [];
@@ -3039,14 +1179,12 @@ function getPriorityExplanation(priority, stepName) {
             }
             svgContent += `<polygon points="${points.join(' ')}" fill="none" stroke="#ddd" stroke-width="1"/>`;
         }
-
         for(let i = 0; i < 6; i++) {
             const angle = (Math.PI / 3) * i - Math.PI / 2;
             const x = centerX + radius * Math.cos(angle);
             const y = centerY + radius * Math.sin(angle);
             svgContent += `<line x1="${centerX}" y1="${centerY}" x2="${x}" y2="${y}" stroke="#ddd" stroke-width="1"/>`;
         }
-
         let dataPoints = [];
         for(let i = 0; i < 6; i++) {
             const angle = (Math.PI / 3) * i - Math.PI / 2;
@@ -3056,7 +1194,6 @@ function getPriorityExplanation(priority, stepName) {
             dataPoints.push(`${x},${y}`);
         }
         svgContent += `<polygon points="${dataPoints.join(' ')}" fill="rgba(212, 175, 55, 0.3)" stroke="#D4AF37" stroke-width="2"/>`;
-
         for(let i = 0; i < 6; i++) {
             const angle = (Math.PI / 3) * i - Math.PI / 2;
             const r = radius * (chartScores[i] / 100);
@@ -3064,30 +1201,19 @@ function getPriorityExplanation(priority, stepName) {
             const y = centerY + r * Math.sin(angle);
             svgContent += `<circle cx="${x}" cy="${y}" r="5" fill="${colors[i]}" stroke="#fff" stroke-width="2"/>`;
         }
-
         for(let i = 0; i < 6; i++) {
             const angle = (Math.PI / 3) * i - Math.PI / 2;
             const x = centerX + (radius + 25) * Math.cos(angle);
             const y = centerY + (radius + 25) * Math.sin(angle);
             svgContent += `<text x="${x}" y="${y}" text-anchor="middle" dominant-baseline="middle" font-size="12" font-weight="600" fill="#333">${labels[i]}</text>`;
         }
-
         svg.innerHTML = svgContent;
-
-        window.chartScores = {
-            oil: oilScore,
-            hydration: hydrationScore,
-            sensitive: sensitiveScore,
-            pigment: pigmentScore,
-            elastic: elasticScore,
-            barrier: barrierScore
-        };
+        window.chartScores = { oil: oilScore, hydration: hydrationScore, sensitive: sensitiveScore, pigment: pigmentScore, elastic: elasticScore, barrier: barrierScore };
     }
 
     function createMetricCards(type) {
         const grid = document.getElementById('metricsGrid');
         const scores = window.chartScores;
-        
         const metrics = [
             { key: 'oil', score: scores.oil },
             { key: 'hydration', score: scores.hydration },
@@ -3096,12 +1222,10 @@ function getPriorityExplanation(priority, stepName) {
             { key: 'elastic', score: scores.elastic },
             { key: 'barrier', score: scores.barrier }
         ];
-
         let html = '';
         metrics.forEach(m => {
             const info = metricInfo[m.key];
             let status, statusClass, tip;
-            
             if(m.key === 'oil' || m.key === 'sensitive' || m.key === 'pigment') {
                 if(m.score >= 70) { status = info.high; statusClass = 'high'; tip = info.highTip; }
                 else if(m.score >= 40) { status = info.medium; statusClass = 'medium'; tip = info.mediumTip; }
@@ -3111,114 +1235,178 @@ function getPriorityExplanation(priority, stepName) {
                 else if(m.score >= 40) { status = info.medium; statusClass = 'medium'; tip = info.mediumTip; }
                 else { status = info.low; statusClass = 'high'; tip = info.lowTip; }
             }
-
-            html += `
-                <div class="metric-card ${m.key}">
-                    <div class="metric-name">${info.name}</div>
-                    <div class="metric-score">${Math.round(m.score)}점</div>
-                    <span class="metric-status ${statusClass}">${status}</span>
-                    <div class="metric-tip">${tip}</div>
-                </div>
-            `;
+            html += `<div class="metric-card ${m.key}"><div class="metric-name">${info.name}</div><div class="metric-score">${Math.round(m.score)}점</div><span class="metric-status ${statusClass}">${status}</span><div class="metric-tip">${tip}</div></div>`;
         });
-
         grid.innerHTML = html;
     }
 
-    // [기능 1] 수정된 텍스트 상세 복사 기능
+    function renderRoutineSection(skinType) {
+        const adjustedRoutine = getAgeAdjustedRoutine(skinType, userProfile.age, userProfile.gender);
+        const priority = routinePriority[skinType];
+        const ageDesc = getAgeDescription(userProfile.age, userProfile.gender);
+        
+        if (!adjustedRoutine || !priority) return;
+
+        const routineHTML = `
+            <div class="routine-section">
+                <div class="routine-header">
+                    <div class="age-badge-container">
+                        <span class="age-badge">${ageDesc.title}</span>
+                        <span class="age-subtitle">${ageDesc.subtitle}</span>
+                    </div>
+                    
+                    <h3 class="routine-title">💎 맞춤 4단계 루틴</h3>
+                    <p class="routine-subtitle">피부샵 전문가가 추천하는 필수 조합</p>
+                    <p class="routine-budget">${ageDesc.budgetInfo}</p>
+                    
+                    <div class="coupon-info-box">
+                        🎁 <strong>스마트스토어 '알림받기'</strong> 하면<br>
+                        <strong class="coupon-highlight">10% 쿠폰 즉시 발급!</strong><br>
+                        <span class="coupon-sub">매달 추가 쿠폰도 랜덤 지급 중이에요 🎉</span>
+                    </div>
+                </div>
+                
+                ${generateRoutineCard('클렌징', adjustedRoutine.cleansing, priority.cleansing, 1, skinType)}
+                ${generateRoutineCard('토너', adjustedRoutine.toner, priority.toner, 2, skinType)}
+                ${generateRoutineCard('세럼/앰플', adjustedRoutine.serum, priority.serum, 3, skinType)}
+                ${generateRoutineCard('크림/로션', adjustedRoutine.cream, priority.cream, 4, skinType)}
+                
+                <div class="routine-summary">
+                    <p class="routine-note">💡 <strong>TIP:</strong> 위 4단계를 기본으로 하고, 자외선 차단제를 마지막에 바르세요!</p>
+                    <p class="routine-note">💰 <strong>예산 부족?</strong> 별점 5개(⭐⭐⭐⭐⭐) 제품부터 우선 구매하세요!</p>
+                    <p class="routine-note">🎯 <strong>${ageDesc.title}</strong>에게 최적화된 가성비 조합이에요!</p>
+                </div>
+            </div>
+        `;
+
+        const shopSection = document.querySelector('.shop-section');
+        shopSection.insertAdjacentHTML('beforebegin', routineHTML);
+
+        document.querySelectorAll('.routine-detail-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const detailContent = this.nextElementSibling;
+                const isOpen = detailContent.style.display === 'block';
+                detailContent.style.display = isOpen ? 'none' : 'block';
+                this.textContent = isOpen ? '더 알아보기 ▼' : '접기 ▲';
+            });
+        });
+    }
+
+    function generateRoutineCard(stepName, productId, priorityScore, stepNumber, skinType) {
+        const product = productData[productId];
+        if (!product) return '';
+        const priceFormatted = product.price.toLocaleString();
+        const brandBadgeClass = product.brand === '닥터랩' ? 'brand-doctorlab' : 'brand-reviderm';
+        const stars = renderStars(priorityScore);
+        const priorityLabel = getPriorityLabel(priorityScore);
+        const priorityClass = priorityScore === 5 ? 'priority-must' : priorityScore === 4 ? 'priority-high' : 'priority-normal';
+        const priorityExplanation = getPriorityExplanation(priorityScore, stepName);
+
+        return `
+            <div class="routine-card ${priorityClass}">
+                <div class="routine-card-header">
+                    <div class="step-info"><span class="step-number">STEP ${stepNumber}</span><h4 class="step-name">${stepName}</h4></div>
+                    <div class="header-right"><span class="priority-badge ${priorityClass}">${priorityLabel}</span><span class="brand-badge ${brandBadgeClass}">${product.brand}</span></div>
+                </div>
+                <div class="priority-stars"><span class="stars">${stars}</span><span class="priority-text">${priorityExplanation}</span></div>
+                <div class="product-basic-info"><p class="product-name">${product.name}</p><p class="product-short-desc">${product.shortDesc}</p><p class="product-price">${priceFormatted}원</p></div>
+                <button class="routine-detail-btn">더 알아보기 ▼</button>
+                <div class="routine-detail-content" style="display:none;">
+                    <div class="detail-block"><p class="detail-label">📌 왜 필요한가요?</p><p class="detail-text">${product.why}</p></div>
+                    <div class="detail-block"><p class="detail-label">⚠️ 안 쓰면 어떻게 되나요?</p><p class="detail-text">${product.risk}</p></div>
+                    <a href="${product.url}" target="_blank" class="product-buy-btn">제품 보러 가기 →</a>
+                </div>
+            </div>
+        `;
+    }
+
+    function getAgeAdjustedRoutine(skinType, age, gender) {
+        const baseRoutine = routineData[skinType];
+        const ageProductMapping = {
+            'P049': { '10s': 'P049', '20s': 'P049', '30s': 'P049', '40s': 'P049', '50s': 'P049', '60s': 'P049' },
+            'P047': { '10s': 'P049', '20s': 'P047', '30s': 'P047', '40s': 'P047', '50s': 'P051', '60s': 'P051' },
+            'P027': { '10s': 'P027', '20s': 'P027', '30s': 'P027', '40s': 'P027', '50s': 'P051', '60s': 'P051' },
+            'P051': { '10s': 'P027', '20s': 'P027', '30s': 'P051', '40s': 'P051', '50s': 'P051', '60s': 'P051' },
+            'P046': { '10s': 'P046', '20s': 'P046', '30s': 'P046', '40s': 'P060', '50s': 'P060', '60s': 'P060' },
+            'P053': { '10s': 'P046', '20s': 'P053', '30s': 'P053', '40s': 'P053', '50s': 'P053', '60s': 'P060' },
+            'P079': { '10s': 'P046', '20s': 'P046', '30s': 'P079', '40s': 'P079', '50s': 'P079', '60s': 'P079' },
+            'P048': { '10s': 'P046', '20s': 'P048', '30s': 'P048', '40s': 'P048', '50s': 'P060', '60s': 'P060' },
+            'P052': { '10s': 'P046', '20s': 'P046', '30s': 'P052', '40s': 'P052', '50s': 'P052', '60s': 'P052' },
+            'P060': { '10s': 'P046', '20s': 'P046', '30s': 'P060', '40s': 'P060', '50s': 'P060', '60s': 'P060' },
+            'P033': { '10s': 'P007', '20s': 'P033', '30s': 'P033', '40s': 'P033', '50s': 'P033', '60s': 'P033' },
+            'P104': { '10s': 'P009', '20s': 'P104', '30s': 'P104', '40s': 'P104', '50s': 'P104', '60s': 'P104' },
+            'P028': { '10s': 'P009', '20s': 'P028', '30s': 'P028', '40s': 'P028', '50s': 'P028', '60s': 'P028' },
+            'P001': { '10s': 'P001', '20s': 'P001', '30s': 'P001', '40s': 'P001', '50s': 'P001', '60s': 'P054' },
+            'P054': { '10s': 'P001', '20s': 'P001', '30s': 'P054', '40s': 'P054', '50s': 'P054', '60s': 'P054' },
+            'P007': { '10s': 'P007', '20s': 'P007', '30s': 'P007', '40s': 'P033', '50s': 'P033', '60s': 'P033' },
+            'P052b': { '10s': 'P052b', '20s': 'P052b', '30s': 'P052b', '40s': 'P052b', '50s': 'P104', '60s': 'P104' },
+            'P035': { '10s': 'P035', '20s': 'P035', '30s': 'P035', '40s': 'P035', '50s': 'P045', '60s': 'P045' },
+            'P022': { '10s': 'P022', '20s': 'P022', '30s': 'P022', '40s': 'P045', '50s': 'P045', '60s': 'P045' },
+            'P076': { '10s': 'P035', '20s': 'P076', '30s': 'P076', '40s': 'P076', '50s': 'P076', '60s': 'P076' },
+            'P045': { '10s': 'P045', '20s': 'P045', '30s': 'P045', '40s': 'P045', '50s': 'P045', '60s': 'P045' },
+            'P014': { '10s': 'P014', '20s': 'P014', '30s': 'P014', '40s': 'P014', '50s': 'P045', '60s': 'P045' }
+        };
+        const adjustedRoutine = {};
+        for (let step in baseRoutine) {
+            const originalProduct = baseRoutine[step];
+            const mapping = ageProductMapping[originalProduct];
+            if (mapping && mapping[age]) { adjustedRoutine[step] = mapping[age]; }
+            else { adjustedRoutine[step] = originalProduct; }
+        }
+        return adjustedRoutine;
+    }
+
+    function getAgeDescription(age, gender) {
+        const ageText = { '10s': '10대', '20s': '20대', '30s': '30대', '40s': '40대', '50s': '50대', '60s': '60대 이상' }[age];
+        const genderText = gender === 'male' ? '남성' : '여성';
+        const strategy = ageStrategy[age];
+        return { title: `${ageText} ${genderText}을 위한 맞춤 루틴`, subtitle: strategy.description, budgetInfo: `예상 금액: ${strategy.budgetRange}` };
+    }
+
+    function renderStars(priority) {
+        const filledStar = '⭐'; const emptyStar = '☆'; let stars = '';
+        for (let i = 1; i <= 5; i++) { stars += i <= priority ? filledStar : emptyStar; }
+        return stars;
+    }
+
+    function getPriorityLabel(priority) { return priority === 5 ? '필수' : priority === 4 ? '권장' : '추천'; }
+
+    function getPriorityExplanation(priority, stepName) {
+        const explanations = {
+            5: { cleansing: '이 클렌저 없이는 피부 관리를 시작할 수 없어요', toner: '이 토너가 모든 케어의 기초를 다져줘요', serum: '이 세럼이 고민 해결의 핵심이에요', cream: '이 크림 없이는 수분이 다 날아가요' },
+            4: { cleansing: '더 나은 결과를 위해 꼭 사용하세요', toner: '효과를 극대화하려면 필요해요', serum: '이 세럼이 있으면 효과가 2배예요', cream: '지속력을 높이려면 필수예요' },
+            3: { cleansing: '예산이 된다면 추천드려요', toner: '있으면 더 좋지만 필수는 아니에요', serum: '여유가 있다면 추가해보세요', cream: '기본 케어가 완성되면 추가하세요' }
+        };
+        const step = stepName.includes('클렌징') ? 'cleansing' : stepName.includes('토너') ? 'toner' : stepName.includes('세럼') || stepName.includes('앰플') ? 'serum' : 'cream';
+        return explanations[priority][step];
+    }
+
     function copyResultDetails() {
         const code = document.getElementById('resultCode').innerText;
         const name = document.getElementById('resultName').innerText;
         const desc = document.getElementById('resultDesc').innerText;
         const care = document.getElementById('resultCare').innerText;
-        
-        // 1. 제품 링크 (버튼에서 가져오기)
         const productLink = document.getElementById('shopLink').href;
-        
-        // 2. 진단 페이지 링크 (짧은 URL 고정)
-        const diagnosisLink = "https://white-miner.github.io/whiteminer-skincare/";
-
-        const text = `[하얀광부 피부 갱도 진단 결과]
-━━━━━━━━━━━━━━━━
-🔬 타입: ${code}
-👤 별명: ${name}
-━━━━━━━━━━━━━━━━
-📊 분석:
-${desc}
-
-💊 처방:
-${care}
-
-👉 내 피부 전용 제품 보기:
-${productLink}
-
-🔍 내 피부 타입 진단하기:
-${diagnosisLink}
-━━━━━━━━━━━━━━━━
-*하얀광부와 함께 피부 금맥을 찾아보세요!*`;
-        
-        navigator.clipboard.writeText(text).then(() => {
-            alert('상세 진단 결과가 복사되었습니다! \n카카오톡이나 메모장에 붙여넣으세요.');
-        }).catch(err => {
-            alert('복사에 실패했습니다.');
-        });
+        const diagnosisLink = window.location.href;
+        const text = `[하얀광부 피부 갱도 진단 결과]\n━━━━━━━━━━━━━━━━\n🔬 타입: ${code}\n👤 별명: ${name}\n━━━━━━━━━━━━━━━━\n📊 분석:\n${desc}\n\n💊 처방:\n${care}\n\n👉 내 피부 전용 제품 보기:\n${productLink}\n\n🔍 내 피부 타입 진단하기:\n${diagnosisLink}\n━━━━━━━━━━━━━━━━\n*하얀광부와 함께 피부 금맥을 찾아보세요!*`;
+        navigator.clipboard.writeText(text).then(() => { alert('상세 진단 결과가 복사되었습니다! \n카카오톡이나 메모장에 붙여넣으세요.'); }).catch(err => { alert('복사에 실패했습니다.'); });
     }
 
-    // [기능 2] 이미지 저장 기능
     function saveAsImage() {
-        // 캡처 영역 선택
         const captureElement = document.getElementById('captureArea');
-        
-        // 사용자에게 안내
         const originalText = document.querySelector('.save-img-btn').innerText;
         document.querySelector('.save-img-btn').innerText = "📸 이미지 생성 중...";
-
-        html2canvas(captureElement, { 
-            scale: 2, 
-            backgroundColor: "#FFFFFF",
-            useCORS: true,
-            allowTaint: true
-        }).then(canvas => {
-            // 모바일 대응: Blob URL 방식 사용
-            canvas.toBlob(function(blob) {
-                // iOS Safari 대응
-                if (navigator.share && /iPhone|iPad|iPod/.test(navigator.userAgent)) {
-                    // iOS에서는 Web Share API 사용
-                    const file = new File([blob], '하얀광부_피부진단_' + document.getElementById('resultCode').innerText + '.png', { type: 'image/png' });
-                    
-                    navigator.share({
-                        files: [file],
-                        title: '하얀광부 피부진단 결과',
-                        text: '내 피부타입 진단 결과입니다'
-                    }).then(() => {
-                        document.querySelector('.save-img-btn').innerText = originalText;
-                        alert("이미지 공유가 완료되었습니다!\n사진 앱에서 저장하세요.");
-                    }).catch(err => {
-                        // 공유 실패 시 다운로드 시도
-                        fallbackDownload(blob, originalText);
-                    });
-                } else {
-                    // 일반 다운로드 (PC, Android)
-                    fallbackDownload(blob, originalText);
-                }
-            }, 'image/png');
+        html2canvas(captureElement, { scale: 2, backgroundColor: "#FFFFFF" }).then(canvas => {
+            const link = document.createElement('a');
+            link.download = '하얀광부_피부진단_' + document.getElementById('resultCode').innerText + '.png';
+            link.href = canvas.toDataURL();
+            link.click();
+            document.querySelector('.save-img-btn').innerText = originalText;
+            alert("이미지가 저장되었습니다!");
         }).catch(err => {
-            alert("이미지 생성에 실패했습니다.");
+            alert("이미지 저장에 실패했습니다.");
             document.querySelector('.save-img-btn').innerText = originalText;
         });
-    }
-    
-    // 폴백 다운로드 함수
-    function fallbackDownload(blob, originalText) {
-        const url = URL.createObjectURL(blob);
-        const link = document.createElement('a');
-        link.download = '하얀광부_피부진단_' + document.getElementById('resultCode').innerText + '.png';
-        link.href = url;
-        link.click();
-        URL.revokeObjectURL(url);
-        
-        document.querySelector('.save-img-btn').innerText = originalText;
-        alert("이미지가 다운로드되었습니다!\n다운로드 폴더를 확인하세요.");
     }
 </script>
 

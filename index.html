@@ -314,6 +314,19 @@
         .option-btn:hover { border-color: var(--gold-main); background: #FFFCF2; transform: translateX(5px); }
         .option-btn:active { transform: scale(0.98); }
 
+        /* 질문 안내글 스타일 */
+        .question-help {
+            margin-top: 16px;
+            font-size: 0.85rem;
+            color: var(--text-main);
+            line-height: 1.6;
+            white-space: normal;
+        }
+        .question-help .highlight-red {
+            color: var(--alert-red);
+            font-weight: 700;
+        }
+
         /* 프로필 화면 스타일 */
         .profile-container { display: flex; flex-direction: column; gap: 24px; padding: 0; }
         .profile-hero { text-align: center; padding: 32px 0 24px; }
@@ -605,6 +618,8 @@
         <div class="question-number" id="questionNumber">Q1 / 24</div>
         <div class="question-text" id="questionText">질문 내용이 여기에 표시됩니다.</div>
         <div id="optionsArea"></div>
+        <!-- 각 질문별 안내글을 표시할 영역 -->
+        <div id="questionHelp" class="question-help"></div>
     </div>
 
     <div id="resultScreen" class="screen">
@@ -639,6 +654,37 @@
             <div class="result-card">
                 <div class="card-title">🚫 이건 피하세요</div>
                 <div class="avoid-tags" id="avoidTags">
+                </div>
+            </div>
+
+            <!-- ===============================
+            🪨 하얀광부 피부고민 광산
+            1:1 상담 & 리뷰 이벤트 CTA
+            (결과 진단 페이지 전용)
+            =============================== -->
+            <div class="result-card prescription-card">
+                <div class="card-title">🪨 하얀광부 피부고민 광산</div>
+                <div class="card-desc">
+                    지금 진단 결과를 보면,<br>
+                    관리가 부족한 게 아니라 <b>방향이 없었던 것</b>에 가깝습니다.<br><br>
+
+                    이 타입은 혼자 판단할수록<br>
+                    제품 선택이 더 꼬이기 쉬워요.
+                </div>
+                <div style="margin-top:16px;">
+                    <a href="https://open.kakao.com/o/sXq5Kzbi"
+                       target="_blank"
+                       rel="noopener noreferrer"
+                       class="shop-link-btn"
+                       style="background: linear-gradient(135deg, #FEE500 0%, #F5D400 100%);
+                              color:#3C1E1E;
+                              box-shadow:0 6px 18px rgba(0,0,0,0.18);">
+                        💬 1:1 피부고민 상담 입장하기
+                    </a>
+                    <div class="shop-benefit" style="margin-top:10px;">
+                        <span>✔ 진단 결과 기반 상담</span>
+                        <span>✔ 리뷰 이벤트 참여 가능</span>
+                    </div>
                 </div>
             </div>
 
@@ -919,6 +965,34 @@
         { q: "부모님이 실제 나이보다 젊어 보이시나요?", a: [{t:"나이보다 많아 보여요", s:4}, {t:"나이대로 보여요", s:3}, {t:"젊어 보여요", s:2}, {t:"많이 젊어 보여요", s:1}] }
     ];
 
+    // 각 질문에 대한 간단한 안내글 (질문 순서와 동일하게 24개 배열)
+    const questionHelps = [
+        `세안 후 2시간 동안 자연스럽게 분비되는 <span class='highlight-red'>유분</span>을 확인하면 피부의 <span class='highlight-red'>지성</span>·<span class='highlight-red'>건성</span> 여부를 판단할 수 있습니다. 유분이 빠르게 올라오면 피지가 많고, 당김이나 거침이 느껴지면 건조하다는 신호입니다.`,
+        `아침 베개에 묻어나는 <span class='highlight-red'>유분</span>은 밤새 분비된 피지량을 알려줍니다. 많이 묻어나면 지성이며, 거의 없다면 건성에 가까워요.`,
+        `화장 후 유분이 올라오는 시간은 <span class='highlight-red'>피지 분비 속도</span>를 보여줍니다. 짧을수록 기름기가 많고, 길수록 건조하거나 균형 잡힌 상태입니다.`,
+        `<span class='highlight-red'>모공</span>은 피지선과 연결되어 있어요. 크고 눈에 띄면 피지 분비가 많은 지성이며, 작고 잘 보이지 않으면 건조하거나 균형 잡힌 피부랍니다.`,
+        `<span class='highlight-red'>블랙헤드</span>나 <span class='highlight-red'>화이트헤드</span>는 과잉 <span class='highlight-red'>피지</span>와 각질이 모공을 막아 생깁니다. 많을수록 지성 피부 가능성이 높습니다.`,
+        `일어나는 <span class='highlight-red'>각질</span>은 피부가 <span class='highlight-red'>건조</span>하거나 장벽이 약해졌다는 신호예요. 자주 일어나면 보습과 장벽 강화가 필요합니다.`,
+        `새로운 화장품에 <span class='highlight-red'>트러블</span>이나 <span class='highlight-red'>붉어짐</span>이 쉽게 나타나면 피부가 민감하다는 뜻입니다. 장벽이 약해 외부 자극에 반응하는 거죠.`,
+        `자주 나는 <span class='highlight-red'>여드름</span>과 <span class='highlight-red'>뾰루지</span>는 염증 반응이 높고 <span class='highlight-red'>민감</span>한 피부의 특징입니다. 피지와 세균, 호르몬이 복합적으로 작용해요.`,
+        `운동이나 온도 변화에 얼굴이 쉽게 <span class='highlight-red'>붉어지면</span> 혈관 반응성이 높고 <span class='highlight-red'>민감</span>도가 높은 피부일 수 있습니다.`,
+        `따끔거리거나 <span class='highlight-red'>화끈거림</span>은 신경 말단이 쉽게 자극되는 <span class='highlight-red'>민감성</span> 피부의 특징이에요. 장벽을 강화하고 자극을 줄여야 합니다.`,
+        `<span class='highlight-red'>여드름</span>·<span class='highlight-red'>아토피</span>·<span class='highlight-red'>로사시아</span> 등 피부과 진단은 피부가 염증에 취약한 <span class='highlight-red'>민감성</span>이라는 증거예요.`,
+        `직계 가족 중 <span class='highlight-red'>민감성 피부</span>나 <span class='highlight-red'>알레르기</span>가 있다면 유전적 요인으로 민감도가 높을 수 있습니다.`,
+        `환절기마다 <span class='highlight-red'>트러블</span>이 심해지는 것은 환경 변화에 쉽게 반응하는 <span class='highlight-red'>민감</span> 피부임을 보여줍니다. 온도와 습도 변화가 영향을 줍니다.`,
+        `빈번한 <span class='highlight-red'>가려움증</span>은 피부가 건조하거나 염증 반응이 많은 <span class='highlight-red'>민감성</span>일 가능성이 높습니다.`,
+        `<span class='highlight-red'>기미</span>·<span class='highlight-red'>주근깨</span>·<span class='highlight-red'>잡티</span>는 멜라닌 생성이 활발해지거나 자외선·염증 후 색소가 남는 현상입니다.`,
+        `상처나 여드름 자국이 오래 남는다면 <span class='highlight-red'>색소침착</span> 경향이 강한 피부라는 뜻이에요. 염증 후 과다한 <span class='highlight-red'>멜라닌</span>이 쌓이는 것입니다.`,
+        `햇볕에 타는 반응은 피부의 <span class='highlight-red'>멜라닌</span> 생성 능력을 보여줍니다. 쉽게 <span class='highlight-red'>검게</span> 그을리거나 <span class='highlight-red'>붉어지는</span> 타입을 파악해 자외선 관리 방향을 정합니다.`,
+        `부모님이 <span class='highlight-red'>기미</span>·<span class='highlight-red'>주근깨</span>가 있다면 색소침착에 대한 <span class='highlight-red'>유전적</span> 경향을 나타낼 수 있습니다.`,
+        `임신, 피임약 등 <span class='highlight-red'>호르몬 변화</span>로 색소가 나타났다면 <span class='highlight-red'>멜라스마</span> 등 호르몬성 잡티에 민감한 피부입니다.`,
+        `이마와 눈가의 <span class='highlight-red'>주름</span>은 피부의 <span class='highlight-red'>콜라겐</span>과 엘라스틴 감소를 보여주며, 탄력 저하의 지표입니다.`,
+        `주변이 말하는 나이 대비 인상은 피부의 탄력과 <span class='highlight-red'>주름</span> 정도를 반영합니다. 더 많아 보이면 탄력 관리가 필요합니다.`,
+        `꾸준한 <span class='highlight-red'>자외선 차단</span>은 광노화를 예방하는 핵심입니다. 자주 쓰지 않으면 <span class='highlight-red'>주름</span>과 잡티가 빨리 생길 수 있어요.`,
+        `장기 <span class='highlight-red'>흡연</span>은 자유 라디칼을 증가시켜 <span class='highlight-red'>콜라겐</span>과 엘라스틴을 파괴하여 주름을 가속합니다.`,
+        `부모님의 피부가 실제보다 <span class='highlight-red'>젊어</span> 또는 <span class='highlight-red'>많아</span> 보이는지는 <span class='highlight-red'>노화</span>에 대한 유전적 경향을 알려줍니다.`
+    ];
+
     const resultData = {
         "OSPT": { koreanCode: "지성 + 민감 + 잡티 + 탄력◎", name: "트러블 많은 민감 지성 피부", simpleDesc: "피지 조절과 진정 케어가 동시에 필요한 피부예요", desc: "피지 분비가 많으면서 피부 장벽이 약해 트러블과 색소침착이 동시에 생기기 쉬운 상태입니다. 다행히 탄력은 유지되고 있어, 진정과 피지 조절에 집중하면 빠르게 개선될 수 있어요.", care: "자극 없이 피지를 조절하면서 진정 케어를 병행해야 합니다. 각질 제거는 최소화하고, 수분 공급을 충분히 하면서 유수분 밸런스를 맞춰주세요.", avoid: ["고농도 알코올 토너", "과도한 클렌징", "자극적인 스크럽"], ingredients: ["나이아신아마이드", "살리실산(BHA)", "센텔라", "티트리"], linkType: "ACNE" },
         "OSNT": { koreanCode: "지성 + 민감 + 잡티× + 탄력◎", name: "여드름 잘 나는 민감 지성 피부", simpleDesc: "트러블만 잡으면 건강해지는 피부예요", desc: "피지는 많지만 잡티 걱정은 적은 타입입니다. 한국 남성에게 가장 흔한 피부 타입이에요. 여드름과 모공만 관리하면 빠르게 좋아질 수 있습니다.", care: "가벼운 수분 제품으로 유수분 밸런스만 맞춰도 좋아집니다. 무거운 크림은 피하고, 수분 젤이나 로션 타입을 사용하세요.", avoid: ["무거운 크림", "기름진 제품", "자극적인 토너"], ingredients: ["티트리", "살리실산", "나이아신아마이드", "녹차추출물"], linkType: "OILY" },
@@ -1102,6 +1176,12 @@
             btn.onclick = () => nextQuestion(opt.s, currentStepIdx);
             optsDiv.appendChild(btn);
         });
+
+        // 안내글 업데이트: 현재 질문에 맞는 설명을 표시
+        const helpDiv = document.getElementById('questionHelp');
+        if (helpDiv) {
+            helpDiv.innerHTML = questionHelps[currentQ] || '';
+        }
     }
 
     function nextQuestion(score, stepIdx) {
